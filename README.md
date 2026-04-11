@@ -1,2 +1,0 @@
-# MARKETPLACE-Mongolia
-V1
