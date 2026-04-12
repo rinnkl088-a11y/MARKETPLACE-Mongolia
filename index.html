@@ -5,13 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Account Marketplace</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-<!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
-
 <style>
   :root {
     --primary: #0a66c2;
@@ -50,15 +47,13 @@
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   html,body { width:100%; height:100%; }
-  body {
-    font-family:'Sora',sans-serif;
+  body {    font-family:'Sora',sans-serif;
     background:var(--bg);
     color:var(--text);
     font-size:14px;
     line-height:1.6;
     transition:background var(--transition),color var(--transition);
   }
-
   /* AUTH */
   #auth-screen {
     min-height:100vh;
@@ -101,8 +96,7 @@
   .auth-brand { text-align:center; margin-bottom:32px; }
   .auth-brand h1 { font-size:2.8rem; font-weight:800; color:#fff; letter-spacing:-1px; margin-bottom:6px; }
   .auth-brand h1 span { color:#0a66c2; }
-  .auth-brand p { font-size:0.85rem; color:rgba(255,255,255,0.5); }
-  .auth-tabs { display:flex; margin-bottom:24px; background:rgba(255,255,255,0.06); border-radius:var(--radius); padding:4px; }
+  .auth-brand p { font-size:0.85rem; color:rgba(255,255,255,0.5); }  .auth-tabs { display:flex; margin-bottom:24px; background:rgba(255,255,255,0.06); border-radius:var(--radius); padding:4px; }
   .auth-tab { flex:1; padding:10px; background:none; border:none; color:rgba(255,255,255,0.5); font-weight:600; font-size:0.85rem; cursor:pointer; border-radius:8px; transition:all var(--transition); font-family:'Sora',sans-serif; }
   .auth-tab.active { background:var(--primary); color:#fff; }
   .form-group { margin-bottom:14px; }
@@ -151,11 +145,10 @@
   .nav-actions { display:flex; align-items:center; gap:6px; }
   .nav-icon-btn { width:36px; height:36px; border-radius:50%; background:var(--surface-secondary); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1rem; transition:all var(--transition); position:relative; color:var(--text); }
   .nav-icon-btn:hover { background:var(--border); }
-  .notif-badge { position:absolute; top:-3px; right:-3px; min-width:18px; height:18px; background:var(--danger); color:#fff; border-radius:9px; font-size:0.65rem; font-weight:700; display:flex; align-items:center; justify-content:center; padding:0 4px; border:2px solid var(--surface); }
-  .nav-info-chip { display:flex; align-items:center; gap:6px; padding:4px 10px; background:var(--surface-secondary); border:1px solid var(--border); border-radius:var(--radius-full); font-size:0.75rem; }
+  .notif-badge { position:absolute; top:-3px; right:-3px; min-width:18px; height:18px; background:var(--danger); color:#fff; border-radius:9px; font-size:0.65rem; font-weight:700; display:flex; align-items:center; justify-content:center; padding:0 4px; border:2px solid var(--surface); }  .nav-info-chip { display:flex; align-items:center; gap:6px; padding:4px 10px; background:var(--surface-secondary); border:1px solid var(--border); border-radius:var(--radius-full); font-size:0.75rem; }
   .nav-chip-id { font-weight:700; color:var(--text); }
   .nav-chip-name { color:var(--text-secondary); }
-  .nav-role-badge { background:var(--danger); color:#fff; padding:2px 6px; border-radius:4px; font-weight:700; font-size:0.6rem; }
+  .nav-role-badge { background:var(--danger); color:#fff; padding:2px 6px; border-radius:4px; font-size:0.6rem; font-weight:700; }
   .nav-avatar-btn { width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,var(--primary),var(--secondary)); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.85rem; cursor:pointer; border:2px solid var(--border); transition:all var(--transition); flex-shrink:0; }
   .nav-avatar-btn:hover { transform:scale(1.08); }
 
@@ -201,8 +194,7 @@
 
   /* UPLOAD PROGRESS */
   .upload-progress { margin-bottom:10px; display:none; }
-  .upload-progress.show { display:block; }
-  .upload-progress-bar { height:6px; background:var(--border); border-radius:3px; overflow:hidden; }
+  .upload-progress.show { display:block; }  .upload-progress-bar { height:6px; background:var(--border); border-radius:3px; overflow:hidden; }
   .upload-progress-fill { height:100%; background:linear-gradient(90deg,var(--primary),var(--secondary)); border-radius:3px; transition:width 0.3s ease; width:0%; }
   .upload-progress-text { font-size:0.75rem; color:var(--text-secondary); margin-top:4px; text-align:center; }
 
@@ -251,8 +243,7 @@
   .feed-loading { text-align:center; padding:40px; color:var(--text-secondary); }
   .feed-loading .spinner2 { width:28px; height:28px; border:3px solid var(--border); border-top-color:var(--primary); border-radius:50%; animation:spin 0.8s linear infinite; margin:0 auto 10px; }
 
-  /* SIDEBAR */
-  .sidebar { width:290px; display:none; flex-direction:column; gap:14px; }
+  /* SIDEBAR */  .sidebar { width:290px; display:none; flex-direction:column; gap:14px; }
   .sidebar.open { display:flex; }
   .sidebar-card { background:var(--surface); border-radius:var(--radius-lg); padding:16px; box-shadow:var(--shadow-sm); border:1px solid var(--border); }
   .sidebar-title { font-weight:700; margin-bottom:12px; color:var(--text); display:flex; align-items:center; gap:8px; font-size:0.9rem; }
@@ -301,8 +292,7 @@
   .dm-chat-hbtn { width:26px; height:26px; border-radius:50%; background:rgba(255,255,255,0.15); border:none; color:#fff; cursor:pointer; font-size:0.8rem; display:flex; align-items:center; justify-content:center; transition:all var(--transition); }
   .dm-chat-hbtn:hover { background:rgba(255,255,255,0.3); }
   .dm-chat-body { flex:1; overflow-y:auto; padding:12px; display:flex; flex-direction:column; gap:6px; background:var(--bg); }
-  .msg-row { display:flex; flex-direction:column; max-width:82%; position:relative; }
-  .msg-row.mine { align-self:flex-end; align-items:flex-end; }
+  .msg-row { display:flex; flex-direction:column; max-width:82%; position:relative; }  .msg-row.mine { align-self:flex-end; align-items:flex-end; }
   .msg-row.theirs { align-self:flex-start; align-items:flex-start; }
   .msg-bubble { padding:9px 13px; border-radius:18px; font-size:0.88rem; line-height:1.45; word-break:break-word; }
   .msg-row.mine .msg-bubble { background:linear-gradient(135deg,var(--primary),var(--primary-dark)); color:#fff; border-bottom-right-radius:4px; }
@@ -351,8 +341,7 @@
   .dm-preview-item img { width:60px; height:60px; object-fit:cover; border-radius:8px; border:1px solid var(--border); }
   .dm-preview-remove { position:absolute; top:-6px; right:-6px; width:18px; height:18px; border-radius:50%; background:var(--danger); border:none; color:#fff; cursor:pointer; font-size:0.65rem; display:flex; align-items:center; justify-content:center; }
   .img-lightbox { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:2000; align-items:center; justify-content:center; cursor:zoom-out; }
-  .img-lightbox.open { display:flex; }
-  .img-lightbox img { max-width:90vw; max-height:90vh; border-radius:var(--radius); }
+  .img-lightbox.open { display:flex; }  .img-lightbox img { max-width:90vw; max-height:90vh; border-radius:var(--radius); }
 
   /* ADMIN */
   #adminPanel { display:none; flex:1; flex-direction:column; }
@@ -402,7 +391,6 @@
   @keyframes slideUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
   .toast.fadeOut { animation:fadeOut 0.3s ease forwards; }
   @keyframes fadeOut { to { opacity:0; transform:translateY(8px); } }
-
   ::-webkit-scrollbar { width:5px; height:5px; }
   ::-webkit-scrollbar-track { background:transparent; }
   ::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
@@ -451,8 +439,7 @@
       <div class="form-group"><label>Нууц үг</label><input type="password" id="loginPass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
       <button class="btn-primary" onclick="doLogin()" id="loginBtn">Нэвтрэх</button>
       <div class="auth-divider">эсвэл</div>
-      <button class="social-btn google" onclick="signInWithGoogle()">
-        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      <button class="social-btn google" onclick="signInWithGoogle()">        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
         Google-ээр нэвтрэх
       </button>
       <button class="social-btn" onclick="showPhoneAuth('login')" style="margin-top:8px">📱 Утсаар нэвтрэх</button>
@@ -501,8 +488,7 @@
             <option value="+81">🇯🇵 +81</option>
           </select>
           <input type="tel" id="signupPhone" placeholder="99123456" maxlength="8" pattern="[0-9]{8}">
-        </div>
-        <button class="btn-primary" onclick="sendPhoneCode('signup')" id="sendSignupPhoneBtn">Код илгээх</button>
+        </div>        <button class="btn-primary" onclick="sendPhoneCode('signup')" id="sendSignupPhoneBtn">Код илгээх</button>
         <div id="recaptcha-container-signup"></div>
         <div class="otp-inputs" id="signupOtpInputs" style="display:none"></div>
         <button class="btn-primary" onclick="verifyPhoneCode('signup')" id="verifySignupPhoneBtn" style="display:none">Бүртгүүлэх</button>
@@ -551,8 +537,7 @@
   <div id="mainContent" class="main-layout">
     <div class="feed-col">
       <div class="create-post-card" id="createPostBtn" onclick="toggleNewPost()">
-        <div class="create-post-avatar" id="createAvatar">A</div>
-        <div class="create-post-input">Шинэ зар нийтлэх...</div>
+        <div class="create-post-avatar" id="createAvatar">A</div>        <div class="create-post-input">Шинэ зар нийтлэх...</div>
       </div>
       <div class="new-post-card" id="newPostCard">
         <div class="new-post-header">
@@ -564,7 +549,6 @@
         <div class="new-post-content">
           <select id="postCategory">
             <option value="">-- Төрөл сонгох --</option>
-            <option value="📌All">📌All</option>
             <option value="Roblox">🎮 Roblox</option>
             <option value="Bloxfruit">🍎 Bloxfruit</option>
             <option value="Escape tsunami">🌊 Escape tsunami</option>
@@ -602,8 +586,7 @@
         <button class="filter-btn" onclick="filterPosts('Mlbb',this)">⚔️ MLBB</button>
         <button class="filter-btn" onclick="filterPosts('So2',this)">⚡ So2</button>
       </div>
-      <div id="feedContainer"><div class="feed-loading"><div class="spinner2"></div><p>Ачаалж байна...</p></div></div>
-      <div id="emptyFeed" class="empty-feed" style="display:none"><div class="icon">📭</div><p>Одоогоор зар байхгүй байна.</p></div>
+      <div id="feedContainer"><div class="feed-loading"><div class="spinner2"></div><p>Ачаалж байна...</p></div></div>      <div id="emptyFeed" class="empty-feed" style="display:none"><div class="icon">📭</div><p>Одоогоор зар байхгүй байна.</p></div>
     </div>
 
     <div class="sidebar" id="profileSidebar">
@@ -652,8 +635,7 @@
         <button class="dm-img-upload-btn" title="Зураг илгээх">📷<input type="file" id="dmImgFileInput" accept="image/*" multiple onchange="handleDmImages(event)"></button>
         <button class="dm-emoji-btn" id="dmEmojiToggleBtn" onclick="toggleInputEmoji(event)">😊</button>
         <textarea class="dm-text-input" id="dmTextInput" placeholder="Мессеж бичих..." rows="1" onkeydown="dmInputKeydown(event)" oninput="autoResizeInput(this)"></textarea>
-        <button class="dm-send-btn" onclick="sendDM()">➤</button>
-      </div>
+        <button class="dm-send-btn" onclick="sendDM()">➤</button>      </div>
     </div>
   </div>
 
@@ -702,8 +684,7 @@
             <thead><tr><th>ID</th><th>Нэр</th><th>И-мэйл</th><th>Дүр</th><th>Үйлдэл</th></tr></thead>
             <tbody id="usersBody"></tbody>
           </table>
-        </div>
-      </div>
+        </div>      </div>
       <div class="admin-content" id="postsTab"><div id="postsContainer"></div></div>
       <button class="nav-icon-btn" onclick="toggleAdmin()" style="width:auto;padding:0 16px;border-radius:var(--radius);margin-top:10px;height:36px;font-size:0.85rem;">← Буцаж</button>
     </div>
@@ -752,8 +733,7 @@
     </div>
     <div class="modal-buttons">
       <button class="btn-save" id="saveEditBtn" onclick="saveEditPost()">Хадгалах</button>
-      <button class="btn-cancel" onclick="closeEditPost()">Болих</button>
-    </div>
+      <button class="btn-cancel" onclick="closeEditPost()">Болих</button>    </div>
   </div>
 </div>
 
@@ -767,9 +747,7 @@ const firebaseConfig = {
   messagingSenderId: "879027782167",
   appId: "1:879027782167:web:39c8eef0b1cfbab2831252"
 };
-
 const ADMIN_EMAILS = ['concengcon@gmail.com'];
-
 if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
@@ -780,11 +758,11 @@ let currentUser = null;
 let currentFilter = 'all';
 let currentSearch = '';
 let currentChatKey = null;
-let postImageFiles = [];    // File objects for new post
+let postImageFiles = [];
 let editPostId = null;
-let editPostExistingUrls = []; // existing storage URLs
-let editPostNewFiles = [];     // new File objects to upload
-let pendingDmImageFiles = [];  // File objects for DM
+let editPostExistingUrls = [];
+let editPostNewFiles = [];
+let pendingDmImageFiles = [];
 let isDark = localStorage.getItem('hm_theme') === 'dark';
 let phoneVerificationId = null;
 let resendTimer = null;
@@ -792,20 +770,19 @@ let recaptchaVerifiers = {};
 let unsubscribeFeed = null;
 let unsubscribeChat = null;
 let unsubscribeConvs = null;
-let allUsers = {};  // uid -> user data cache
+let allUsers = {};
 
 // ── UTILS ──
 function escHtml(s) {
   if (!s) return '';
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;').replace(/\n/g,'<br>');
+  return String(s).replace(/&/g,'&').replace(/</g,'<').replace(/>/g,'>').replace(/"/g,'"').replace(/'/g,'&#039;').replace(/\n/g,'<br>');
 }
 
 function showToast(msg, type='info') {
   const t = document.createElement('div');
   t.className = 'toast';
   t.style.borderColor = type==='error'?'var(--danger)':type==='success'?'var(--success)':'var(--border)';
-  t.innerHTML = msg;
-  document.getElementById('toastContainer').appendChild(t);
+  t.innerHTML = msg;  document.getElementById('toastContainer').appendChild(t);
   setTimeout(() => { t.classList.add('fadeOut'); setTimeout(() => t.remove(), 300); }, 3500);
 }
 
@@ -854,8 +831,7 @@ async function deleteStorageUrl(url) {
 }
 
 // ── AUTH TABS ──
-function switchTab(t) {
-  document.getElementById('loginForm').style.display = t==='login' ? '' : 'none';
+function switchTab(t) {  document.getElementById('loginForm').style.display = t==='login' ? '' : 'none';
   document.getElementById('signupForm').style.display = t==='signup' ? '' : 'none';
   document.getElementById('resetForm').style.display = 'none';
   document.getElementById('loginTab').classList.toggle('active', t==='login');
@@ -904,8 +880,7 @@ async function doSignup() {
 async function resetPassword() {
   const email = document.getElementById('resetEmail').value.trim().toLowerCase();
   const err = document.getElementById('authErr');
-  if (!email) { err.textContent = 'И-мэйл оруулна уу'; return; }
-  showLoading(true);
+  if (!email) { err.textContent = 'И-мэйл оруулна уу'; return; }  showLoading(true);
   try {
     await auth.sendPasswordResetEmail(email);
     showToast('✓ Нууц үг сэргээх холбоос илгээгдлээ', 'success');
@@ -934,14 +909,14 @@ async function signInWithGoogle() {
   } catch(e) { err.textContent = getAuthErrorMessage(e.code); showLoading(false); }
 }
 
-// ── PHONE AUTH ──
+// ── PHONE AUTH (Corrected) ──
 function getRecaptchaVerifier(mode) {
   const key = mode;
   if (!recaptchaVerifiers[key]) {
     const containerId = mode==='login' ? 'recaptcha-container' : 'recaptcha-container-signup';
     if (!document.getElementById(containerId)) return null;
     recaptchaVerifiers[key] = new firebase.auth.RecaptchaVerifier(containerId, {
-      'size':'normal',
+      'size':'invisible',
       'callback': () => {},
       'expired-callback': () => { recaptchaVerifiers[key]?.clear(); recaptchaVerifiers[key]=null; }
     }, auth);
@@ -953,9 +928,8 @@ function showPhoneAuth(mode) {
   document.getElementById('loginForm').style.display = mode==='login' ? '' : 'none';
   document.getElementById('signupForm').style.display = mode==='signup' ? '' : 'none';
   document.getElementById(mode==='login'?'phoneLoginOtp':'phoneSignupOtp')?.classList.add('show');
-  if (recaptchaVerifiers[mode]) { recaptchaVerifiers[mode].clear(); recaptchaVerifiers[mode]=null; }
-  getRecaptchaVerifier(mode);
-  setupOtpInputs(mode);
+  if (recaptchaVerifiers[mode]) { recaptchaVerifiers[mode].clear(); recaptchaVerifiers[mode] = null; }
+  getRecaptchaVerifier(mode);  setupOtpInputs(mode);
 }
 
 function setupOtpInputs(mode) {
@@ -969,30 +943,48 @@ function setupOtpInputs(mode) {
       e.target.value = e.target.value.replace(/[^0-9]/g,'');
       if (e.target.value && index < inputs.length-1) inputs[index+1].focus();
     });
-    input.addEventListener('keydown', e => { if(e.key==='Backspace'&&!e.target.value&&index>0) inputs[index-1].focus(); });
+    input.addEventListener('keydown', e => { 
+      if(e.key==='Backspace' && !e.target.value && index > 0) inputs[index-1].focus(); 
+    });
     input.addEventListener('paste', e => {
       e.preventDefault();
       const digits = (e.clipboardData||window.clipboardData).getData('text').replace(/[^0-9]/g,'').slice(0,6);
       digits.split('').forEach((d,i) => { if(inputs[i]) inputs[i].value=d; });
+      if(digits.length === 6) inputs[5].focus();
     });
   });
 }
 
 async function sendPhoneCode(mode) {
   const country = document.getElementById(mode==='login'?'loginPhoneCountry':'signupPhoneCountry')?.value;
-  const phone = document.getElementById(mode==='login'?'loginPhone':'signupPhone')?.value.trim();
-  if (!country||!phone||!/^\d{8}$/.test(phone)) { showToast('⚠️ Зөв утасны дугаар оруулна уу (8 тоо)','error'); return; }
+  const phoneInput = document.getElementById(mode==='login'?'loginPhone':'signupPhone');
+  const phone = phoneInput?.value.trim();
+  
+  const mongolianPattern = /^(?:[123456789][0-9]{7}|976[123456789][0-9]{7})$/;
+  const fullNumber = country + phone;
+  
+  if (!country || !phone || !mongolianPattern.test(fullNumber)) { 
+    showToast('⚠️ Зөв утасны дугаар оруулна уу (жнь: 99123456)', 'error'); 
+    return; 
+  }
+
   showLoading(true);
   try {
     const verifier = getRecaptchaVerifier(mode);
-    if (!verifier) { showToast('❌ reCAPTCHA ачаалахад алдаа гарлаа','error'); return; }
-    phoneVerificationId = await auth.signInWithPhoneNumber(country+phone, verifier);
+    if (!verifier) { 
+      showToast('❌ reCAPTCHA ачаалахад алдаа гарлаа', 'error'); 
+      return; 
+    }
+    phoneVerificationId = await auth.signInWithPhoneNumber(fullNumber, verifier);
     document.getElementById(mode==='login'?'loginOtpInputs':'signupOtpInputs').style.display='flex';
     document.getElementById(mode==='login'?'verifyPhoneBtn':'verifySignupPhoneBtn').style.display='block';
-    document.getElementById(mode==='login'?'sendPhoneBtn':'sendSignupPhoneBtn').style.display='none';
-    startResendTimer(mode);
-    showToast('✓ 6 оронтой код илгээгдлээ','success');
-  } catch(e) { showToast(getAuthErrorMessage(e.code),'error'); recaptchaVerifiers[mode]?.clear(); recaptchaVerifiers[mode]=null; }
+    document.getElementById(mode==='login'?'sendPhoneBtn':'sendSignupPhoneBtn').style.display='none';    startResendTimer(mode);
+    showToast('✓ 6 оронтой код илгээгдлээ', 'success');
+  } catch(e) { 
+    showToast(getAuthErrorMessage(e.code), 'error'); 
+    recaptchaVerifiers[mode]?.clear(); 
+    recaptchaVerifiers[mode]=null; 
+  }
   finally { showLoading(false); }
 }
 
@@ -1017,8 +1009,8 @@ async function resendPhoneCode(mode) {
 async function verifyPhoneCode(mode) {
   const containerId = mode==='login' ? 'loginOtpInputs' : 'signupOtpInputs';
   const code = Array.from(document.querySelectorAll(`#${containerId} input`)).map(i=>i.value||'').join('');
-  if (code.length!==6) { showToast('⚠️ 6 оронтой кодыг бүрэн оруулна уу','error'); return; }
-  if (!phoneVerificationId) { showToast('❌ Кодын хугацаа дууссан','error'); return; }
+  if (code.length!==6) { showToast('⚠️ 6 оронтой кодыг бүрэн оруулна уу', 'error'); return; }
+  if (!phoneVerificationId) { showToast('❌ Кодын хугацаа дууссан', 'error'); return; }
   showLoading(true);
   try {
     const result = await phoneVerificationId.confirm(code);
@@ -1027,7 +1019,7 @@ async function verifyPhoneCode(mode) {
       await result.user.updateProfile({ displayName: name });
     }
     await handleFirebaseUser(result.user);
-  } catch(e) { showToast('❌ Код буруу эсвэл хугацаа дууссан','error'); }
+  } catch(e) { showToast('❌ Код буруу эсвэл хугацаа дууссан', 'error'); }
   finally { showLoading(false); }
 }
 
@@ -1036,13 +1028,11 @@ async function handleFirebaseUser(firebaseUser) {
   const uid = firebaseUser.uid;
   const userEmail = firebaseUser.email?.toLowerCase() || '';
   const isAdminEmail = ADMIN_EMAILS.includes(userEmail);
-
   const userRef = db.collection('users').doc(uid);
   const snap = await userRef.get();
 
   let userData;
   if (!snap.exists) {
-    // Generate unique numeric ID
     const counterRef = db.collection('meta').doc('counter');
     let numId;
     await db.runTransaction(async t => {
@@ -1086,8 +1076,7 @@ async function logout() {
   unsubscribeFeed=null; unsubscribeChat=null; unsubscribeConvs=null;
   if (resendTimer) clearInterval(resendTimer);
   Object.values(recaptchaVerifiers).forEach(v => v?.clear());
-  recaptchaVerifiers = {};
-  try { await auth.signOut(); } catch(e) {}
+  recaptchaVerifiers = {};  try { await auth.signOut(); } catch(e) {}
   currentUser = null;
   document.getElementById('app').style.display = 'none';
   document.getElementById('auth-screen').style.display = 'flex';
@@ -1107,7 +1096,9 @@ function getAuthErrorMessage(code) {
     'auth/too-many-requests':'Хэт олон оролдлого',
     'auth/invalid-phone-number':'Буруу утасны дугаар',
     'auth/invalid-verification-code':'Буруу баталгаажуулах код',
-    'auth/code-expired':'Кодын хугацаа дууссан'
+    'auth/code-expired':'Кодын хугацаа дууссан',
+    'auth/captcha-check-failed': 'reCAPTCHA шалгалт амжилтгүй боллоо',
+    'auth/invalid-credential': 'Баталгаажуулах мэдээлэл хүчингүй'
   };
   return errors[code] || 'Алдаа гарлаа. Дахин оролдоно уу.';
 }
@@ -1134,7 +1125,6 @@ function showApp() {
   listenConversations();
   updateDMBadge();
 }
-
 // ── POSTS (Firestore) ──
 function listenFeed() {
   unsubscribeFeed?.();
@@ -1155,7 +1145,6 @@ function filterPosts(cat, btn) {
   currentFilter = cat;
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
-  // Re-subscribe with filter
   unsubscribeFeed?.();
   let query = db.collection('posts').orderBy('createdAt', 'desc').limit(50);
   unsubscribeFeed = query.onSnapshot(snap => {
@@ -1185,8 +1174,7 @@ function renderFeed(posts) {
     let actions = '';
     if (isMine && (currentUser.role==='admin'||currentUser.role==='seller'))
       actions = `<button class="btn-edit" onclick="openEditPost('${p.id}')" type="button">✏️ Засах</button><button class="btn-delete" onclick="deletePost('${p.id}')" type="button">🗑️</button>`;
-    else if (currentUser && currentUser.uid !== p.sellerUid)
-      actions = `<button class="btn-dm" onclick="openDMTo('${p.sellerUid}','${escHtml(p.sellerName)}')" type="button">💬 Холбогдох</button>`;
+    else if (currentUser && currentUser.uid !== p.sellerUid)      actions = `<button class="btn-dm" onclick="openDMTo('${p.sellerUid}','${escHtml(p.sellerName)}')" type="button">💬 Холбогдох</button>`;
     const sellerBadge = p.sellerRole==='admin'
       ? '<span class="post-admin-badge">admin</span>'
       : '<span class="seller-verified">✓ Seller</span>';
@@ -1235,8 +1223,7 @@ function resetPostForm() {
   const cat = document.getElementById('postCategory'); if(cat) cat.value='';
   const inp = document.getElementById('imgInput'); if(inp) inp.value='';
   const prev = document.getElementById('imgPreview'); if(prev) prev.innerHTML='';
-  postImageFiles = [];
-  document.getElementById('uploadProgress').classList.remove('show');
+  postImageFiles = [];  document.getElementById('uploadProgress').classList.remove('show');
 }
 
 function previewImages(e) {
@@ -1260,7 +1247,6 @@ function removePostImage(idx) {
   postImageFiles.splice(idx,1);
   document.getElementById('imgInput').value='';
   const preview = document.getElementById('imgPreview');
-  // Re-render previews
   const files = [...postImageFiles];
   postImageFiles = [];
   preview.innerHTML='';
@@ -1286,8 +1272,7 @@ async function submitPost() {
 
   const btn = document.getElementById('submitPostBtn');
   btn.disabled = true; btn.textContent = 'Байршуулж байна...';
-  const progress = document.getElementById('uploadProgress');
-  const fill = document.getElementById('uploadProgressFill');
+  const progress = document.getElementById('uploadProgress');  const fill = document.getElementById('uploadProgressFill');
   const text = document.getElementById('uploadProgressText');
 
   try {
@@ -1337,7 +1322,6 @@ async function openEditPost(postId) {
   editPostId = postId;
   editPostExistingUrls = [...(editPostDoc.imageUrls || [])];
   editPostNewFiles = [];
-
   document.getElementById('editPostTitle').value = editPostDoc.title;
   document.getElementById('editPostCategory').value = editPostDoc.category;
   document.getElementById('editPostDesc').value = editPostDoc.desc;
@@ -1386,8 +1370,7 @@ async function saveEditPost() {
 
   const btn = document.getElementById('saveEditBtn');
   btn.disabled=true; btn.textContent='Хадгалж байна...';
-  const progress = document.getElementById('editUploadProgress');
-  const fill = document.getElementById('editUploadProgressFill');
+  const progress = document.getElementById('editUploadProgress');  const fill = document.getElementById('editUploadProgressFill');
   const text = document.getElementById('editUploadProgressText');
 
   try {
@@ -1436,7 +1419,6 @@ async function updateProfileUI() {
   document.getElementById('profileName').textContent = escHtml(currentUser.name);
   document.getElementById('profileId').textContent = '#'+String(currentUser.numId||'').padStart(6,'0');
   document.getElementById('profileRole').textContent = currentUser.role==='admin'?'Админ':(currentUser.role==='seller'?'Худалдагч':'Худалдан авагч');
-
   try {
     const myPostsSnap = await db.collection('posts').where('sellerUid','==',currentUser.uid).get();
     document.getElementById('profilePostCount').textContent = myPostsSnap.size;
@@ -1486,8 +1468,7 @@ async function updateDMBadge() {
 
 function listenConversations() {
   unsubscribeConvs?.();
-  unsubscribeConvs = db.collection('conversations')
-    .where('participants','array-contains',currentUser.uid)
+  unsubscribeConvs = db.collection('conversations')    .where('participants','array-contains',currentUser.uid)
     .onSnapshot(snap => {
       updateDMBadge();
       if (document.getElementById('dmPopup').classList.contains('open')) renderDMList(snap.docs);
@@ -1513,7 +1494,6 @@ async function loadAndRenderDMList() {
 async function renderDMList(docs) {
   const list = document.getElementById('dmConvList');
   if (!docs || !docs.length) { list.innerHTML='<div class="dm-empty"><div class="dm-empty-icon">💬</div><p>Мессеж байхгүй байна</p></div>'; return; }
-  // Load other user info
   const items = await Promise.all(docs.map(async d => {
     const data = d.data();
     const otherUid = data.participants?.find(p => p !== currentUser.uid);
@@ -1537,8 +1517,7 @@ async function renderDMList(docs) {
       <div class="dm-conv-avatar">${item.otherUser.name.charAt(0).toUpperCase()}<span class="dm-conv-online"></span></div>
       <div class="dm-conv-info">
         <div class="dm-conv-name">${escHtml(item.otherUser.name)}</div>
-        <div class="dm-conv-last">${escHtml(item.lastText||'Шинэ чат')}</div>
-      </div>
+        <div class="dm-conv-last">${escHtml(item.lastText||'Шинэ чат')}</div>      </div>
       ${item.unread>0?`<span class="dm-unread-badge">${item.unread}</span>`:''}
     </div>`).join('');
 }
@@ -1580,7 +1559,6 @@ function listenChat(key) {
   unsubscribeChat = db.collection('conversations').doc(key).onSnapshot(snap => {
     if (!snap.exists) return;
     const data = snap.data();
-    // Mark messages as read
     const msgs = data.msgs || [];
     let hasUnread = false;
     msgs.forEach(m => { if(m.from!==currentUser.uid&&!m.read){m.read=true;hasUnread=true;} });
@@ -1589,7 +1567,6 @@ function listenChat(key) {
     updateDMBadge();
   });
 }
-
 function renderChatMessages(msgs) {
   const body = document.getElementById('dmChatBody');
   if (!body) return;
@@ -1638,8 +1615,7 @@ async function toggleReaction(msgIdx, emoji) {
 async function startEdit(idx) {
   const msgs = await getConvMsgs();
   if (msgs[idx]) { msgs[idx].editing=true; await db.collection('conversations').doc(currentChatKey).update({ msgs }); }
-  setTimeout(() => { const inp=document.getElementById('editInput_'+idx); if(inp){inp.focus();inp.select();} }, 50);
-}
+  setTimeout(() => { const inp=document.getElementById('editInput_'+idx); if(inp){inp.focus();inp.select();} }, 50);}
 
 async function saveEdit(idx) {
   const inp = document.getElementById('editInput_'+idx); if(!inp) return;
@@ -1689,8 +1665,6 @@ async function sendDM() {
 
   const time = new Date().toLocaleTimeString('mn-MN',{hour:'2-digit',minute:'2-digit'});
   const msgs = await getConvMsgs();
-
-  // Upload DM images first
   if (pendingDmImageFiles.length > 0) {
     for (const file of pendingDmImageFiles) {
       const path = `dm/${currentChatKey}/${Date.now()}_${file.name.replace(/[^a-zA-Z0-9.]/g,'_')}`;
@@ -1739,8 +1713,7 @@ function openLightbox(src) { const img=document.getElementById('lightboxImg'); c
 function closeLightbox() { document.getElementById('imgLightbox')?.classList.remove('open'); }
 
 // ── ADMIN ──
-function toggleAdmin() {
-  const main=document.getElementById('mainContent');
+function toggleAdmin() {  const main=document.getElementById('mainContent');
   const admin=document.getElementById('adminPanel');
   if (admin.style.display==='flex'){main.style.display='flex';admin.style.display='none';}
   else{main.style.display='none';admin.style.display='flex';loadUsersTable();}
@@ -1789,8 +1762,7 @@ async function promoteToSeller(uid, currentRole) {
   const newRole = currentRole==='seller' ? 'buyer' : 'seller';
   try {
     await db.collection('users').doc(uid).update({ role: newRole });
-    showToast(`✓ Эрх шинэчлэгдлээ: ${newRole}`, 'success');
-    loadUsersTable();
+    showToast(`✓ Эрх шинэчлэгдлээ: ${newRole}`, 'success');    loadUsersTable();
   } catch(e) { showToast('❌ Алдаа гарлаа','error'); }
 }
 
@@ -1839,8 +1811,7 @@ auth.onAuthStateChanged(async firebaseUser => {
   if (firebaseUser && !currentUser) {
     try {
       const snap = await db.collection('users').doc(firebaseUser.uid).get();
-      if (snap.exists) {
-        const userData = snap.data();
+      if (snap.exists) {        const userData = snap.data();
         const userEmail = firebaseUser.email?.toLowerCase()||'';
         if (ADMIN_EMAILS.includes(userEmail) && userData.role!=='admin') {
           await db.collection('users').doc(firebaseUser.uid).update({ role:'admin' });
@@ -1854,4 +1825,4 @@ auth.onAuthStateChanged(async firebaseUser => {
 });
 </script>
 </body>
-        </html>
+</html>
