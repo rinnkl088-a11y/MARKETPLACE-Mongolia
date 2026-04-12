@@ -8,7 +8,6 @@
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
 <style>
   :root {
     --primary: #0a66c2;
@@ -96,7 +95,8 @@
   .auth-brand { text-align:center; margin-bottom:32px; }
   .auth-brand h1 { font-size:2.8rem; font-weight:800; color:#fff; letter-spacing:-1px; margin-bottom:6px; }
   .auth-brand h1 span { color:#0a66c2; }
-  .auth-brand p { font-size:0.85rem; color:rgba(255,255,255,0.5); }  .auth-tabs { display:flex; margin-bottom:24px; background:rgba(255,255,255,0.06); border-radius:var(--radius); padding:4px; }
+  .auth-brand p { font-size:0.85rem; color:rgba(255,255,255,0.5); }
+  .auth-tabs { display:flex; margin-bottom:24px; background:rgba(255,255,255,0.06); border-radius:var(--radius); padding:4px; }
   .auth-tab { flex:1; padding:10px; background:none; border:none; color:rgba(255,255,255,0.5); font-weight:600; font-size:0.85rem; cursor:pointer; border-radius:8px; transition:all var(--transition); font-family:'Sora',sans-serif; }
   .auth-tab.active { background:var(--primary); color:#fff; }
   .form-group { margin-bottom:14px; }
@@ -116,22 +116,6 @@
   .social-btn:hover { background:rgba(255,255,255,0.15); }
   .social-btn.google { background:#fff; color:#333; border-color:#ddd; }
   .social-btn.google:hover { background:#f5f5f5; }
-  .phone-input-group { display:flex; gap:8px; margin-bottom:14px; }
-  .phone-input-group input[type=tel] { flex:1; padding:12px 14px; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); border-radius:var(--radius); color:#fff; font-size:0.9rem; font-family:'Sora',sans-serif; outline:none; }
-  .phone-input-group input[type=tel]:focus { border-color:var(--primary); }
-  .phone-input-group select { padding:12px 10px; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); border-radius:var(--radius); color:#fff; font-size:0.85rem; outline:none; cursor:pointer; }
-  .otp-container { display:none; margin-top:10px; }
-  .otp-container.show { display:block; }
-  .otp-inputs { display:flex; gap:6px; justify-content:center; margin-bottom:14px; }
-  .otp-inputs input { width:42px; height:48px; text-align:center; font-size:1.2rem; font-weight:700; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); border-radius:8px; color:#fff; outline:none; }
-  .otp-inputs input:focus { border-color:var(--primary); }
-  .auth-loading { display:none; position:absolute; inset:0; background:rgba(0,0,0,0.3); border-radius:24px; align-items:center; justify-content:center; z-index:10; }
-  .auth-loading.show { display:flex; }
-  .spinner { width:32px; height:32px; border:3px solid rgba(255,255,255,0.3); border-top-color:#fff; border-radius:50%; animation:spin 0.8s linear infinite; }
-  @keyframes spin { to { transform:rotate(360deg); } }
-  .resend-link { text-align:center; margin-top:10px; font-size:0.8rem; color:rgba(255,255,255,0.5); }
-  .resend-link a { color:#60a5fa; cursor:pointer; }
-  #recaptcha-container, #recaptcha-container-signup { margin-top:10px; transform:scale(0.9); transform-origin:left; min-height:78px; }
 
   /* APP */
   #app { display:none; flex-direction:column; min-height:100vh; }
@@ -145,7 +129,7 @@
   .nav-actions { display:flex; align-items:center; gap:6px; }
   .nav-icon-btn { width:36px; height:36px; border-radius:50%; background:var(--surface-secondary); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1rem; transition:all var(--transition); position:relative; color:var(--text); }
   .nav-icon-btn:hover { background:var(--border); }
-  .notif-badge { position:absolute; top:-3px; right:-3px; min-width:18px; height:18px; background:var(--danger); color:#fff; border-radius:9px; font-size:0.65rem; font-weight:700; display:flex; align-items:center; justify-content:center; padding:0 4px; border:2px solid var(--surface); }  .nav-info-chip { display:flex; align-items:center; gap:6px; padding:4px 10px; background:var(--surface-secondary); border:1px solid var(--border); border-radius:var(--radius-full); font-size:0.75rem; }
+  .nav-info-chip { display:flex; align-items:center; gap:6px; padding:4px 10px; background:var(--surface-secondary); border:1px solid var(--border); border-radius:var(--radius-full); font-size:0.75rem; }
   .nav-chip-id { font-weight:700; color:var(--text); }
   .nav-chip-name { color:var(--text-secondary); }
   .nav-role-badge { background:var(--danger); color:#fff; padding:2px 6px; border-radius:4px; font-size:0.6rem; font-weight:700; }
@@ -194,7 +178,8 @@
 
   /* UPLOAD PROGRESS */
   .upload-progress { margin-bottom:10px; display:none; }
-  .upload-progress.show { display:block; }  .upload-progress-bar { height:6px; background:var(--border); border-radius:3px; overflow:hidden; }
+  .upload-progress.show { display:block; }
+  .upload-progress-bar { height:6px; background:var(--border); border-radius:3px; overflow:hidden; }
   .upload-progress-fill { height:100%; background:linear-gradient(90deg,var(--primary),var(--secondary)); border-radius:3px; transition:width 0.3s ease; width:0%; }
   .upload-progress-text { font-size:0.75rem; color:var(--text-secondary); margin-top:4px; text-align:center; }
 
@@ -243,7 +228,8 @@
   .feed-loading { text-align:center; padding:40px; color:var(--text-secondary); }
   .feed-loading .spinner2 { width:28px; height:28px; border:3px solid var(--border); border-top-color:var(--primary); border-radius:50%; animation:spin 0.8s linear infinite; margin:0 auto 10px; }
 
-  /* SIDEBAR */  .sidebar { width:290px; display:none; flex-direction:column; gap:14px; }
+  /* SIDEBAR */
+  .sidebar { width:290px; display:none; flex-direction:column; gap:14px; }
   .sidebar.open { display:flex; }
   .sidebar-card { background:var(--surface); border-radius:var(--radius-lg); padding:16px; box-shadow:var(--shadow-sm); border:1px solid var(--border); }
   .sidebar-title { font-weight:700; margin-bottom:12px; color:var(--text); display:flex; align-items:center; gap:8px; font-size:0.9rem; }
@@ -292,38 +278,17 @@
   .dm-chat-hbtn { width:26px; height:26px; border-radius:50%; background:rgba(255,255,255,0.15); border:none; color:#fff; cursor:pointer; font-size:0.8rem; display:flex; align-items:center; justify-content:center; transition:all var(--transition); }
   .dm-chat-hbtn:hover { background:rgba(255,255,255,0.3); }
   .dm-chat-body { flex:1; overflow-y:auto; padding:12px; display:flex; flex-direction:column; gap:6px; background:var(--bg); }
-  .msg-row { display:flex; flex-direction:column; max-width:82%; position:relative; }  .msg-row.mine { align-self:flex-end; align-items:flex-end; }
+  .msg-row { display:flex; flex-direction:column; max-width:82%; position:relative; }
+  .msg-row.mine { align-self:flex-end; align-items:flex-end; }
   .msg-row.theirs { align-self:flex-start; align-items:flex-start; }
   .msg-bubble { padding:9px 13px; border-radius:18px; font-size:0.88rem; line-height:1.45; word-break:break-word; }
   .msg-row.mine .msg-bubble { background:linear-gradient(135deg,var(--primary),var(--primary-dark)); color:#fff; border-bottom-right-radius:4px; }
   .msg-row.theirs .msg-bubble { background:var(--surface); color:var(--text); border:1px solid var(--border); border-bottom-left-radius:4px; }
-  .msg-bubble.edited-msg::after { content:' (засагдсан)'; font-size:0.65rem; opacity:0.6; }
   .msg-img { max-width:200px; max-height:200px; border-radius:12px; object-fit:cover; cursor:pointer; display:block; }
   .msg-row.mine .msg-img { border-bottom-right-radius:4px; }
   .msg-row.theirs .msg-img { border-bottom-left-radius:4px; }
   .msg-meta { display:flex; align-items:center; gap:5px; font-size:0.65rem; color:var(--text-tertiary); margin-top:2px; padding:0 4px; }
   .msg-seen { color:var(--primary); font-size:0.7rem; }
-  .msg-reactions { display:flex; gap:3px; flex-wrap:wrap; margin-top:3px; }
-  .reaction-chip { background:var(--surface-secondary); border:1px solid var(--border); border-radius:12px; padding:2px 7px; font-size:0.78rem; cursor:pointer; transition:all var(--transition); display:flex; align-items:center; gap:3px; }
-  .reaction-chip:hover { background:var(--primary-light); border-color:var(--primary); }
-  .reaction-chip.mine-react { background:var(--primary-light); border-color:var(--primary); }
-  .reaction-count { font-size:0.7rem; color:var(--text-secondary); font-weight:600; }
-  .msg-hover-actions { display:none; position:absolute; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:3px; box-shadow:var(--shadow-md); flex-direction:row; gap:2px; z-index:10; }
-  .msg-row.mine .msg-hover-actions { right:0; top:-36px; }
-  .msg-row.theirs .msg-hover-actions { left:0; top:-36px; }
-  .msg-row:hover .msg-hover-actions { display:flex; }
-  .msg-action-btn { width:28px; height:28px; border-radius:8px; background:none; border:none; cursor:pointer; font-size:0.85rem; display:flex; align-items:center; justify-content:center; transition:background var(--transition); }
-  .msg-action-btn:hover { background:var(--surface-secondary); }
-  .emoji-picker-popup { position:fixed; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:8px; box-shadow:var(--shadow-lg); z-index:600; display:none; flex-wrap:wrap; gap:4px; width:200px; }
-  .emoji-picker-popup.open { display:flex; }
-  .emoji-opt { width:32px; height:32px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; cursor:pointer; border-radius:8px; transition:background var(--transition); }
-  .emoji-opt:hover { background:var(--surface-secondary); }
-  .msg-edit-input { background:rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.4); border-radius:8px; padding:4px 8px; color:#fff; font-family:'Sora',sans-serif; font-size:0.88rem; outline:none; width:100%; }
-  .msg-row.theirs .msg-edit-input { background:var(--surface-secondary); border-color:var(--primary); color:var(--text); }
-  .msg-edit-actions { display:flex; gap:4px; margin-top:4px; }
-  .msg-edit-save, .msg-edit-cancel { padding:3px 10px; border-radius:6px; font-size:0.75rem; font-weight:700; cursor:pointer; border:none; font-family:'Sora',sans-serif; }
-  .msg-edit-save { background:var(--success); color:#fff; }
-  .msg-edit-cancel { background:var(--surface-secondary); color:var(--text); }
   .dm-chat-input-area { flex-shrink:0; background:var(--surface); border-top:1px solid var(--border); }
   .dm-chat-input-row { padding:8px 10px; display:flex; align-items:flex-end; gap:6px; }
   .dm-img-upload-btn { width:34px; height:34px; border-radius:50%; background:var(--surface-secondary); border:1px solid var(--border); color:var(--text-secondary); cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; transition:all var(--transition); flex-shrink:0; position:relative; }
@@ -341,7 +306,8 @@
   .dm-preview-item img { width:60px; height:60px; object-fit:cover; border-radius:8px; border:1px solid var(--border); }
   .dm-preview-remove { position:absolute; top:-6px; right:-6px; width:18px; height:18px; border-radius:50%; background:var(--danger); border:none; color:#fff; cursor:pointer; font-size:0.65rem; display:flex; align-items:center; justify-content:center; }
   .img-lightbox { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:2000; align-items:center; justify-content:center; cursor:zoom-out; }
-  .img-lightbox.open { display:flex; }  .img-lightbox img { max-width:90vw; max-height:90vh; border-radius:var(--radius); }
+  .img-lightbox.open { display:flex; }
+  .img-lightbox img { max-width:90vw; max-height:90vh; border-radius:var(--radius); }
 
   /* ADMIN */
   #adminPanel { display:none; flex:1; flex-direction:column; }
@@ -429,9 +395,6 @@
       <button class="auth-tab active" id="loginTab" onclick="switchTab('login')">Нэвтрэх</button>
       <button class="auth-tab" id="signupTab" onclick="switchTab('signup')">Бүртгүүлэх</button>
     </div>
-    <div class="auth-loading" id="authLoading">
-      <div class="spinner"></div>
-    </div>
 
     <!-- LOGIN FORM -->
     <div id="loginForm">
@@ -439,29 +402,8 @@
       <div class="form-group"><label>Нууц үг</label><input type="password" id="loginPass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
       <button class="btn-primary" onclick="doLogin()" id="loginBtn">Нэвтрэх</button>
       <div class="auth-divider">эсвэл</div>
-      <button class="social-btn google" onclick="signInWithGoogle()">        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-        Google-ээр нэвтрэх
-      </button>
-      <button class="social-btn" onclick="showPhoneAuth('login')" style="margin-top:8px">📱 Утсаар нэвтрэх</button>
+      <button class="social-btn google" onclick="signInWithGoogle()">🔵 Google-ээр нэвтрэх</button>
       <div class="auth-link"><a onclick="switchToReset()">Нууц үг мартсан уу?</a></div>
-      <div class="otp-container" id="phoneLoginOtp">
-        <div class="phone-input-group">
-          <select id="loginPhoneCountry">
-            <option value="+976">🇲🇳 +976</option>
-            <option value="+1">🇺🇸 +1</option>
-            <option value="+44">🇬🇧 +44</option>
-            <option value="+86">🇨🇳 +86</option>
-            <option value="+82">🇰🇷 +82</option>
-            <option value="+81">🇯🇵 +81</option>
-          </select>
-          <input type="tel" id="loginPhone" placeholder="99123456" maxlength="8" pattern="[0-9]{8}">
-        </div>
-        <button class="btn-primary" onclick="sendPhoneCode('login')" id="sendPhoneBtn">Код илгээх</button>
-        <div id="recaptcha-container"></div>
-        <div class="otp-inputs" id="loginOtpInputs" style="display:none"></div>
-        <button class="btn-primary" onclick="verifyPhoneCode('login')" id="verifyPhoneBtn" style="display:none">Баталгаажуулах</button>
-        <div class="resend-link">Код ирээгүй юу? <a id="resendPhoneLink" onclick="resendPhoneCode('login')">Дахин илгээх</a></div>
-      </div>
     </div>
 
     <!-- SIGNUP FORM -->
@@ -471,29 +413,7 @@
       <div class="form-group"><label>Нууц үг</label><input type="password" id="signupPass" placeholder="•••••••• (6+ тэмдэгт)" onkeydown="if(event.key==='Enter')doSignup()"></div>
       <button class="btn-primary" onclick="doSignup()" id="signupBtn">Бүртгүүлэх</button>
       <div class="auth-divider">эсвэл</div>
-      <button class="social-btn google" onclick="signInWithGoogle()">
-        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-        Google-ээр бүртгүүлэх
-      </button>
-      <button class="social-btn" onclick="showPhoneAuth('signup')" style="margin-top:8px">📱 Утсаар бүртгүүлэх</button>
-      <div class="otp-container" id="phoneSignupOtp">
-        <div class="form-group"><label>Нэр</label><input type="text" id="signupPhoneName" placeholder="Таны нэр"></div>
-        <div class="phone-input-group">
-          <select id="signupPhoneCountry">
-            <option value="+976">🇲🇳 +976</option>
-            <option value="+1">🇺🇸 +1</option>
-            <option value="+44">🇬🇧 +44</option>
-            <option value="+86">🇨🇳 +86</option>
-            <option value="+82">🇰🇷 +82</option>
-            <option value="+81">🇯🇵 +81</option>
-          </select>
-          <input type="tel" id="signupPhone" placeholder="99123456" maxlength="8" pattern="[0-9]{8}">
-        </div>        <button class="btn-primary" onclick="sendPhoneCode('signup')" id="sendSignupPhoneBtn">Код илгээх</button>
-        <div id="recaptcha-container-signup"></div>
-        <div class="otp-inputs" id="signupOtpInputs" style="display:none"></div>
-        <button class="btn-primary" onclick="verifyPhoneCode('signup')" id="verifySignupPhoneBtn" style="display:none">Бүртгүүлэх</button>
-        <div class="resend-link">Код ирээгүй юу? <a id="resendSignupPhoneLink" onclick="resendPhoneCode('signup')">Дахин илгээх</a></div>
-      </div>
+      <button class="social-btn google" onclick="signInWithGoogle()">🔵 Google-ээр бүртгүүлэх</button>
     </div>
 
     <!-- RESET FORM -->
@@ -523,10 +443,7 @@
     <div class="nav-spacer"></div>
     <div class="nav-actions">
       <button class="nav-icon-btn" onclick="toggleTheme()" title="Dark mode" id="themeBtn">🌙</button>
-      <button class="nav-icon-btn" id="dmBtn" onclick="toggleDM()" title="Мессеж">
-        💬
-        <span class="notif-badge" id="dmBadge" style="display:none">0</span>
-      </button>
+      <button class="nav-icon-btn" id="dmBtn" onclick="toggleDM()" title="Мессеж">💬</button>
       <button class="nav-icon-btn" id="adminBtn" onclick="toggleAdmin()" title="Админ" style="display:none">⚙️</button>
       <button class="nav-icon-btn" onclick="toggleProfile()" title="Профиль">👤</button>
       <div class="nav-avatar-btn" id="navAvatar" onclick="toggleProfile()">A</div>
@@ -537,7 +454,8 @@
   <div id="mainContent" class="main-layout">
     <div class="feed-col">
       <div class="create-post-card" id="createPostBtn" onclick="toggleNewPost()">
-        <div class="create-post-avatar" id="createAvatar">A</div>        <div class="create-post-input">Шинэ зар нийтлэх...</div>
+        <div class="create-post-avatar" id="createAvatar">A</div>
+        <div class="create-post-input">Шинэ зар нийтлэх...</div>
       </div>
       <div class="new-post-card" id="newPostCard">
         <div class="new-post-header">
@@ -553,11 +471,6 @@
             <option value="Bloxfruit">🍎 Bloxfruit</option>
             <option value="Escape tsunami">🌊 Escape tsunami</option>
             <option value="Sailor">⛵ Sailor</option>
-            <option value="Steal a brainrot">🧠 Steal a brainrot</option>
-            <option value="99Night">🌙 99Night</option>
-            <option value="Pubg">🔫 Pubg</option>
-            <option value="Mlbb">⚔️ MLBB</option>
-            <option value="So2">⚡ So2</option>
           </select>
           <textarea id="postDesc" placeholder="Дэлгэрэнгүй тайлбар..." rows="3"></textarea>
           <input type="text" id="postPrice" placeholder="Үнэ (жш: 50,000₮)">
@@ -565,7 +478,7 @@
             <div class="upload-progress-bar"><div class="upload-progress-fill" id="uploadProgressFill"></div></div>
             <div class="upload-progress-text" id="uploadProgressText">Зураг байршуулж байна...</div>
           </div>
-          <div class="img-upload-area">📸 Зураг оруулах (олон зураг)<input type="file" id="imgInput" accept="image/*" multiple onchange="previewImages(event)"></div>
+          <div class="img-upload-area">📸 Зураг оруулах<input type="file" id="imgInput" accept="image/*" multiple onchange="previewImages(event)"></div>
           <div class="img-preview-grid" id="imgPreview"></div>
           <div class="new-post-buttons">
             <button class="btn-post" id="submitPostBtn" onclick="submitPost()">Нийтлэх</button>
@@ -578,15 +491,9 @@
         <button class="filter-btn active" onclick="filterPosts('all',this)">Бүгд</button>
         <button class="filter-btn" onclick="filterPosts('Roblox',this)">🎮 Roblox</button>
         <button class="filter-btn" onclick="filterPosts('Bloxfruit',this)">🍎 Bloxfruit</button>
-        <button class="filter-btn" onclick="filterPosts('Escape tsunami',this)">🌊 Tsunami</button>
-        <button class="filter-btn" onclick="filterPosts('Sailor',this)">⛵ Sailor</button>
-        <button class="filter-btn" onclick="filterPosts('Steal a brainrot',this)">🧠 Brainrot</button>
-        <button class="filter-btn" onclick="filterPosts('99Night',this)">🌙 99Night</button>
-        <button class="filter-btn" onclick="filterPosts('Pubg',this)">🔫 Pubg</button>
-        <button class="filter-btn" onclick="filterPosts('Mlbb',this)">⚔️ MLBB</button>
-        <button class="filter-btn" onclick="filterPosts('So2',this)">⚡ So2</button>
       </div>
-      <div id="feedContainer"><div class="feed-loading"><div class="spinner2"></div><p>Ачаалж байна...</p></div></div>      <div id="emptyFeed" class="empty-feed" style="display:none"><div class="icon">📭</div><p>Одоогоор зар байхгүй байна.</p></div>
+      <div id="feedContainer"><div class="feed-loading"><div class="spinner2"></div><p>Ачаалж байна...</p></div></div>
+      <div id="emptyFeed" class="empty-feed" style="display:none"><div class="icon">📭</div><p>Одоогоор зар байхгүй байна.</p></div>
     </div>
 
     <div class="sidebar" id="profileSidebar">
@@ -633,30 +540,10 @@
       <div class="dm-img-preview-strip" id="dmImgPreviewStrip"></div>
       <div class="dm-chat-input-row">
         <button class="dm-img-upload-btn" title="Зураг илгээх">📷<input type="file" id="dmImgFileInput" accept="image/*" multiple onchange="handleDmImages(event)"></button>
-        <button class="dm-emoji-btn" id="dmEmojiToggleBtn" onclick="toggleInputEmoji(event)">😊</button>
         <textarea class="dm-text-input" id="dmTextInput" placeholder="Мессеж бичих..." rows="1" onkeydown="dmInputKeydown(event)" oninput="autoResizeInput(this)"></textarea>
-        <button class="dm-send-btn" onclick="sendDM()">➤</button>      </div>
+        <button class="dm-send-btn" onclick="sendDM()">➤</button>
+      </div>
     </div>
-  </div>
-
-  <!-- EMOJI PICKER -->
-  <div class="emoji-picker-popup" id="inputEmojiPicker">
-    <div class="emoji-opt" onclick="insertEmoji('😊')">😊</div>
-    <div class="emoji-opt" onclick="insertEmoji('😂')">😂</div>
-    <div class="emoji-opt" onclick="insertEmoji('🔥')">🔥</div>
-    <div class="emoji-opt" onclick="insertEmoji('👍')">👍</div>
-    <div class="emoji-opt" onclick="insertEmoji('❤️')">❤️</div>
-    <div class="emoji-opt" onclick="insertEmoji('😎')">😎</div>
-    <div class="emoji-opt" onclick="insertEmoji('🎮')">🎮</div>
-    <div class="emoji-opt" onclick="insertEmoji('💰')">💰</div>
-    <div class="emoji-opt" onclick="insertEmoji('✅')">✅</div>
-    <div class="emoji-opt" onclick="insertEmoji('😍')">😍</div>
-    <div class="emoji-opt" onclick="insertEmoji('🤣')">🤣</div>
-    <div class="emoji-opt" onclick="insertEmoji('👀')">👀</div>
-    <div class="emoji-opt" onclick="insertEmoji('💯')">💯</div>
-    <div class="emoji-opt" onclick="insertEmoji('🙏')">🙏</div>
-    <div class="emoji-opt" onclick="insertEmoji('😭')">😭</div>
-    <div class="emoji-opt" onclick="insertEmoji('🤔')">🤔</div>
   </div>
 
   <!-- LIGHTBOX -->
@@ -684,7 +571,8 @@
             <thead><tr><th>ID</th><th>Нэр</th><th>И-мэйл</th><th>Дүр</th><th>Үйлдэл</th></tr></thead>
             <tbody id="usersBody"></tbody>
           </table>
-        </div>      </div>
+        </div>
+      </div>
       <div class="admin-content" id="postsTab"><div id="postsContainer"></div></div>
       <button class="nav-icon-btn" onclick="toggleAdmin()" style="width:auto;padding:0 16px;border-radius:var(--radius);margin-top:10px;height:36px;font-size:0.85rem;">← Буцаж</button>
     </div>
@@ -712,16 +600,9 @@
         <option value="">-- Төрөл сонгох --</option>
         <option value="Roblox">🎮 Roblox</option>
         <option value="Bloxfruit">🍎 Bloxfruit</option>
-        <option value="Escape tsunami">🌊 Escape tsunami</option>
-        <option value="Sailor">⛵ Sailor</option>
-        <option value="Steal a brainrot">🧠 Steal a brainrot</option>
-        <option value="99Night">🌙 99Night</option>
-        <option value="Pubg">🔫 Pubg</option>
-        <option value="Mlbb">⚔️ MLBB</option>
-        <option value="So2">⚡ So2</option>
       </select>
     </div>
-    <div class="form-group"><label>Тайлбар</label><textarea id="editPostDesc" rows="3" style="display:block;width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:var(--radius);outline:none;font-family:'Sora',sans-serif;background:var(--surface-secondary);color:var(--text);resize:vertical;"></textarea></div>
+    <div class="form-group"><label>Тайлбар</label><textarea id="editPostDesc" rows="3"></textarea></div>
     <div class="form-group"><label>Үнэ</label><input type="text" id="editPostPrice"></div>
     <div class="form-group"><label>Зургууд</label>
       <div class="img-preview-grid" id="editImgPreview"></div>
@@ -733,7 +614,8 @@
     </div>
     <div class="modal-buttons">
       <button class="btn-save" id="saveEditBtn" onclick="saveEditPost()">Хадгалах</button>
-      <button class="btn-cancel" onclick="closeEditPost()">Болих</button>    </div>
+      <button class="btn-cancel" onclick="closeEditPost()">Болих</button>
+    </div>
   </div>
 </div>
 
@@ -747,11 +629,10 @@ const firebaseConfig = {
   messagingSenderId: "879027782167",
   appId: "1:879027782167:web:39c8eef0b1cfbab2831252"
 };
-const ADMIN_EMAILS = ['concengcon@gmail.com'];
+const ADMIN_EMAILS = ['concengcon@gmail.com']; // ← ӨӨРИЙН ИМЕЙЛ ОРУУЛНА УУ!
 if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
-const storage = firebase.storage();
 
 // ── STATE ──
 let currentUser = null;
@@ -764,9 +645,6 @@ let editPostExistingUrls = [];
 let editPostNewFiles = [];
 let pendingDmImageFiles = [];
 let isDark = localStorage.getItem('hm_theme') === 'dark';
-let phoneVerificationId = null;
-let resendTimer = null;
-let recaptchaVerifiers = {};
 let unsubscribeFeed = null;
 let unsubscribeChat = null;
 let unsubscribeConvs = null;
@@ -782,15 +660,9 @@ function showToast(msg, type='info') {
   const t = document.createElement('div');
   t.className = 'toast';
   t.style.borderColor = type==='error'?'var(--danger)':type==='success'?'var(--success)':'var(--border)';
-  t.innerHTML = msg;  document.getElementById('toastContainer').appendChild(t);
+  t.innerHTML = msg;
+  document.getElementById('toastContainer').appendChild(t);
   setTimeout(() => { t.classList.add('fadeOut'); setTimeout(() => t.remove(), 300); }, 3500);
-}
-
-function showLoading(show) {
-  document.getElementById('authLoading').classList.toggle('show', show);
-  ['loginBtn','signupBtn','sendPhoneBtn','sendSignupPhoneBtn','verifyPhoneBtn','verifySignupPhoneBtn'].forEach(id => {
-    const el = document.getElementById(id); if(el) el.disabled = show;
-  });
 }
 
 function validateImage(file) {
@@ -808,36 +680,14 @@ function applyTheme() {
 function toggleTheme() { isDark = !isDark; localStorage.setItem('hm_theme', isDark ? 'dark' : 'light'); applyTheme(); }
 applyTheme();
 
-// ── FIREBASE STORAGE UPLOAD ──
-async function uploadImageToStorage(file, path) {
-  const ref = storage.ref().child(path);
-  const snap = await ref.put(file);
-  return await snap.ref.getDownloadURL();
-}
-
-async function uploadMultipleImages(files, basePath, onProgress) {
-  const urls = [];
-  for (let i = 0; i < files.length; i++) {
-    if (onProgress) onProgress(i, files.length, files[i].name);
-    const path = `${basePath}/${Date.now()}_${i}_${files[i].name.replace(/[^a-zA-Z0-9.]/g,'_')}`;
-    const url = await uploadImageToStorage(files[i], path);
-    urls.push(url);
-  }
-  return urls;
-}
-
-async function deleteStorageUrl(url) {
-  try { await storage.refFromURL(url).delete(); } catch(e) {}
-}
-
 // ── AUTH TABS ──
-function switchTab(t) {  document.getElementById('loginForm').style.display = t==='login' ? '' : 'none';
+function switchTab(t) {
+  document.getElementById('loginForm').style.display = t==='login' ? '' : 'none';
   document.getElementById('signupForm').style.display = t==='signup' ? '' : 'none';
   document.getElementById('resetForm').style.display = 'none';
   document.getElementById('loginTab').classList.toggle('active', t==='login');
   document.getElementById('signupTab').classList.toggle('active', t==='signup');
   document.getElementById('authErr').textContent = '';
-  ['phoneLoginOtp','phoneSignupOtp'].forEach(id => document.getElementById(id)?.classList.remove('show'));
 }
 
 function switchToReset() {
@@ -853,12 +703,10 @@ async function doLogin() {
   const pass = document.getElementById('loginPass').value;
   const err = document.getElementById('authErr');
   if (!email || !pass) { err.textContent = 'И-мэйл болон нууц үг оруулна уу'; return; }
-  showLoading(true);
   try {
     const uc = await auth.signInWithEmailAndPassword(email, pass);
     await handleFirebaseUser(uc.user);
-  } catch(e) { err.textContent = getAuthErrorMessage(e.code); }
-  finally { showLoading(false); }
+  } catch(e) { err.textContent = 'И-мэйл эсвэл нууц үг буруу'; }
 }
 
 async function doSignup() {
@@ -868,159 +716,32 @@ async function doSignup() {
   const err = document.getElementById('authErr');
   if (!name||!email||!pass) { err.textContent = 'Бүх талбарыг бөглөнө үү'; return; }
   if (pass.length < 6) { err.textContent = 'Нууц үг 6-аас дээш тэмдэгт байх ёстой'; return; }
-  showLoading(true);
   try {
     const uc = await auth.createUserWithEmailAndPassword(email, pass);
     await uc.user.updateProfile({ displayName: name });
     await handleFirebaseUser(uc.user);
-  } catch(e) { err.textContent = getAuthErrorMessage(e.code); }
-  finally { showLoading(false); }
+  } catch(e) { err.textContent = 'И-мэйл аль хэдийн бүртгэлтэй'; }
 }
 
 async function resetPassword() {
   const email = document.getElementById('resetEmail').value.trim().toLowerCase();
   const err = document.getElementById('authErr');
-  if (!email) { err.textContent = 'И-мэйл оруулна уу'; return; }  showLoading(true);
+  if (!email) { err.textContent = 'И-мэйл оруулна уу'; return; }
   try {
     await auth.sendPasswordResetEmail(email);
     showToast('✓ Нууц үг сэргээх холбоос илгээгдлээ', 'success');
     setTimeout(() => switchTab('login'), 2000);
-  } catch(e) { err.textContent = getAuthErrorMessage(e.code); }
-  finally { showLoading(false); }
+  } catch(e) { err.textContent = 'И-мэйл олдсонгүй'; }
 }
 
 async function signInWithGoogle() {
-  showLoading(true);
   const err = document.getElementById('authErr');
   try {
     const provider = new firebase.auth.GoogleAuthProvider();
     provider.setCustomParameters({ prompt: 'select_account' });
-    try {
-      const result = await auth.signInWithPopup(provider);
-      await handleFirebaseUser(result.user);
-    } catch(popupErr) {
-      if (['auth/popup-blocked','auth/cancelled-popup-request','auth/operation-not-supported-in-this-environment'].includes(popupErr.code) || popupErr.message?.includes('storage')) {
-        localStorage.setItem('hm_google_redirect','1');
-        await auth.signInWithRedirect(provider);
-        return;
-      }
-      throw popupErr;
-    }
-  } catch(e) { err.textContent = getAuthErrorMessage(e.code); showLoading(false); }
-}
-
-// ── PHONE AUTH (Corrected) ──
-function getRecaptchaVerifier(mode) {
-  const key = mode;
-  if (!recaptchaVerifiers[key]) {
-    const containerId = mode==='login' ? 'recaptcha-container' : 'recaptcha-container-signup';
-    if (!document.getElementById(containerId)) return null;
-    recaptchaVerifiers[key] = new firebase.auth.RecaptchaVerifier(containerId, {
-      'size':'invisible',
-      'callback': () => {},
-      'expired-callback': () => { recaptchaVerifiers[key]?.clear(); recaptchaVerifiers[key]=null; }
-    }, auth);
-  }
-  return recaptchaVerifiers[key];
-}
-
-function showPhoneAuth(mode) {
-  document.getElementById('loginForm').style.display = mode==='login' ? '' : 'none';
-  document.getElementById('signupForm').style.display = mode==='signup' ? '' : 'none';
-  document.getElementById(mode==='login'?'phoneLoginOtp':'phoneSignupOtp')?.classList.add('show');
-  if (recaptchaVerifiers[mode]) { recaptchaVerifiers[mode].clear(); recaptchaVerifiers[mode] = null; }
-  getRecaptchaVerifier(mode);  setupOtpInputs(mode);
-}
-
-function setupOtpInputs(mode) {
-  const containerId = mode==='login' ? 'loginOtpInputs' : 'signupOtpInputs';
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  container.innerHTML = Array.from({length:6},(_,i)=>`<input type="text" maxlength="1" data-idx="${i}" inputmode="numeric">`).join('');
-  const inputs = container.querySelectorAll('input');
-  inputs.forEach((input,index) => {
-    input.addEventListener('input', e => {
-      e.target.value = e.target.value.replace(/[^0-9]/g,'');
-      if (e.target.value && index < inputs.length-1) inputs[index+1].focus();
-    });
-    input.addEventListener('keydown', e => { 
-      if(e.key==='Backspace' && !e.target.value && index > 0) inputs[index-1].focus(); 
-    });
-    input.addEventListener('paste', e => {
-      e.preventDefault();
-      const digits = (e.clipboardData||window.clipboardData).getData('text').replace(/[^0-9]/g,'').slice(0,6);
-      digits.split('').forEach((d,i) => { if(inputs[i]) inputs[i].value=d; });
-      if(digits.length === 6) inputs[5].focus();
-    });
-  });
-}
-
-async function sendPhoneCode(mode) {
-  const country = document.getElementById(mode==='login'?'loginPhoneCountry':'signupPhoneCountry')?.value;
-  const phoneInput = document.getElementById(mode==='login'?'loginPhone':'signupPhone');
-  const phone = phoneInput?.value.trim();
-  
-  const mongolianPattern = /^(?:[123456789][0-9]{7}|976[123456789][0-9]{7})$/;
-  const fullNumber = country + phone;
-  
-  if (!country || !phone || !mongolianPattern.test(fullNumber)) { 
-    showToast('⚠️ Зөв утасны дугаар оруулна уу (жнь: 99123456)', 'error'); 
-    return; 
-  }
-
-  showLoading(true);
-  try {
-    const verifier = getRecaptchaVerifier(mode);
-    if (!verifier) { 
-      showToast('❌ reCAPTCHA ачаалахад алдаа гарлаа', 'error'); 
-      return; 
-    }
-    phoneVerificationId = await auth.signInWithPhoneNumber(fullNumber, verifier);
-    document.getElementById(mode==='login'?'loginOtpInputs':'signupOtpInputs').style.display='flex';
-    document.getElementById(mode==='login'?'verifyPhoneBtn':'verifySignupPhoneBtn').style.display='block';
-    document.getElementById(mode==='login'?'sendPhoneBtn':'sendSignupPhoneBtn').style.display='none';    startResendTimer(mode);
-    showToast('✓ 6 оронтой код илгээгдлээ', 'success');
-  } catch(e) { 
-    showToast(getAuthErrorMessage(e.code), 'error'); 
-    recaptchaVerifiers[mode]?.clear(); 
-    recaptchaVerifiers[mode]=null; 
-  }
-  finally { showLoading(false); }
-}
-
-function startResendTimer(mode) {
-  let secs = 60;
-  const link = document.getElementById(mode==='login'?'resendPhoneLink':'resendSignupPhoneLink');
-  if (!link) return;
-  link.style.pointerEvents='none'; link.style.opacity='0.5';
-  if (resendTimer) clearInterval(resendTimer);
-  resendTimer = setInterval(() => {
-    secs--;
-    if (secs<=0) { clearInterval(resendTimer); link.style.pointerEvents='auto'; link.style.opacity='1'; link.textContent='Дахин илгээх'; }
-    else link.textContent = secs+'сек';
-  }, 1000);
-}
-
-async function resendPhoneCode(mode) {
-  phoneVerificationId=null;
-  await sendPhoneCode(mode);
-}
-
-async function verifyPhoneCode(mode) {
-  const containerId = mode==='login' ? 'loginOtpInputs' : 'signupOtpInputs';
-  const code = Array.from(document.querySelectorAll(`#${containerId} input`)).map(i=>i.value||'').join('');
-  if (code.length!==6) { showToast('⚠️ 6 оронтой кодыг бүрэн оруулна уу', 'error'); return; }
-  if (!phoneVerificationId) { showToast('❌ Кодын хугацаа дууссан', 'error'); return; }
-  showLoading(true);
-  try {
-    const result = await phoneVerificationId.confirm(code);
-    if (mode==='signup') {
-      const name = document.getElementById('signupPhoneName')?.value.trim() || 'Хэрэглэгч';
-      await result.user.updateProfile({ displayName: name });
-    }
+    const result = await auth.signInWithPopup(provider);
     await handleFirebaseUser(result.user);
-  } catch(e) { showToast('❌ Код буруу эсвэл хугацаа дууссан', 'error'); }
-  finally { showLoading(false); }
+  } catch(e) { err.textContent = 'Google нэвтрэлт амжилтгүй'; }
 }
 
 // ── FIRESTORE USER HANDLER ──
@@ -1074,33 +795,13 @@ async function handleFirebaseUser(firebaseUser) {
 async function logout() {
   unsubscribeFeed?.(); unsubscribeChat?.(); unsubscribeConvs?.();
   unsubscribeFeed=null; unsubscribeChat=null; unsubscribeConvs=null;
-  if (resendTimer) clearInterval(resendTimer);
-  Object.values(recaptchaVerifiers).forEach(v => v?.clear());
-  recaptchaVerifiers = {};  try { await auth.signOut(); } catch(e) {}
+  allUsers = {};
+  try { await auth.signOut(); } catch(e) {}
   currentUser = null;
   document.getElementById('app').style.display = 'none';
   document.getElementById('auth-screen').style.display = 'flex';
   switchTab('login');
   showToast('✓ Гарлаа','success');
-}
-
-function getAuthErrorMessage(code) {
-  const errors = {
-    'auth/invalid-email':'Буруу и-мэйл хаяг',
-    'auth/user-not-found':'Хэрэглэгч олдсонгүй',
-    'auth/wrong-password':'Нууц үг буруу',
-    'auth/email-already-in-use':'Энэ и-мэйл бүртгэлтэй байна',
-    'auth/weak-password':'Нууц үг хэт сул',
-    'auth/popup-closed-by-user':'Цонх хаагдлаа',
-    'auth/network-request-failed':'Сүлжээний алдаа',
-    'auth/too-many-requests':'Хэт олон оролдлого',
-    'auth/invalid-phone-number':'Буруу утасны дугаар',
-    'auth/invalid-verification-code':'Буруу баталгаажуулах код',
-    'auth/code-expired':'Кодын хугацаа дууссан',
-    'auth/captcha-check-failed': 'reCAPTCHA шалгалт амжилтгүй боллоо',
-    'auth/invalid-credential': 'Баталгаажуулах мэдээлэл хүчингүй'
-  };
-  return errors[code] || 'Алдаа гарлаа. Дахин оролдоно уу.';
 }
 
 // ── APP INIT ──
@@ -1123,9 +824,9 @@ function showApp() {
   updateProfileUI();
   listenFeed();
   listenConversations();
-  updateDMBadge();
 }
-// ── POSTS (Firestore) ──
+
+// ── POSTS (Firestore) - ✅ BASE64 ВЕРСИОН ──
 function listenFeed() {
   unsubscribeFeed?.();
   const feed = document.getElementById('feedContainer');
@@ -1150,7 +851,7 @@ function filterPosts(cat, btn) {
   unsubscribeFeed = query.onSnapshot(snap => {
     let posts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
     if (currentFilter !== 'all') posts = posts.filter(p => p.category === currentFilter);
-    if (currentSearch) { const s=currentSearch; posts=posts.filter(p=>p.title?.toLowerCase().includes(s)||p.desc?.toLowerCase().includes(s)||p.category?.toLowerCase().includes(s)); }
+    if (currentSearch) { const s=currentSearch; posts=posts.filter(p=>p.title?.toLowerCase().includes(s)||p.desc?.toLowerCase().includes(s)); }
     renderFeed(posts);
   });
 }
@@ -1174,10 +875,9 @@ function renderFeed(posts) {
     let actions = '';
     if (isMine && (currentUser.role==='admin'||currentUser.role==='seller'))
       actions = `<button class="btn-edit" onclick="openEditPost('${p.id}')" type="button">✏️ Засах</button><button class="btn-delete" onclick="deletePost('${p.id}')" type="button">🗑️</button>`;
-    else if (currentUser && currentUser.uid !== p.sellerUid)      actions = `<button class="btn-dm" onclick="openDMTo('${p.sellerUid}','${escHtml(p.sellerName)}')" type="button">💬 Холбогдох</button>`;
-    const sellerBadge = p.sellerRole==='admin'
-      ? '<span class="post-admin-badge">admin</span>'
-      : '<span class="seller-verified">✓ Seller</span>';
+    else if (currentUser && currentUser.uid !== p.sellerUid)
+      actions = `<button class="btn-dm" onclick="openDMTo('${p.sellerUid}','${escHtml(p.sellerName)}')" type="button">💬 Холбогдох</button>`;
+    const sellerBadge = p.sellerRole==='admin' ? '<span class="post-admin-badge">admin</span>' : '<span class="seller-verified">✓ Seller</span>';
     const timeStr = p.createdAt ? (p.createdAt.toDate ? new Date(p.createdAt.toDate()).toLocaleDateString('mn-MN',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}) : '') : '';
     return `<div class="post-card" style="animation-delay:${idx*0.05}s">
       ${imgHtml}
@@ -1202,10 +902,17 @@ function renderFeed(posts) {
 }
 
 async function toggleLike(postId, isLiked) {
-  if (!currentUser) return;
-  const ref = db.collection('posts').doc(postId);
-  if (isLiked) await ref.update({ likedBy: firebase.firestore.FieldValue.arrayRemove(currentUser.uid) });
-  else await ref.update({ likedBy: firebase.firestore.FieldValue.arrayUnion(currentUser.uid) });
+  if (!currentUser?.uid) { showToast('⚠️ Нэвтэрнэ үү', 'error'); return; }
+  try {
+    const ref = db.collection('posts').doc(postId);
+    if (isLiked) 
+      await ref.update({ likedBy: firebase.firestore.FieldValue.arrayRemove(currentUser.uid) });
+    else 
+      await ref.update({ likedBy: firebase.firestore.FieldValue.arrayUnion(currentUser.uid) });
+  } catch(e) {
+    console.error('Like error:', e);
+    showToast('❌ Алдаа гарлаа', 'error');
+  }
 }
 
 // ── NEW POST ──
@@ -1223,7 +930,8 @@ function resetPostForm() {
   const cat = document.getElementById('postCategory'); if(cat) cat.value='';
   const inp = document.getElementById('imgInput'); if(inp) inp.value='';
   const prev = document.getElementById('imgPreview'); if(prev) prev.innerHTML='';
-  postImageFiles = [];  document.getElementById('uploadProgress').classList.remove('show');
+  postImageFiles = [];
+  document.getElementById('uploadProgress').classList.remove('show');
 }
 
 function previewImages(e) {
@@ -1263,6 +971,7 @@ function removePostImage(idx) {
   });
 }
 
+// ✅ ЗАСАЛТ 1: submitPost() - Base64
 async function submitPost() {
   const title = document.getElementById('postTitle')?.value.trim();
   const desc = document.getElementById('postDesc')?.value.trim();
@@ -1272,30 +981,42 @@ async function submitPost() {
 
   const btn = document.getElementById('submitPostBtn');
   btn.disabled = true; btn.textContent = 'Байршуулж байна...';
-  const progress = document.getElementById('uploadProgress');  const fill = document.getElementById('uploadProgressFill');
+  const progress = document.getElementById('uploadProgress');
+  const fill = document.getElementById('uploadProgressFill');
   const text = document.getElementById('uploadProgressText');
 
   try {
     let imageUrls = [];
+    
     if (postImageFiles.length > 0) {
       progress.classList.add('show');
-      for (let i=0; i<postImageFiles.length; i++) {
-        fill.style.width = Math.round((i/postImageFiles.length)*80)+'%';
-        text.textContent = `Зураг ${i+1}/${postImageFiles.length} байршуулж байна...`;
-        const path = `posts/${currentUser.uid}/${Date.now()}_${i}_${postImageFiles[i].name.replace(/[^a-zA-Z0-9.]/g,'_')}`;
-        const url = await uploadImageToStorage(postImageFiles[i], path);
-        imageUrls.push(url);
+      
+      // ✅ Base64-ээр болгох (NO STORAGE!)
+      for (let i = 0; i < postImageFiles.length; i++) {
+        fill.style.width = Math.round((i / postImageFiles.length) * 100) + '%';
+        text.textContent = `Зураг ${i+1}/${postImageFiles.length} үйлдэл...`;
+        
+        // FileReader дээр Base64 болгох
+        const base64 = await new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onload = (e) => resolve(e.target.result);
+          reader.readAsDataURL(postImageFiles[i]);
+        });
+        
+        imageUrls.push(base64);
       }
+      
       fill.style.width = '100%';
       text.textContent = 'Зар нийтлэж байна...';
     }
 
+    // Firestore дээр хадгалах (Base64 хадгалагдана)
     await db.collection('posts').add({
       sellerUid: currentUser.uid,
       sellerName: currentUser.name,
       sellerRole: currentUser.role,
       title, desc, price, category: cat,
-      imageUrls,
+      imageUrls, // ← Base64 string array
       likedBy: [],
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
@@ -1361,33 +1082,50 @@ function addEditImages(e) {
 
 function closeEditPost() { document.getElementById('editPostModal').classList.remove('open'); editPostId=null; editPostDoc=null; editPostExistingUrls=[]; editPostNewFiles=[]; }
 
+// ✅ ЗАСАЛТ 2: saveEditPost() - Base64
 async function saveEditPost() {
   const title = document.getElementById('editPostTitle')?.value.trim();
   const category = document.getElementById('editPostCategory')?.value;
   const desc = document.getElementById('editPostDesc')?.value.trim();
   const price = document.getElementById('editPostPrice')?.value.trim();
-  if (!title||!desc||!price||!category) { showToast('⚠️ Бүх талбарыг бөглөнө үү','error'); return; }
+  if (!title||!desc||!price||!category) { 
+    showToast('⚠️ Бүх талбарыг бөглөнө үү','error'); 
+    return; 
+  }
 
   const btn = document.getElementById('saveEditBtn');
   btn.disabled=true; btn.textContent='Хадгалж байна...';
-  const progress = document.getElementById('editUploadProgress');  const fill = document.getElementById('editUploadProgressFill');
+  const progress = document.getElementById('editUploadProgress');
+  const fill = document.getElementById('editUploadProgressFill');
   const text = document.getElementById('editUploadProgressText');
 
   try {
     let newUrls = [];
+    
+    // ✅ Base64-ээр нэмэх (NO STORAGE!)
     if (editPostNewFiles.length > 0) {
       progress.classList.add('show');
       for (let i=0; i<editPostNewFiles.length; i++) {
         fill.style.width = Math.round((i/editPostNewFiles.length)*90)+'%';
         text.textContent = `Зураг ${i+1}/${editPostNewFiles.length} байршуулж байна...`;
-        const path = `posts/${currentUser.uid}/${Date.now()}_${i}_${editPostNewFiles[i].name.replace(/[^a-zA-Z0-9.]/g,'_')}`;
-        const url = await uploadImageToStorage(editPostNewFiles[i], path);
-        newUrls.push(url);
+        
+        const base64 = await new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onload = (e) => resolve(e.target.result);
+          reader.readAsDataURL(editPostNewFiles[i]);
+        });
+        
+        newUrls.push(base64);
       }
     }
 
     const finalUrls = [...editPostExistingUrls, ...newUrls];
-    await db.collection('posts').doc(editPostId).update({ title, category, desc, price, imageUrls: finalUrls, updatedAt: firebase.firestore.FieldValue.serverTimestamp() });
+    await db.collection('posts').doc(editPostId).update({ 
+      title, category, desc, price, 
+      imageUrls: finalUrls, 
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp() 
+    });
+    
     showToast('✓ Зар шинэчлэгдлээ','success');
     closeEditPost();
   } catch(e) {
@@ -1399,14 +1137,11 @@ async function saveEditPost() {
   }
 }
 
+// ✅ ЗАСАЛТ 4: deletePost() - Base64 (Storage доосоо устгах шаардалггүй)
 async function deletePost(postId) {
   if (!confirm('Үнэхээр устгах уу?')) return;
   try {
-    const snap = await db.collection('posts').doc(postId).get();
-    if (snap.exists) {
-      const data = snap.data();
-      if (data.imageUrls) await Promise.all(data.imageUrls.map(url => deleteStorageUrl(url)));
-    }
+    // ✅ Storage доосоо устгах шаардалггүй - Base64 байна
     await db.collection('posts').doc(postId).delete();
     showToast('🗑️ Зар устгагдлаа','success');
   } catch(e) { showToast('❌ Устгахад алдаа гарлаа','error'); }
@@ -1452,25 +1187,11 @@ async function saveProfile() {
 // ── DM / CHAT (Firestore) ──
 function getConvKey(a, b) { return [a, b].sort().join('__'); }
 
-async function updateDMBadge() {
-  if (!currentUser) return;
-  try {
-    const snap = await db.collection('conversations').where('participants','array-contains',currentUser.uid).get();
-    let unread = 0;
-    snap.docs.forEach(d => {
-      const msgs = d.data().msgs || [];
-      unread += msgs.filter(m => m.from !== currentUser.uid && !m.read).length;
-    });
-    const badge = document.getElementById('dmBadge');
-    if (badge) { if(unread>0){badge.style.display='flex';badge.textContent=unread>99?'99+':unread;}else badge.style.display='none'; }
-  } catch(e) {}
-}
-
 function listenConversations() {
   unsubscribeConvs?.();
-  unsubscribeConvs = db.collection('conversations')    .where('participants','array-contains',currentUser.uid)
+  unsubscribeConvs = db.collection('conversations')
+    .where('participants','array-contains',currentUser.uid)
     .onSnapshot(snap => {
-      updateDMBadge();
       if (document.getElementById('dmPopup').classList.contains('open')) renderDMList(snap.docs);
     });
 }
@@ -1505,10 +1226,9 @@ async function renderDMList(docs) {
     }
     if (!otherUser) return null;
     const msgs = data.msgs || [];
-    const unread = msgs.filter(m => m.from!==currentUser.uid && !m.read).length;
     const lastMsg = msgs.length ? msgs[msgs.length-1] : null;
     const lastText = lastMsg ? (lastMsg.imgUrl ? '📷 Зураг' : (lastMsg.text||'').slice(0,28)) : '';
-    return { convKey: d.id, otherUser, unread, lastText };
+    return { convKey: d.id, otherUser, lastText };
   }));
   const valid = items.filter(Boolean);
   if (!valid.length) { list.innerHTML='<div class="dm-empty"><div class="dm-empty-icon">💬</div><p>Мессеж байхгүй байна</p></div>'; return; }
@@ -1517,8 +1237,8 @@ async function renderDMList(docs) {
       <div class="dm-conv-avatar">${item.otherUser.name.charAt(0).toUpperCase()}<span class="dm-conv-online"></span></div>
       <div class="dm-conv-info">
         <div class="dm-conv-name">${escHtml(item.otherUser.name)}</div>
-        <div class="dm-conv-last">${escHtml(item.lastText||'Шинэ чат')}</div>      </div>
-      ${item.unread>0?`<span class="dm-unread-badge">${item.unread}</span>`:''}
+        <div class="dm-conv-last">${escHtml(item.lastText||'Шинэ чат')}</div>
+      </div>
     </div>`).join('');
 }
 
@@ -1564,9 +1284,9 @@ function listenChat(key) {
     msgs.forEach(m => { if(m.from!==currentUser.uid&&!m.read){m.read=true;hasUnread=true;} });
     if (hasUnread) db.collection('conversations').doc(key).update({ msgs });
     renderChatMessages(msgs);
-    updateDMBadge();
   });
 }
+
 function renderChatMessages(msgs) {
   const body = document.getElementById('dmChatBody');
   if (!body) return;
@@ -1574,22 +1294,12 @@ function renderChatMessages(msgs) {
   body.innerHTML = msgs.map((m,idx) => {
     const mine = m.from === currentUser.uid;
     const side = mine ? 'mine' : 'theirs';
-    const seenHtml = mine ? `<span class="msg-seen">${m.read?'✓✓':'✓'}</span>` : '';
-    const reactions = m.reactions || {};
-    const reactHtml = Object.entries(reactions).length
-      ? `<div class="msg-reactions">${Object.entries(reactions).map(([emoji,users])=>{const isMine=users?.includes(currentUser.uid);return`<span class="reaction-chip ${isMine?'mine-react':''}" onclick="toggleReaction(${idx},'${emoji}')">${emoji}<span class="reaction-count">${users.length}</span></span>`;}).join('')}</div>` : '';
     let contentHtml = '';
-    if (m.imgUrl) contentHtml = `<img class="msg-img" src="${escHtml(m.imgUrl)}" alt="msg" loading="lazy" onclick="openLightbox('${escHtml(m.imgUrl)}')">`;
-    else if (m.editing) contentHtml = `<input class="msg-edit-input" id="editInput_${idx}" value="${escHtml(m.text)}" onkeydown="if(event.key==='Enter')saveEdit(${idx});if(event.key==='Escape')cancelEdit(${idx})"><div class="msg-edit-actions"><button class="msg-edit-save" onclick="saveEdit(${idx})" type="button">✓</button><button class="msg-edit-cancel" onclick="cancelEdit(${idx})" type="button">Болих</button></div>`;
-    else contentHtml = `<div class="msg-bubble ${m.edited?'edited-msg':''}">${escHtml(m.text)}</div>`;
-    const emojiOpts = ['❤️','😂','👍','🔥','😮','😢'].map(e=>`<button class="msg-action-btn" onclick="toggleReaction(${idx},'${e}')" type="button">${e}</button>`).join('');
-    const editBtn = mine&&!m.imgUrl ? `<button class="msg-action-btn" onclick="startEdit(${idx})" type="button">✏️</button>` : '';
-    const deleteBtn = mine ? `<button class="msg-action-btn" onclick="deleteMsg(${idx})" type="button">🗑️</button>` : '';
+    if (m.imgUrl) contentHtml = `<img class="msg-img" src="${escHtml(m.imgUrl)}" alt="msg" loading="lazy" onclick="openLightbox('${escHtml(m.imgUrl)}')" onerror="this.src='data:image/svg+xml,%3Csvg%3E%3C/svg%3E'">`;
+    else contentHtml = `<div class="msg-bubble">${escHtml(m.text)}</div>`;
     return `<div class="msg-row ${side}">
-      <div class="msg-hover-actions">${emojiOpts}${editBtn}${deleteBtn}</div>
       ${contentHtml}
-      ${reactHtml}
-      <div class="msg-meta"><span>${escHtml(m.time||'')}</span>${seenHtml}</div>
+      <div class="msg-meta"><span>${escHtml(m.time||'')}</span></div>
     </div>`;
   }).join('');
   body.scrollTop = body.scrollHeight;
@@ -1600,44 +1310,44 @@ async function getConvMsgs() {
   return snap.exists ? (snap.data().msgs || []) : [];
 }
 
-async function toggleReaction(msgIdx, emoji) {
-  const msgs = await getConvMsgs();
-  if (!msgs[msgIdx]) return;
-  if (!msgs[msgIdx].reactions) msgs[msgIdx].reactions = {};
-  if (!msgs[msgIdx].reactions[emoji]) msgs[msgIdx].reactions[emoji] = [];
-  const arr = msgs[msgIdx].reactions[emoji];
-  const i = arr.indexOf(currentUser.uid);
-  if (i>=0) arr.splice(i,1); else arr.push(currentUser.uid);
-  if (!arr.length) delete msgs[msgIdx].reactions[emoji];
-  await db.collection('conversations').doc(currentChatKey).update({ msgs });
-}
+// ✅ ЗАСАЛТ 3: sendDM() - Base64
+async function sendDM() {
+  if (!currentChatKey) return;
+  const input = document.getElementById('dmTextInput');
+  const text = input?.value.trim();
+  if (!text && !pendingDmImageFiles.length) return;
 
-async function startEdit(idx) {
+  const time = new Date().toLocaleTimeString('mn-MN',{hour:'2-digit',minute:'2-digit'});
   const msgs = await getConvMsgs();
-  if (msgs[idx]) { msgs[idx].editing=true; await db.collection('conversations').doc(currentChatKey).update({ msgs }); }
-  setTimeout(() => { const inp=document.getElementById('editInput_'+idx); if(inp){inp.focus();inp.select();} }, 50);}
+  
+  // ✅ Base64-ээр мессежийн зур (NO STORAGE!)
+  if (pendingDmImageFiles.length > 0) {
+    for (const file of pendingDmImageFiles) {
+      const base64 = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (e) => resolve(e.target.result);
+        reader.readAsDataURL(file);
+      });
+      
+      msgs.push({ 
+        from: currentUser.uid, 
+        imgUrl: base64, // ← Base64 шууд
+        time, 
+        read: false
+      });
+    }
+    pendingDmImageFiles = [];
+    renderDmImgPreview();
+  }
 
-async function saveEdit(idx) {
-  const inp = document.getElementById('editInput_'+idx); if(!inp) return;
-  const msgs = await getConvMsgs();
-  if (!msgs[idx]) return;
-  msgs[idx].text = inp.value.trim() || msgs[idx].text;
-  msgs[idx].editing = false; msgs[idx].edited = true;
-  await db.collection('conversations').doc(currentChatKey).update({ msgs });
-}
+  if (text) msgs.push({ from: currentUser.uid, text, time, read: false });
 
-async function cancelEdit(idx) {
-  const msgs = await getConvMsgs();
-  if (msgs[idx]) { msgs[idx].editing=false; await db.collection('conversations').doc(currentChatKey).update({ msgs }); }
-}
-
-async function deleteMsg(idx) {
-  const msgs = await getConvMsgs();
-  const m = msgs[idx];
-  if (m?.imgUrl) await deleteStorageUrl(m.imgUrl);
-  msgs.splice(idx,1);
-  await db.collection('conversations').doc(currentChatKey).update({ msgs });
-  loadAndRenderDMList();
+  await db.collection('conversations').doc(currentChatKey).update({ 
+    msgs, 
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp() 
+  });
+  
+  if (input) { input.value=''; input.style.height='auto'; }
 }
 
 function handleDmImages(e) {
@@ -1657,55 +1367,6 @@ function renderDmImgPreview() {
 
 function removePendingImg(i) { pendingDmImageFiles.splice(i,1); renderDmImgPreview(); }
 
-async function sendDM() {
-  if (!currentChatKey) return;
-  const input = document.getElementById('dmTextInput');
-  const text = input?.value.trim();
-  if (!text && !pendingDmImageFiles.length) return;
-
-  const time = new Date().toLocaleTimeString('mn-MN',{hour:'2-digit',minute:'2-digit'});
-  const msgs = await getConvMsgs();
-  if (pendingDmImageFiles.length > 0) {
-    for (const file of pendingDmImageFiles) {
-      const path = `dm/${currentChatKey}/${Date.now()}_${file.name.replace(/[^a-zA-Z0-9.]/g,'_')}`;
-      const imgUrl = await uploadImageToStorage(file, path);
-      msgs.push({ from: currentUser.uid, imgUrl, time, read: false, reactions: {} });
-    }
-    pendingDmImageFiles = [];
-    renderDmImgPreview();
-  }
-
-  if (text) msgs.push({ from: currentUser.uid, text, time, read: false, reactions: {} });
-
-  await db.collection('conversations').doc(currentChatKey).update({ msgs, updatedAt: firebase.firestore.FieldValue.serverTimestamp() });
-  if (input) { input.value=''; input.style.height='auto'; }
-}
-
-function toggleInputEmoji(e) {
-  e?.stopPropagation();
-  const picker = document.getElementById('inputEmojiPicker');
-  const btn = document.getElementById('dmEmojiToggleBtn');
-  if (!picker||!btn) return;
-  const rect = btn.getBoundingClientRect();
-  picker.style.bottom = (window.innerHeight-rect.top+4)+'px';
-  picker.style.right = (window.innerWidth-rect.right)+'px';
-  picker.classList.toggle('open');
-}
-
-function insertEmoji(emoji) {
-  const inp = document.getElementById('dmTextInput'); if(!inp) return;
-  const pos = inp.selectionStart||0;
-  inp.value = inp.value.slice(0,pos)+emoji+inp.value.slice(pos);
-  inp.focus(); inp.setSelectionRange(pos+emoji.length,pos+emoji.length);
-  document.getElementById('inputEmojiPicker')?.classList.remove('open');
-}
-
-document.addEventListener('click', e => {
-  const picker = document.getElementById('inputEmojiPicker');
-  const btn = document.getElementById('dmEmojiToggleBtn');
-  if (picker&&!picker.contains(e.target)&&e.target!==btn) picker.classList.remove('open');
-});
-
 function autoResizeInput(el) { if(!el) return; el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,100)+'px'; }
 function dmInputKeydown(e) { if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendDM();} }
 
@@ -1713,7 +1374,8 @@ function openLightbox(src) { const img=document.getElementById('lightboxImg'); c
 function closeLightbox() { document.getElementById('imgLightbox')?.classList.remove('open'); }
 
 // ── ADMIN ──
-function toggleAdmin() {  const main=document.getElementById('mainContent');
+function toggleAdmin() {
+  const main=document.getElementById('mainContent');
   const admin=document.getElementById('adminPanel');
   if (admin.style.display==='flex'){main.style.display='flex';admin.style.display='none';}
   else{main.style.display='none';admin.style.display='flex';loadUsersTable();}
@@ -1762,7 +1424,8 @@ async function promoteToSeller(uid, currentRole) {
   const newRole = currentRole==='seller' ? 'buyer' : 'seller';
   try {
     await db.collection('users').doc(uid).update({ role: newRole });
-    showToast(`✓ Эрх шинэчлэгдлээ: ${newRole}`, 'success');    loadUsersTable();
+    showToast(`✓ Эрх шинэчлэгдлээ: ${newRole}`, 'success');
+    loadUsersTable();
   } catch(e) { showToast('❌ Алдаа гарлаа','error'); }
 }
 
@@ -1791,8 +1454,7 @@ async function loadAdminPosts() {
 async function adminDeletePost(postId) {
   if (!confirm('Үнэхээр устгах уу?')) return;
   try {
-    const snap = await db.collection('posts').doc(postId).get();
-    if (snap.exists) { const d=snap.data(); if(d.imageUrls) await Promise.all(d.imageUrls.map(url=>deleteStorageUrl(url))); }
+    // ✅ Storage доосоо устгах шаардалггүй - Base64 байна
     await db.collection('posts').doc(postId).delete();
     showToast('🗑️ Зар устгагдлаа','success');
     loadAdminPosts();
@@ -1800,18 +1462,12 @@ async function adminDeletePost(postId) {
 }
 
 // ── AUTH STATE ──
-auth.getRedirectResult().then(async result => {
-  if (result?.user && localStorage.getItem('hm_google_redirect')) {
-    localStorage.removeItem('hm_google_redirect');
-    await handleFirebaseUser(result.user);
-  }
-}).catch(e => { if(e.code && e.code!=='auth/no-auth-event') console.error(e); });
-
 auth.onAuthStateChanged(async firebaseUser => {
   if (firebaseUser && !currentUser) {
     try {
       const snap = await db.collection('users').doc(firebaseUser.uid).get();
-      if (snap.exists) {        const userData = snap.data();
+      if (snap.exists) {
+        const userData = snap.data();
         const userEmail = firebaseUser.email?.toLowerCase()||'';
         if (ADMIN_EMAILS.includes(userEmail) && userData.role!=='admin') {
           await db.collection('users').doc(firebaseUser.uid).update({ role:'admin' });
@@ -1825,4 +1481,4 @@ auth.onAuthStateChanged(async firebaseUser => {
 });
 </script>
 </body>
-</html>
+  </html>
