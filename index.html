@@ -586,7 +586,7 @@
     background:rgba(16,185,129,0.12);
     color:var(--success);
     padding:2px 7px; border-radius:4px;
-    font-size:0.65rem; font-weight:700;
+    font-size:0.8rem; font-weight:700;
   }
   .post-admin-badge {
     background:var(--danger); color:#fff;
@@ -2123,7 +2123,7 @@ function renderFeed() {
       <div class="post-body">
         <div class="post-meta">
           <span class="post-category">${escHtml(p.category)}</span>
-          <span class="post-id">#${String(p.sellerId).padStart(6,'0')}</span>
+          <span class="post-id">${escHtml(p.sellerName)}</span>
           ${sellerBadge}
           <span class="post-time">${escHtml(p.time||'')}</span>
         </div>
@@ -2564,4 +2564,4 @@ auth.onAuthStateChanged(async firebaseUser => {
 });
 </script>
 </body>
-    </html>
+      </html>
