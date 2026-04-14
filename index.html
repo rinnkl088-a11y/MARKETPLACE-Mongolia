@@ -1,4 +1,19 @@
-<!DOCTYPE html>
+
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <style>
+                body {
+                  background-color: white; /* Ensure the iframe has a white background */
+                }
+
+                
+              </style>
+                        </head>
+                        <body>
+                            <!DOCTYPE html>
 <html lang="mn">
 <head>
 <meta charset="UTF-8">
@@ -47,7 +62,8 @@
     --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
     --shadow-lg: 0 10px 30px rgba(0,0,0,0.5);
   }
-  * { margin:0; padding:0; box-sizing:border-box; }  html,body { width:100%; height:100%; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:100%; height:100%; }
   body {
     font-family:'Sora',sans-serif;
     background:var(--bg);
@@ -96,7 +112,8 @@
     position:relative;
     z-index:1;
   }
-  .auth-brand { text-align:center; margin-bottom:32px; }  .auth-brand h1 {
+  .auth-brand { text-align:center; margin-bottom:32px; }
+  .auth-brand h1 {
     font-size:2.8rem;
     font-weight:800;
     color:#fff;
@@ -145,7 +162,8 @@
     font-size:0.9rem;
     font-family:'Sora',sans-serif;
     outline:none;
-    transition:all var(--transition);  }
+    transition:all var(--transition);
+  }
   .form-group input::placeholder { color:rgba(255,255,255,0.3); }
   .form-group input:focus {
     border-color:var(--primary);
@@ -194,7 +212,8 @@
   }
   .social-btn {
     width:100%; padding:10px;
-    background:rgba(255,255,255,0.08);    border:1px solid rgba(255,255,255,0.15);
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.15);
     border-radius:var(--radius);
     color:#fff; font-weight:600; font-size:0.85rem;
     cursor:pointer; transition:all var(--transition);
@@ -243,7 +262,8 @@
   }
   .otp-inputs input:focus { border-color:var(--primary); }
   .auth-loading {
-    display:none; position:absolute; inset:0;    background:rgba(0,0,0,0.3); border-radius:24px;
+    display:none; position:absolute; inset:0;
+    background:rgba(0,0,0,0.3); border-radius:24px;
     align-items:center; justify-content:center;
     z-index:10;
   }
@@ -292,7 +312,8 @@
     min-width:fit-content;
   }
   .nav-search {
-    flex:1;    max-width:300px;
+    flex:1;
+    max-width:300px;
     position:relative;
   }
   .nav-search input {
@@ -341,7 +362,8 @@
     color:#fff;
     border-radius:9px;
     font-size:0.65rem;
-    font-weight:700;    display:flex; align-items:center; justify-content:center;
+    font-weight:700;
+    display:flex; align-items:center; justify-content:center;
     padding:0 4px;
     border:2px solid var(--surface);
     animation:popIn 0.3s ease;
@@ -391,6 +413,7 @@
     gap:16px;
   }
   .feed-col { flex:1; min-width:0; }
+
   /* CREATE POST */
   .create-post-card {
     background:var(--surface);
@@ -439,7 +462,8 @@
   .new-post-card.show { display:block; }
   .new-post-header { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
   .new-post-avatar {
-    width:38px; height:38px;    border-radius:50%;
+    width:38px; height:38px;
+    border-radius:50%;
     background:linear-gradient(135deg,var(--primary),var(--secondary));
     color:#fff;
     display:flex; align-items:center; justify-content:center;
@@ -488,7 +512,8 @@
   .img-item { position:relative; }
   .img-preview-grid img { width:100%; aspect-ratio:1; object-fit:cover; border-radius:var(--radius); border:1px solid var(--border); }
   .img-remove {
-    position:absolute; top:-6px; right:-6px;    width:20px; height:20px; border-radius:50%;
+    position:absolute; top:-6px; right:-6px;
+    width:20px; height:20px; border-radius:50%;
     background:var(--danger); border:none;
     color:#fff; cursor:pointer; font-size:0.7rem;
     display:flex; align-items:center; justify-content:center;
@@ -537,7 +562,8 @@
     color:var(--text); font-weight:600; font-size:0.78rem;
     cursor:pointer; white-space:nowrap;
     transition:all var(--transition);
-    font-family:'Sora',sans-serif;  }
+    font-family:'Sora',sans-serif;
+  }
   .filter-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
   .filter-btn:hover:not(.active) { border-color:var(--primary); color:var(--primary); }
 
@@ -586,7 +612,8 @@
   .post-time { font-size:0.72rem; color:var(--text-tertiary); margin-left:auto; }
   .post-title { font-size:1.05rem; font-weight:700; color:var(--text); margin-bottom:6px; }
   .post-desc { color:var(--text-secondary); font-size:0.88rem; line-height:1.55; margin-bottom:12px; }
-  .post-price {    font-size:1.25rem; font-weight:800;
+  .post-price {
+    font-size:1.25rem; font-weight:800;
     background:linear-gradient(135deg,var(--primary),var(--secondary));
     -webkit-background-clip:text; -webkit-text-fill-color:transparent;
     margin-bottom:12px;
@@ -636,6 +663,7 @@
   .btn-delete:hover { background:rgba(239,68,68,0.18); }
   .empty-feed { text-align:center; padding:60px 20px; color:var(--text-secondary); }
   .empty-feed .icon { font-size:3rem; margin-bottom:14px; }
+
   /* SIDEBAR */
   .sidebar { width:290px; display:none; flex-direction:column; gap:14px; }
   .sidebar.open { display:flex; }
@@ -684,7 +712,8 @@
   .btn-profile {
     width:100%; padding:9px;
     background:linear-gradient(135deg,var(--primary),var(--primary-dark));
-    border:none; border-radius:var(--radius);    color:#fff; font-weight:700; font-size:0.82rem;
+    border:none; border-radius:var(--radius);
+    color:#fff; font-weight:700; font-size:0.82rem;
     cursor:pointer; margin-top:12px;
     transition:all var(--transition); font-family:'Sora',sans-serif;
   }
@@ -733,7 +762,8 @@
     transition:background var(--transition);
     display:flex; align-items:center; gap:10px;
     border-bottom:1px solid var(--border);
-  }  .dm-conv-item:last-child { border-bottom:none; }
+  }
+  .dm-conv-item:last-child { border-bottom:none; }
   .dm-conv-item:hover { background:var(--surface-secondary); }
   .dm-conv-avatar {
     width:36px; height:36px; border-radius:50%;
@@ -782,7 +812,8 @@
   }
   .dm-chat-popup.open { display:flex; }
   .dm-chat-popup.minimized { height:56px; }
-  .dm-chat-popup.minimized .dm-chat-body,  .dm-chat-popup.minimized .dm-chat-input-area { display:none; }
+  .dm-chat-popup.minimized .dm-chat-body,
+  .dm-chat-popup.minimized .dm-chat-input-area { display:none; }
   .dm-chat-header {
     padding:0 14px;
     height:56px;
@@ -831,7 +862,8 @@
     position:relative;
     word-break:break-word;
   }
-  .msg-row.mine .msg-bubble {    background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  .msg-row.mine .msg-bubble {
+    background:linear-gradient(135deg,var(--primary),var(--primary-dark));
     color:#fff;
     border-bottom-right-radius:4px;
   }
@@ -880,7 +912,8 @@
     border:1px solid var(--border);
     border-radius:var(--radius);
     padding:3px;
-    box-shadow:var(--shadow-md);    flex-direction:row; gap:2px;
+    box-shadow:var(--shadow-md);
+    flex-direction:row; gap:2px;
     z-index:10;
   }
   .msg-row.mine .msg-hover-actions { right:0; top:-36px; }
@@ -929,7 +962,8 @@
   .msg-edit-actions { display:flex; gap:4px; margin-top:4px; }
   .msg-edit-save, .msg-edit-cancel {
     padding:3px 10px; border-radius:6px;
-    font-size:0.75rem; font-weight:700;    cursor:pointer; border:none;
+    font-size:0.75rem; font-weight:700;
+    cursor:pointer; border:none;
     font-family:'Sora',sans-serif;
   }
   .msg-edit-save { background:var(--success); color:#fff; }
@@ -978,7 +1012,8 @@
     border:none; color:#fff; cursor:pointer; font-size:1rem;
     display:flex; align-items:center; justify-content:center;
     transition:all var(--transition); flex-shrink:0;
-  }  .dm-send-btn:hover { transform:scale(1.1); box-shadow:var(--shadow-md); }
+  }
+  .dm-send-btn:hover { transform:scale(1.1); box-shadow:var(--shadow-md); }
   .dm-img-preview-strip {
     display:none; gap:6px; padding:0 10px 8px;
     overflow-x:auto;
@@ -1027,7 +1062,8 @@
   .admin-tab {
     padding:9px 16px;
     background:var(--surface-secondary);
-    border:1.5px solid var(--border);    border-radius:var(--radius);
+    border:1.5px solid var(--border);
+    border-radius:var(--radius);
     color:var(--text); font-weight:600; cursor:pointer;
     transition:all var(--transition); font-family:'Sora',sans-serif;
   }
@@ -1076,7 +1112,8 @@
     padding:20px; overflow-y:auto;
     backdrop-filter:blur(4px);
   }
-  .modal.open { display:flex; }  .modal-content {
+  .modal.open { display:flex; }
+  .modal-content {
     background:var(--surface);
     border-radius:var(--radius-lg);
     padding:24px; width:100%; max-width:480px;
@@ -1125,7 +1162,8 @@
   .btn-save:hover { transform:translateY(-2px); box-shadow:var(--shadow-md); }
   .btn-cancel {
     flex:1; padding:10px;
-    background:var(--surface-secondary);    border:1.5px solid var(--border);
+    background:var(--surface-secondary);
+    border:1.5px solid var(--border);
     border-radius:var(--radius);
     color:var(--text); font-weight:700; cursor:pointer;
     transition:all var(--transition); font-family:'Sora',sans-serif;
@@ -1174,7 +1212,8 @@
   }
   .theme-toggle { font-size:1rem; }
   ::-webkit-scrollbar { width:5px; height:5px; }
-  ::-webkit-scrollbar-track { background:transparent; }  ::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
+  ::-webkit-scrollbar-track { background:transparent; }
+  ::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
 
   /* MOBILE */
   @media (max-width:768px) {
@@ -1223,7 +1262,8 @@
   <div class="auth-container">
     <div class="auth-brand">
       <h1>Shop<span>&</span>M</h1>
-      <p>Account Shop</p>    </div>
+      <p>Account Shop</p>
+    </div>
     <div class="auth-tabs">
       <button class="auth-tab active" id="loginTab" onclick="switchTab('login')">Нэвтрэх</button>
       <button class="auth-tab" id="signupTab" onclick="switchTab('signup')">Бүртгүүлэх</button>
@@ -1272,7 +1312,8 @@
       <button class="btn-primary" onclick="doSignup()" id="signupBtn">Бүртгүүлэх</button>
       <div class="auth-divider">эсвэл</div>
       <button class="social-btn google" onclick="signInWithGoogle()">
-        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>        Google-ээр бүртгүүлэх
+        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+        Google-ээр бүртгүүлэх
       </button>
       <button class="social-btn" onclick="showPhoneAuth('signup')" style="margin-top:8px">📱 Утсаар бүртгүүлэх</button>
       <div class="otp-container" id="phoneSignupOtp">
@@ -1321,7 +1362,8 @@
       <input type="text" id="navSearchInput" placeholder="Зар хайх..." oninput="handleSearchInput(this.value)">
     </div>
     <div class="nav-spacer"></div>
-    <div class="nav-actions">      <button class="nav-icon-btn theme-toggle" onclick="toggleTheme()" title="Dark mode" id="themeBtn">🌙</button>
+    <div class="nav-actions">
+      <button class="nav-icon-btn theme-toggle" onclick="toggleTheme()" title="Dark mode" id="themeBtn">🌙</button>
       <button class="nav-icon-btn" id="dmBtn" onclick="toggleDM()" title="Мессеж">
         💬
         <span class="notif-badge" id="dmBadge" style="display:none">0</span>
@@ -1370,7 +1412,8 @@
           </div>
         </div>
       </div>
-      <div class="filter-row" id="filterRow">        <button class="filter-btn active" onclick="filterPosts('all',this)">Бүгд</button>
+      <div class="filter-row" id="filterRow">
+        <button class="filter-btn active" onclick="filterPosts('all',this)">Бүгд</button>
         <button class="filter-btn" onclick="filterPosts('Roblox',this)">🎮 Roblox</button>
         <button class="filter-btn" onclick="filterPosts('Bloxfruit',this)">🍎 Bloxfruit</button>
         <button class="filter-btn" onclick="filterPosts('Escape tsunami',this)">🌊 Tsunami</button>
@@ -1419,7 +1462,8 @@
         <div class="dm-chat-header-name" id="chatHeaderName">User</div>
         <div class="dm-chat-header-status"><span style="width:7px;height:7px;background:#4ade80;border-radius:50%;display:inline-block;"></span> Онлайн</div>
       </div>
-      <div class="dm-chat-header-actions" onclick="event.stopPropagation()">        <button class="dm-chat-hbtn" onclick="toggleMinimize()" title="Багасгах">—</button>
+      <div class="dm-chat-header-actions" onclick="event.stopPropagation()">
+        <button class="dm-chat-hbtn" onclick="toggleMinimize()" title="Багасгах">—</button>
         <button class="dm-chat-hbtn" onclick="closeChatPopup()" title="Хаах">✕</button>
       </div>
     </div>
@@ -1468,7 +1512,8 @@
         <div class="admin-tabs">
           <button class="admin-tab active" onclick="switchAdminTab('users',this)">👥 Хэрэглэгчид</button>
           <button class="admin-tab" onclick="switchAdminTab('posts',this)">📝 Зарнууд</button>
-        </div>      </div>
+        </div>
+      </div>
       <div class="admin-content show" id="usersTab">
         <div class="search-box">
           <input type="text" id="searchInput" placeholder="ID эсвэл нэр хайх...">
@@ -1517,7 +1562,8 @@
         <option value="So2">⚡ So2</option>
       </select>
     </div>
-    <div class="form-group"><label>Тайлбар</label><textarea id="editPostDesc" rows="3" style="display:block;width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:var(--radius);outline:none;font-family:'Sora',sans-serif;background:var(--surface-secondary);color:var(--text);resize:vertical;"></textarea></div>    <div class="form-group"><label>Үнэ</label><input type="text" id="editPostPrice"></div>
+    <div class="form-group"><label>Тайлбар</label><textarea id="editPostDesc" rows="3" style="display:block;width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:var(--radius);outline:none;font-family:'Sora',sans-serif;background:var(--surface-secondary);color:var(--text);resize:vertical;"></textarea></div>
+    <div class="form-group"><label>Үнэ</label><input type="text" id="editPostPrice"></div>
     <div class="form-group"><label>Зургууд</label>
       <div class="img-preview-grid" id="editImgPreview"></div>
       <div class="img-upload-area">📸 Зураг оруулах<input type="file" id="editImgInput" accept="image/*" multiple onchange="previewEditImages(event)"></div>
@@ -1566,7 +1612,8 @@ let currentFilter = 'all';
 let currentSearch = '';
 let currentChatKey = null;
 let currentChatName = '';
-let postImages = [];let editPostId = null;
+let postImages = [];
+let editPostId = null;
 let editPostImages = [];
 let pendingDmImages = [];
 let isDark = localStorage.getItem('hm_theme') === 'dark';
@@ -1576,17 +1623,18 @@ let phoneVerificationId = null;
 let resendTimer = null;
 let recaptchaVerifiers = {};
 let isLoadingPosts = false;
-let msgUnsubscribers = {}; // Real-time DM listeners
+let msgUnsubscribers = {};
 window.searchTimeout = null;
 
 // ── UTILS ──
+// ✅ FIXED: Proper HTML escaping to prevent XSS
 function escHtml(s) {
   if (!s) return '';
   return String(s)
-    .replace(/&/g, '&')
-    .replace(/</g, '<')
-    .replace(/>/g, '>')
-    .replace(/"/g, '"')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;')
     .replace(/\n/g, '<br>');
 }
@@ -1597,7 +1645,7 @@ function showToast(msg, type='info') {
   const t = document.createElement('div');
   t.className = 'toast';
   t.style.borderColor = type === 'error' ? 'var(--danger)' : (type === 'success' ? 'var(--success)' : 'var(--border)');
-  t.innerHTML = msg;
+  t.innerHTML = escHtml(msg);
   container.appendChild(t);
   setTimeout(() => { 
     t.classList.add('fadeOut'); 
@@ -1615,7 +1663,8 @@ function showLoading(show) {
   });
 }
 
-function showFeedLoading(show) {  const feed = document.getElementById('feedContainer');
+function showFeedLoading(show) {
+  const feed = document.getElementById('feedContainer');
   if(!feed) return;
   if(show) {
     feed.innerHTML = '<div class="feed-loading"><div class="spinner"></div>Ачааллаж байна...</div>';
@@ -1664,7 +1713,8 @@ function compressImage(file, maxWidth = 800, quality = 0.7) {
           height = Math.round(height * maxWidth / width);
           width = maxWidth;
         }
-        const canvas = document.createElement('canvas');        canvas.width = width;
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
         canvas.height = height;
         const ctx = canvas.getContext('2d');
         ctx.drawImage(img, 0, 0, width, height);
@@ -1713,7 +1763,8 @@ function switchToReset() {
 // ── EMAIL AUTH ──
 async function doLogin() {
   const email = document.getElementById('loginEmail')?.value.trim().toLowerCase();
-  const pass = document.getElementById('loginPass')?.value;  const err = document.getElementById('authErr');
+  const pass = document.getElementById('loginPass')?.value;
+  const err = document.getElementById('authErr');
   if (!email || !pass) { if(err) err.textContent = 'И-мэйл болон нууц үг оруулна уу'; return; }
   showLoading(true);
   try {
@@ -1762,7 +1813,8 @@ async function signInWithGoogle() {
     try {
       const result = await auth.signInWithPopup(provider);
       await handleFirebaseUser(result.user, result.additionalUserInfo?.isNewUser ? 'signup' : 'login');
-    } catch (popupError) {      if (
+    } catch (popupError) {
+      if (
         popupError.code === 'auth/popup-blocked' ||
         popupError.code === 'auth/cancelled-popup-request' ||
         popupError.code === 'auth/operation-not-supported-in-this-environment' ||
@@ -1811,7 +1863,8 @@ function showPhoneAuth(mode) {
   if (recaptchaVerifiers[key]) { recaptchaVerifiers[key].clear(); recaptchaVerifiers[key] = null; }
   getRecaptchaVerifier(mode);
   setupOtpInputs(mode);
-  ['loginOtpInputs','signupOtpInputs'].forEach(id => { const el = document.getElementById(id); if(el) el.style.display='none'; });  ['verifyPhoneBtn','verifySignupPhoneBtn'].forEach(id => { const el = document.getElementById(id); if(el) el.style.display='none'; });
+  ['loginOtpInputs','signupOtpInputs'].forEach(id => { const el = document.getElementById(id); if(el) el.style.display='none'; });
+  ['verifyPhoneBtn','verifySignupPhoneBtn'].forEach(id => { const el = document.getElementById(id); if(el) el.style.display='none'; });
   ['sendPhoneBtn','sendSignupPhoneBtn'].forEach(id => { const el = document.getElementById(id); if(el) el.style.display=''; });
 }
 
@@ -1860,7 +1913,8 @@ async function sendPhoneCode(mode) {
     if(sendEl) sendEl.style.display='none';
     document.querySelector(`#${otpId} input`)?.focus();
     startResendTimer(mode);
-    showToast('✓ 6 оронтой код илгээгдлээ', 'success');  } catch(e) {
+    showToast('✓ 6 оронтой код илгээгдлээ', 'success');
+  } catch(e) {
     showToast(getAuthErrorMessage(e.code), 'error');
     const key = mode==='login'?'login':'signup';
     recaptchaVerifiers[key]?.clear(); recaptchaVerifiers[key]=null;
@@ -1910,6 +1964,7 @@ async function verifyPhoneCode(mode) {
   } catch(e) { showToast('❌ Код буруу эсвэл хугацаа дууссан', 'error'); }
   finally { showLoading(false); }
 }
+
 // ── FIREBASE USER HANDLER ──
 async function handleFirebaseUser(firebaseUser, action) {
   try {
@@ -1958,7 +2013,8 @@ async function handleFirebaseUser(firebaseUser, action) {
   }
 }
 
-// ── LOGOUT ──async function logout() {
+// ── LOGOUT ──
+async function logout() {
   // Stop all message listeners
   Object.keys(msgUnsubscribers).forEach(key => stopListening(key));
   
@@ -2007,7 +2063,8 @@ function getAuthErrorMessage(code) {
 async function savePostToFirestore(post) {
   try {
     await db.collection('posts').doc(String(post.id)).set({
-      id: post.id,      sellerId: post.sellerId,
+      id: post.id,
+      sellerId: post.sellerId,
       sellerName: post.sellerName,
       sellerRole: post.sellerRole,
       title: post.title,
@@ -2056,7 +2113,8 @@ async function loadPostsFromFirestore(category = 'all', search = '') {
 }
 
 async function deletePostFromFirestore(postId) {
-  try {    await db.collection('posts').doc(String(postId)).delete();
+  try {
+    await db.collection('posts').doc(String(postId)).delete();
     return true;
   } catch(e) {
     console.error('Firebase delete error:', e);
@@ -2084,8 +2142,11 @@ async function updatePostInFirestore(post) {
 // ── FIRESTORE DM FUNCTIONS ──
 async function saveMessageToFirestore(convKey, message) {
   try {
+    // Ensure participants array is sorted for consistent key matching
+    const participants = [...message.participants].sort((a,b) => a-b);
+    
     await db.collection('messages').doc(convKey).set({
-      participants: message.participants,
+      participants: participants,
       updatedAt: firebase.firestore.FieldValue.serverTimestamp()
     }, { merge: true });
     
@@ -2105,6 +2166,7 @@ async function saveMessageToFirestore(convKey, message) {
     return false;
   }
 }
+
 async function loadMessagesFromFirestore(convKey) {
   try {
     const doc = await db.collection('messages').doc(convKey).get();
@@ -2125,9 +2187,13 @@ async function loadMessagesFromFirestore(convKey) {
   }
 }
 
-// Real-time listener for new messages
+// Real-time listener for new messages - FIXED: prevent duplicate listeners
 function listenToMessages(convKey, callback) {
-  if(msgUnsubscribers[convKey]) msgUnsubscribers[convKey]();
+  // Stop existing listener first
+  if(msgUnsubscribers[convKey]) {
+    msgUnsubscribers[convKey]();
+    delete msgUnsubscribers[convKey];
+  }
   
   msgUnsubscribers[convKey] = db.collection('messages').doc(convKey)
     .collection('msgs')
@@ -2137,7 +2203,15 @@ function listenToMessages(convKey, callback) {
       const msgs = [];
       snapshot.forEach(d => msgs.push({ id: d.id, ...d.data() }));
       callback(msgs);
-    }, err => console.error('Listener error:', err));
+    }, err => {
+      console.error('Listener error:', err);
+      // Auto-retry on error
+      setTimeout(() => {
+        if(currentChatKey === convKey) {
+          listenToMessages(convKey, callback);
+        }
+      }, 3000);
+    });
 }
 
 function stopListening(convKey) {
@@ -2155,6 +2229,7 @@ function showApp() {
   
   authScreen.style.display='none';
   app.style.display='flex';
+
   const navId = document.getElementById('navId');
   const navUser = document.getElementById('navUser');
   const navAvatar = document.getElementById('navAvatar');
@@ -2203,7 +2278,8 @@ function startPolling() {
   }, 10000);
 }
 
-// ── POSTS ──function toggleNewPost() {
+// ── POSTS ──
+function toggleNewPost() {
   const card = document.getElementById('newPostCard');
   if(!card) return;
   const content = card.querySelector('.new-post-content');
@@ -2252,7 +2328,8 @@ function removeImage(idx) {
   postImages.splice(idx,1);
   const inp = document.getElementById('imgInput'); if(inp) inp.value='';
   const preview = document.getElementById('imgPreview'); if(!preview) return;
-  preview.innerHTML = '';  postImages.forEach((src,i) => {
+  preview.innerHTML = '';
+  postImages.forEach((src,i) => {
     const div = document.createElement('div'); div.className='img-item';
     div.innerHTML = `<img src="${escHtml(src)}" alt="preview"><button class="img-remove" onclick="removeImage(${i})" type="button">✕</button>`;
     preview.appendChild(div);
@@ -2301,7 +2378,8 @@ async function submitPost() {
   if(btn) { btn.disabled = false; btn.textContent = 'Нийтлэх'; }
 }
 
-function handleSearchInput(val) {  currentSearch = val.toLowerCase();
+function handleSearchInput(val) {
+  currentSearch = val.toLowerCase();
   clearTimeout(window.searchTimeout);
   window.searchTimeout = setTimeout(() => {
     renderFeed();
@@ -2350,7 +2428,8 @@ async function renderFeed() {
       posts = [...appData.posts];
       if(currentFilter!=='all') posts=posts.filter(p=>p.category===currentFilter);
       if(currentSearch) { 
-        const s=currentSearch;         posts=posts.filter(p=>p.title.toLowerCase().includes(s)||p.desc.toLowerCase().includes(s)||p.category.toLowerCase().includes(s));
+        const s=currentSearch; 
+        posts=posts.filter(p=>p.title.toLowerCase().includes(s)||p.desc.toLowerCase().includes(s)||p.category.toLowerCase().includes(s));
       }
     }
     
@@ -2399,7 +2478,8 @@ async function renderFeed() {
     console.error('Render feed error:', e);
     showToast('⚠️ Заруудыг ачаалахад алдаа', 'error');
   } finally {
-    isLoadingPosts = false;  }
+    isLoadingPosts = false;
+  }
 }
 
 async function deletePost(postId) {
@@ -2448,7 +2528,8 @@ function openEditPost(postId) {
 function closeEditPost() { 
   document.getElementById('editPostModal').classList.remove('open'); 
   editPostId=null; 
-  editPostImages=[]; }
+  editPostImages=[]; 
+}
 
 async function previewEditImages(e) {
   editPostImages=[];
@@ -2497,7 +2578,8 @@ async function saveEditPost() {
   if(!title||!desc||!price||!category) { showToast('⚠️ Бүх талбарыг бөглөнө үү','error'); return; }
   
   post.title=title; post.category=category; post.desc=desc; post.price=price; post.images=editPostImages;
-    await updatePostInFirestore(post);
+  
+  await updatePostInFirestore(post);
   
   saveAppData(); 
   showToast('✓ Зар шинэчлэгдлээ','success'); 
@@ -2547,6 +2629,7 @@ function saveProfile() {
   if(postAvatar) postAvatar.textContent=name.charAt(0).toUpperCase();
   if(postName) postName.textContent=escHtml(name);
 }
+
 // ── DM ──
 function getConvKey(a,b) { return [a,b].sort((x,y)=>x-y).join('_'); }
 
@@ -2579,7 +2662,7 @@ async function renderDMList() {
   if(!currentUser||!list) return;
   
   try {
-    // Load conversations from Firestore
+    // Load conversations from Firestore - FIXED: use array-contains with proper format
     const snapshot = await db.collection('messages')
       .where('participants', 'array-contains', currentUser.id)
       .orderBy('updatedAt', 'desc')
@@ -2595,7 +2678,8 @@ async function renderDMList() {
     // Fallback to local if empty
     if(!convs.length) {
       const myConvs = Object.entries(appData.messages)
-        .filter(([k,v]) => v.participants?.includes(currentUser.id));      convs.push(...myConvs.map(([key, data]) => ({ key, ...data })));
+        .filter(([k,v]) => v.participants?.includes(currentUser.id));
+      convs.push(...myConvs.map(([key, data]) => ({ key, ...data })));
     }
     
     if(!convs.length) { 
@@ -2644,15 +2728,17 @@ async function openChatPopup(key, name, otherId) {
   currentChatName = name;
   
   const chatHeaderAvatar = document.getElementById('chatHeaderAvatar');
-  const chatHeaderName = document.getElementById('chatHeaderName');  if(chatHeaderAvatar) chatHeaderAvatar.textContent = name.charAt(0).toUpperCase();
+  const chatHeaderName = document.getElementById('chatHeaderName');
+  if(chatHeaderAvatar) chatHeaderAvatar.textContent = name.charAt(0).toUpperCase();
   if(chatHeaderName) chatHeaderName.textContent = escHtml(name);
   
   document.getElementById('dmPopup')?.classList.remove('open');
   
-  // Create conversation if not exists
+  // Create conversation if not exists - FIXED: ensure participants is sorted array
   if(!appData.messages[key]) {
+    const participants = [currentUser.id, otherId].sort((a,b) => a-b);
     appData.messages[key] = {
-      participants: [currentUser.id, otherId],
+      participants: participants,
       msgs: []
     };
   }
@@ -2676,7 +2762,7 @@ async function openChatPopup(key, name, otherId) {
     console.error('Load chat error:', e);
   }
   
-  // Set up real-time listener for new messages
+  // Set up real-time listener for new messages - FIXED: prevent duplicate listeners
   listenToMessages(key, (msgs) => {
     if(currentChatKey === key) {
       appData.messages[key].msgs = msgs.map(m => ({
@@ -2693,7 +2779,8 @@ async function openChatPopup(key, name, otherId) {
       renderDMList();
     }
   });
-    const chat = document.getElementById('dmChatPopup');
+  
+  const chat = document.getElementById('dmChatPopup');
   if(!chat) return;
   chat.classList.remove('minimized'); 
   chat.classList.add('open');
@@ -2706,7 +2793,7 @@ async function openChatPopup(key, name, otherId) {
 
 function closeChatPopup() {
   if(currentChatKey) {
-    stopListening(currentChatKey); // Stop real-time listener
+    stopListening(currentChatKey);
   }
   document.getElementById('dmChatPopup')?.classList.remove('open');
   currentChatKey = null; 
@@ -2742,7 +2829,8 @@ function renderChatMessages() {
     if(m.img) contentHtml = `<img class="msg-img" src="${escHtml(m.img)}" alt="msg" onclick="openLightbox('${escHtml(m.img.replace(/'/g, "\\'"))}')">`;
     else if(m.editing) contentHtml = `<input class="msg-edit-input" id="editInput_${idx}" value="${escHtml(m.text)}" onkeydown="if(event.key==='Enter')saveEdit(${idx});if(event.key==='Escape')cancelEdit(${idx})"><div class="msg-edit-actions"><button class="msg-edit-save" onclick="saveEdit(${idx})" type="button">✓ Хадгалах</button><button class="msg-edit-cancel" onclick="cancelEdit(${idx})" type="button">Болих</button></div>`;
     else contentHtml = `<div class="msg-bubble ${m.edited ? 'edited-msg' : ''}">${escHtml(m.text)}</div>`;
-        const emojiOpts = ['❤️','😂','👍','🔥','😮','😢'].map(e => `<button class="msg-action-btn" onclick="toggleReaction(${idx},'${e}')" type="button">${e}</button>`).join('');
+    
+    const emojiOpts = ['❤️','😂','👍','🔥','😮','😢'].map(e => `<button class="msg-action-btn" onclick="toggleReaction(${idx},'${e}')" type="button">${e}</button>`).join('');
     const editBtn = mine && !m.img ? `<button class="msg-action-btn" onclick="startEdit(${idx})" type="button">✏️</button>` : '';
     const deleteBtn = mine ? `<button class="msg-action-btn" onclick="deleteMsg(${idx})" type="button">🗑️</button>` : '';
     
@@ -2792,6 +2880,7 @@ function deleteMsg(idx) {
   const conv = appData.messages[currentChatKey]; if(!conv?.msgs) return;
   conv.msgs.splice(idx, 1); saveAppData(); renderChatMessages(); renderDMList();
 }
+
 function handleDmImages(e) {
   Array.from(e.target.files).forEach(file => {
     if(!validateImage(file)) return;
@@ -2840,6 +2929,7 @@ function autoResizeInput(el) {
 }
 
 function dmInputKeydown(e) { if(e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendDM(); } }
+
 function sendDM() {
   if(!currentChatKey || !currentUser) return;
   
@@ -2848,17 +2938,17 @@ function sendDM() {
   
   if(!text && pendingDmImages.length === 0) return;
   
-  // Ensure conversation exists with both participants
+  // Ensure conversation exists with both participants - FIXED: sorted participants
   if(!appData.messages[currentChatKey]) {
-    const parts = currentChatKey.split('_').map(Number);
+    const parts = currentChatKey.split('_').map(Number).sort((a,b) => a-b);
     appData.messages[currentChatKey] = {
       participants: parts,
       msgs: []
     };
   }
-  // Ensure participants array is correct
+  // Ensure participants array is correct and sorted
   if(!appData.messages[currentChatKey].participants) {
-    const parts = currentChatKey.split('_').map(Number);
+    const parts = currentChatKey.split('_').map(Number).sort((a,b) => a-b);
     appData.messages[currentChatKey].participants = parts;
   }
 
@@ -2889,7 +2979,8 @@ function sendDM() {
     pendingDmImages.forEach(img => sendMsg(img, null));
     pendingDmImages = [];
     renderDmImgPreview();
-  }  if(text) sendMsg(null, text);
+  }
+  if(text) sendMsg(null, text);
   
   saveAppData();
   if(input) { input.value = ''; input.style.height = 'auto'; }
@@ -2938,7 +3029,8 @@ function searchUser() {
   const val = document.getElementById('searchInput')?.value.trim().toLowerCase();
   if(!val) { renderUsersTable(); return; }
   const users = JSON.parse(localStorage.getItem('hm_users') || '[]');
-  const filtered = users.filter(u => String(u.id).includes(val) || u.name.toLowerCase().includes(val));  const tbody = document.getElementById('usersBody'); if(!tbody) return;
+  const filtered = users.filter(u => String(u.id).includes(val) || u.name.toLowerCase().includes(val));
+  const tbody = document.getElementById('usersBody'); if(!tbody) return;
   tbody.innerHTML = filtered.map(u => `<tr>
     <td>#${String(u.id).padStart(6,'0')}</td>
     <td>${escHtml(u.name)}</td>
@@ -2987,7 +3079,8 @@ window.addEventListener('beforeunload', () => {
   if(pollingInterval) clearInterval(pollingInterval);
   if(resendTimer) clearInterval(resendTimer);
   Object.values(recaptchaVerifiers).forEach(v => v?.clear());
-  // Stop all message listeners  Object.keys(msgUnsubscribers).forEach(key => stopListening(key));
+  // Stop all message listeners
+  Object.keys(msgUnsubscribers).forEach(key => stopListening(key));
 });
 
 // Handle Google redirect result
@@ -3031,4 +3124,48 @@ window.addEventListener('load', async () => {
 });
 </script>
 </body>
-          </html>
+</html>
+
+
+
+              <script>
+                              rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Posts
+    match /posts/{postId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+      allow delete: if request.auth != null && 
+        (get(/databases/$(database)/documents/posts/$(postId)).data.sellerId == request.auth.uid ||
+         request.auth.token.email in ['test@gmail.com']);
+    }
+    
+    // Messages - ONLY participants can access
+    match /messages/{convKey} {
+      allow read, write: if request.auth != null && 
+        resource.data.participants.hasAny([request.auth.uid]);
+      allow create: if request.auth != null;
+      
+      match /msgs/{msgId} {
+        allow read: if request.auth != null && 
+          get(/databases/$(database)/documents/messages/$(convKey)).data.participants.hasAny([request.auth.uid]);
+        allow write: if request.auth != null && 
+          get(/databases/$(database)/documents/messages/$(convKey)).data.participants.hasAny([request.auth.uid]);
+      }
+    }
+    
+    // Users (optional - for profile lookups)
+    match /users/{userId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}
+
+
+              </script>
+                        </body>
+                        </html>
+                    
