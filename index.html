@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Marketplace</title>
+<title>Account Marketplace</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<!-- Note: Firebase Storage removed - images stored as base64 (free) -->
 
 <style>
   :root {
@@ -46,8 +47,9 @@
     --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
     --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
     --shadow-lg: 0 10px 30px rgba(0,0,0,0.5);
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }  html,body { width:100%; height:100%; }  body {
+  }  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:100%; height:100%; }
+  body {
     font-family:'Sora',sans-serif;
     background:var(--bg);
     color:var(--text);
@@ -94,9 +96,10 @@
     box-shadow:0 25px 50px rgba(0,0,0,0.4);
     position:relative;
     z-index:1;
-  }
-  .auth-brand { text-align:center; margin-bottom:32px; }  .auth-brand h1 {
-    font-size:2.8rem;    font-weight:800;
+  }  .auth-brand { text-align:center; margin-bottom:32px; }
+  .auth-brand h1 {
+    font-size:2.8rem;
+    font-weight:800;
     color:#fff;
     letter-spacing:-1px;
     margin-bottom:6px;
@@ -142,10 +145,11 @@
     color:#fff;
     font-size:0.9rem;
     font-family:'Sora',sans-serif;
-    outline:none;
-    transition:all var(--transition);  }
+    outline:none;    transition:all var(--transition);
+  }
   .form-group input::placeholder { color:rgba(255,255,255,0.3); }
-  .form-group input:focus {    border-color:var(--primary);
+  .form-group input:focus {
+    border-color:var(--primary);
     background:rgba(10,102,194,0.1);
     box-shadow:0 0 0 3px rgba(10,102,194,0.2);
   }
@@ -190,11 +194,12 @@
     background:rgba(255,255,255,0.15);
   }
   .social-btn {
-    width:100%; padding:10px;
-    background:rgba(255,255,255,0.08);    border:1px solid rgba(255,255,255,0.15);
+    width:100%; padding:10px;    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.15);
     border-radius:var(--radius);
     color:#fff; font-weight:600; font-size:0.85rem;
-    cursor:pointer; transition:all var(--transition);    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; transition:all var(--transition);
+    display:flex; align-items:center; justify-content:center;
     gap:8px; font-family:'Sora',sans-serif;
   }
   .social-btn:hover { background:rgba(255,255,255,0.15); }
@@ -238,12 +243,13 @@
     border-radius:8px; color:#fff; outline:none;
   }
   .otp-inputs input:focus { border-color:var(--primary); }
-  .auth-loading {
-    display:none; position:absolute; inset:0;    background:rgba(0,0,0,0.3); border-radius:24px;
+  .auth-loading {    display:none; position:absolute; inset:0;
+    background:rgba(0,0,0,0.3); border-radius:24px;
     align-items:center; justify-content:center;
     z-index:10;
   }
-  .auth-loading.show { display:flex; }  .spinner {
+  .auth-loading.show { display:flex; }
+  .spinner {
     width:32px; height:32px;
     border:3px solid rgba(255,255,255,0.3);
     border-top-color:#fff; border-radius:50%;
@@ -286,13 +292,14 @@
     letter-spacing:-0.5px;
     min-width:fit-content;
   }
-  .nav-search {
-    flex:1;    max-width:300px;
+  .nav-search {    flex:1;
+    max-width:300px;
     position:relative;
   }
   .nav-search input {
     width:100%;
-    padding:8px 12px 8px 34px;    background:var(--surface-secondary);
+    padding:8px 12px 8px 34px;
+    background:var(--surface-secondary);
     border:1px solid var(--border);
     border-radius:var(--radius-full);
     color:var(--text);
@@ -334,14 +341,15 @@
     background:var(--danger);
     color:#fff;
     border-radius:9px;
-    font-size:0.65rem;
-    font-weight:700;    display:flex; align-items:center; justify-content:center;
+    font-size:0.65rem;    font-weight:700;
+    display:flex; align-items:center; justify-content:center;
     padding:0 4px;
     border:2px solid var(--surface);
     animation:popIn 0.3s ease;
   }
   @keyframes popIn { from { transform:scale(0); } to { transform:scale(1); } }
-  .nav-avatar-btn {    width:34px; height:34px;
+  .nav-avatar-btn {
+    width:34px; height:34px;
     border-radius:50%;
     background:linear-gradient(135deg,var(--primary),var(--secondary));
     color:#fff;
@@ -382,15 +390,16 @@
     width:100%;
     padding:16px;
     gap:16px;
-  }
-  .feed-col { flex:1; min-width:0; }
+  }  .feed-col { flex:1; min-width:0; }
+
   /* CREATE POST */
   .create-post-card {
     background:var(--surface);
     border-radius:var(--radius-lg);
     padding:14px 16px;
     margin-bottom:14px;
-    display:none;    align-items:center;
+    display:none;
+    align-items:center;
     gap:12px;
     cursor:pointer;
     transition:all var(--transition);
@@ -430,8 +439,8 @@
   }
   .new-post-card.show { display:block; }
   .new-post-header { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
-  .new-post-avatar {
-    width:38px; height:38px;    border-radius:50%;
+  .new-post-avatar {    width:38px; height:38px;
+    border-radius:50%;
     background:linear-gradient(135deg,var(--primary),var(--secondary));
     color:#fff;
     display:flex; align-items:center; justify-content:center;
@@ -439,7 +448,8 @@
   }
   .new-post-info { flex:1; }
   .new-post-name { font-weight:700; color:var(--text); font-size:0.9rem; }
-  .new-post-close {    background:none; border:none; font-size:1.2rem;
+  .new-post-close {
+    background:none; border:none; font-size:1.2rem;
     color:var(--text-secondary); cursor:pointer; padding:0;
     width:30px; height:30px;
     display:flex; align-items:center; justify-content:center;
@@ -478,8 +488,8 @@
   .img-preview-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(80px,1fr)); gap:8px; margin-bottom:10px; }
   .img-item { position:relative; }
   .img-preview-grid img { width:100%; aspect-ratio:1; object-fit:cover; border-radius:var(--radius); border:1px solid var(--border); }
-  .img-remove {
-    position:absolute; top:-6px; right:-6px;    width:20px; height:20px; border-radius:50%;
+  .img-remove {    position:absolute; top:-6px; right:-6px;
+    width:20px; height:20px; border-radius:50%;
     background:var(--danger); border:none;
     color:#fff; cursor:pointer; font-size:0.7rem;
     display:flex; align-items:center; justify-content:center;
@@ -488,7 +498,8 @@
     border:2px dashed var(--border); border-radius:var(--radius);
     padding:18px; text-align:center; color:var(--text-secondary);
     font-size:0.82rem; cursor:pointer; transition:all var(--transition);
-    margin-bottom:10px; position:relative;  }
+    margin-bottom:10px; position:relative;
+  }
   .img-upload-area:hover { border-color:var(--primary); background:var(--primary-light); }
   .img-upload-area input[type=file] { position:absolute; inset:0; opacity:0; cursor:pointer; }
   .new-post-buttons { display:flex; gap:10px; }
@@ -526,8 +537,8 @@
     border:1.5px solid var(--border);
     color:var(--text); font-weight:600; font-size:0.78rem;
     cursor:pointer; white-space:nowrap;
-    transition:all var(--transition);
-    font-family:'Sora',sans-serif;  }
+    transition:all var(--transition);    font-family:'Sora',sans-serif;
+  }
   .filter-btn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
   .filter-btn:hover:not(.active) { border-color:var(--primary); color:var(--primary); }
 
@@ -537,7 +548,8 @@
     border-radius:var(--radius-lg);
     overflow:hidden;
     margin-bottom:14px;
-    box-shadow:var(--shadow-sm);    border:1px solid var(--border);
+    box-shadow:var(--shadow-sm);
+    border:1px solid var(--border);
     transition:all var(--transition);
     animation:fadeUp 0.4s ease both;
   }
@@ -574,8 +586,8 @@
   }
   .post-time { font-size:0.72rem; color:var(--text-tertiary); margin-left:auto; }
   .post-title { font-size:1.05rem; font-weight:700; color:var(--text); margin-bottom:6px; }
-  .post-desc { color:var(--text-secondary); font-size:0.88rem; line-height:1.55; margin-bottom:12px; }
-  .post-price {    font-size:1.25rem; font-weight:800;
+  .post-desc { color:var(--text-secondary); font-size:0.88rem; line-height:1.55; margin-bottom:12px; }  .post-price {
+    font-size:1.25rem; font-weight:800;
     background:linear-gradient(135deg,var(--primary),var(--secondary));
     -webkit-background-clip:text; -webkit-text-fill-color:transparent;
     margin-bottom:12px;
@@ -586,7 +598,8 @@
     display:flex; align-items:center; gap:5px;
     padding:8px 12px;
     background:var(--surface-secondary);
-    border:1.5px solid var(--border);    border-radius:var(--radius);
+    border:1.5px solid var(--border);
+    border-radius:var(--radius);
     cursor:pointer; transition:all var(--transition);
     font-size:0.82rem; font-weight:600; color:var(--text-secondary);
     font-family:'Sora',sans-serif;
@@ -622,20 +635,12 @@
     color:var(--danger);
   }
   .btn-delete:hover { background:rgba(239,68,68,0.18); }
-  .empty-feed { text-align:center; padding:60px 20px; color:var(--text-secondary); }
-  .empty-feed .icon { font-size:3rem; margin-bottom:14px; }  .loading-feed { text-align:center; padding:40px 20px; color:var(--text-secondary); }
-  .loading-spinner {
-    width:28px; height:28px;
-    border:3px solid var(--border);
-    border-top-color:var(--primary);
-    border-radius:50%;
-    animation:spin 1s linear infinite;
-    margin:0 auto 12px;
-  }
+  .empty-feed { text-align:center; padding:60px 20px; color:var(--text-secondary); }  .empty-feed .icon { font-size:3rem; margin-bottom:14px; }
 
   /* SIDEBAR */
   .sidebar { width:290px; display:none; flex-direction:column; gap:14px; }
-  .sidebar.open { display:flex; }  .sidebar-card {
+  .sidebar.open { display:flex; }
+  .sidebar-card {
     background:var(--surface);
     border-radius:var(--radius-lg);
     padding:16px;
@@ -671,20 +676,21 @@
     50% { box-shadow:0 0 12px rgba(16,185,129,0.9); }
   }
   .profile-stat {
-    display:flex; justify-content:space-between;    padding:9px 0; font-size:0.88rem;
+    display:flex; justify-content:space-between;
+    padding:9px 0; font-size:0.88rem;
     border-bottom:1px solid var(--border);
   }
   .profile-stat:last-child { border-bottom:none; }
   .profile-stat-val { color:var(--primary); font-weight:700; }
   .btn-profile {
     width:100%; padding:9px;
-    background:linear-gradient(135deg,var(--primary),var(--primary-dark));
-    border:none; border-radius:var(--radius);
+    background:linear-gradient(135deg,var(--primary),var(--primary-dark));    border:none; border-radius:var(--radius);
     color:#fff; font-weight:700; font-size:0.82rem;
     cursor:pointer; margin-top:12px;
     transition:all var(--transition); font-family:'Sora',sans-serif;
   }
   .btn-profile:hover { transform:translateY(-2px); box-shadow:var(--shadow-md); }
+
   /* DM POPUP */
   .dm-popup {
     position:fixed;
@@ -719,21 +725,22 @@
     width:26px; height:26px; border-radius:50%;
     color:#fff; cursor:pointer; font-size:0.85rem;
     display:flex; align-items:center; justify-content:center;
-    transition:all var(--transition);  }
+    transition:all var(--transition);
+  }
   .dm-popup-header-close:hover { background:rgba(255,255,255,0.35); }
   .dm-conv-list { overflow-y:auto; flex:1; }
   .dm-conv-item {
     padding:12px 16px; cursor:pointer;
     transition:background var(--transition);
     display:flex; align-items:center; gap:10px;
-    border-bottom:1px solid var(--border);
-  }
+    border-bottom:1px solid var(--border);  }
   .dm-conv-item:last-child { border-bottom:none; }
   .dm-conv-item:hover { background:var(--surface-secondary); }
   .dm-conv-avatar {
     width:36px; height:36px; border-radius:50%;
     background:linear-gradient(135deg,var(--primary),var(--secondary));
-    color:#fff; display:flex; align-items:center; justify-content:center;    font-weight:700; font-size:0.88rem; flex-shrink:0;
+    color:#fff; display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-size:0.88rem; flex-shrink:0;
     position:relative;
   }
   .dm-conv-online {
@@ -767,22 +774,23 @@
     background:var(--surface);
     border:1px solid var(--border);
     border-radius:var(--radius-lg);
-    box-shadow:var(--shadow-lg);    z-index:501;
+    box-shadow:var(--shadow-lg);
+    z-index:501;
     display:none;
     flex-direction:column;
     overflow:hidden;
     animation:popupSlide 0.25s cubic-bezier(0.34,1.56,0.64,1);
   }
   .dm-chat-popup.open { display:flex; }
-  .dm-chat-popup.minimized { height:56px; }
-  .dm-chat-popup.minimized .dm-chat-body,
+  .dm-chat-popup.minimized { height:56px; }  .dm-chat-popup.minimized .dm-chat-body,
   .dm-chat-popup.minimized .dm-chat-input-area { display:none; }
   .dm-chat-header {
     padding:0 14px;
     height:56px;
     background:linear-gradient(135deg,var(--primary),var(--primary-dark));
     color:#fff;
-    display:flex; align-items:center; gap:10px;    flex-shrink:0;
+    display:flex; align-items:center; gap:10px;
+    flex-shrink:0;
     cursor:pointer;
     user-select:none;
   }
@@ -815,15 +823,15 @@
     max-width:82%;
     position:relative;
   }
-  .msg-row.mine { align-self:flex-end; align-items:flex-end; }  .msg-row.theirs { align-self:flex-start; align-items:flex-start; }
+  .msg-row.mine { align-self:flex-end; align-items:flex-end; }
+  .msg-row.theirs { align-self:flex-start; align-items:flex-start; }
   .msg-bubble {
     padding:9px 13px;
     border-radius:18px;
     font-size:0.88rem; line-height:1.45;
     position:relative;
     word-break:break-word;
-  }
-  .msg-row.mine .msg-bubble {
+  }  .msg-row.mine .msg-bubble {
     background:linear-gradient(135deg,var(--primary),var(--primary-dark));
     color:#fff;
     border-bottom-right-radius:4px;
@@ -831,7 +839,8 @@
   .msg-row.theirs .msg-bubble {
     background:var(--surface); color:var(--text);
     border:1px solid var(--border);
-    border-bottom-left-radius:4px;  }
+    border-bottom-left-radius:4px;
+  }
   .msg-bubble.edited-msg::after {
     content:' (засагдсан)';
     font-size:0.65rem; opacity:0.6;
@@ -863,15 +872,15 @@
     display:flex; align-items:center; gap:3px;
   }
   .reaction-chip:hover { background:var(--primary-light); border-color:var(--primary); }
-  .reaction-chip.mine-react { background:var(--primary-light); border-color:var(--primary); }  .reaction-count { font-size:0.7rem; color:var(--text-secondary); font-weight:600; }
+  .reaction-chip.mine-react { background:var(--primary-light); border-color:var(--primary); }
+  .reaction-count { font-size:0.7rem; color:var(--text-secondary); font-weight:600; }
   .msg-hover-actions {
     display:none;
     position:absolute;
     background:var(--surface);
     border:1px solid var(--border);
     border-radius:var(--radius);
-    padding:3px;
-    box-shadow:var(--shadow-md);
+    padding:3px;    box-shadow:var(--shadow-md);
     flex-direction:row; gap:2px;
     z-index:10;
   }
@@ -880,13 +889,14 @@
   .msg-row:hover .msg-hover-actions { display:flex; }
   .msg-action-btn {
     width:28px; height:28px; border-radius:8px;
-    background:none; border:none;    cursor:pointer; font-size:0.85rem;
+    background:none; border:none;
+    cursor:pointer; font-size:0.85rem;
     display:flex; align-items:center; justify-content:center;
     transition:background var(--transition);
   }
   .msg-action-btn:hover { background:var(--surface-secondary); }
   .emoji-picker-popup {
-    position:absolute;
+    position:fixed;
     background:var(--surface);
     border:1px solid var(--border);
     border-radius:var(--radius);
@@ -896,8 +906,6 @@
     display:none;
     flex-wrap:wrap; gap:4px;
     width:200px;
-    bottom: 50px;
-    right: 10px;
   }
   .emoji-picker-popup.open { display:flex; }
   .emoji-opt {
@@ -913,15 +921,15 @@
     border-radius:8px; padding:4px 8px;
     color:#fff; font-family:'Sora',sans-serif;
     font-size:0.88rem; outline:none; width:100%;
-  }  .msg-row.theirs .msg-edit-input {
+  }
+  .msg-row.theirs .msg-edit-input {
     background:var(--surface-secondary);
     border-color:var(--primary);
     color:var(--text);
   }
   .msg-edit-actions { display:flex; gap:4px; margin-top:4px; }
   .msg-edit-save, .msg-edit-cancel {
-    padding:3px 10px; border-radius:6px;
-    font-size:0.75rem; font-weight:700;
+    padding:3px 10px; border-radius:6px;    font-size:0.75rem; font-weight:700;
     cursor:pointer; border:none;
     font-family:'Sora',sans-serif;
   }
@@ -929,7 +937,8 @@
   .msg-edit-cancel { background:var(--surface-secondary); color:var(--text); }
   .dm-chat-input-area {
     flex-shrink:0;
-    background:var(--surface);    border-top:1px solid var(--border);
+    background:var(--surface);
+    border-top:1px solid var(--border);
   }
   .dm-chat-input-row {
     padding:8px 10px;
@@ -961,15 +970,15 @@
     background:var(--surface-secondary); color:var(--text);
     resize:none; max-height:100px; overflow-y:auto;
     transition:border-color var(--transition);
-    line-height:1.4;  }
+    line-height:1.4;
+  }
   .dm-text-input:focus { border-color:var(--primary); }
   .dm-send-btn {
     width:34px; height:34px; border-radius:50%;
     background:linear-gradient(135deg,var(--primary),var(--primary-dark));
     border:none; color:#fff; cursor:pointer; font-size:1rem;
     display:flex; align-items:center; justify-content:center;
-    transition:all var(--transition); flex-shrink:0;
-  }
+    transition:all var(--transition); flex-shrink:0;  }
   .dm-send-btn:hover { transform:scale(1.1); box-shadow:var(--shadow-md); }
   .dm-img-preview-strip {
     display:none; gap:6px; padding:0 10px 8px;
@@ -978,7 +987,8 @@
   .dm-img-preview-strip.has-img { display:flex; }
   .dm-preview-item { position:relative; flex-shrink:0; }
   .dm-preview-item img { width:60px; height:60px; object-fit:cover; border-radius:8px; border:1px solid var(--border); }
-  .dm-preview-remove {    position:absolute; top:-6px; right:-6px;
+  .dm-preview-remove {
+    position:absolute; top:-6px; right:-6px;
     width:18px; height:18px; border-radius:50%;
     background:var(--danger); border:none; color:#fff;
     cursor:pointer; font-size:0.65rem;
@@ -1009,6 +1019,7 @@
     .dm-chat-popup { height:calc(100vh - 100px); bottom:80px; }
     .dm-fab { display:flex; }
   }
+
   /* ADMIN */
   #adminPanel { display:none; flex:1; flex-direction:column; }
   .admin-header { margin-bottom:18px; }
@@ -1016,8 +1027,7 @@
   .admin-tabs { display:flex; gap:8px; }
   .admin-tab {
     padding:9px 16px;
-    background:var(--surface-secondary);
-    border:1.5px solid var(--border);
+    background:var(--surface-secondary);    border:1.5px solid var(--border);
     border-radius:var(--radius);
     color:var(--text); font-weight:600; cursor:pointer;
     transition:all var(--transition); font-family:'Sora',sans-serif;
@@ -1027,7 +1037,8 @@
   .admin-content.show { display:block; }
   .search-box { display:flex; gap:8px; margin-bottom:14px; }
   .search-box input {
-    flex:1; padding:9px 12px;    border:1.5px solid var(--border);
+    flex:1; padding:9px 12px;
+    border:1.5px solid var(--border);
     border-radius:var(--radius);
     font-size:0.88rem; outline:none;
     font-family:'Sora',sans-serif;
@@ -1057,6 +1068,7 @@
     transition:all var(--transition); font-family:'Sora',sans-serif;
   }
   .btn-promote:hover { transform:translateY(-2px); }
+
   /* MODAL */
   .modal {
     display:none; position:fixed; inset:0;
@@ -1064,8 +1076,7 @@
     align-items:center; justify-content:center;
     padding:20px; overflow-y:auto;
     backdrop-filter:blur(4px);
-  }
-  .modal.open { display:flex; }
+  }  .modal.open { display:flex; }
   .modal-content {
     background:var(--surface);
     border-radius:var(--radius-lg);
@@ -1076,7 +1087,8 @@
     animation:modalIn 0.25s ease;
   }
   @keyframes modalIn {
-    from { opacity:0; transform:scale(0.96) translateY(10px); }    to { opacity:1; transform:scale(1) translateY(0); }
+    from { opacity:0; transform:scale(0.96) translateY(10px); }
+    to { opacity:1; transform:scale(1) translateY(0); }
   }
   .modal-header { font-size:1.1rem; font-weight:700; margin-bottom:18px; display:flex; justify-content:space-between; align-items:center; color:var(--text); }
   .modal-close {
@@ -1105,15 +1117,15 @@
   }
   .modal-buttons { display:flex; gap:10px; margin-top:18px; }
   .btn-save {
-    flex:1; padding:10px;    background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+    flex:1; padding:10px;
+    background:linear-gradient(135deg,var(--primary),var(--primary-dark));
     border:none; border-radius:var(--radius);
     color:#fff; font-weight:700; cursor:pointer;
     transition:all var(--transition); font-family:'Sora',sans-serif;
   }
   .btn-save:hover { transform:translateY(-2px); box-shadow:var(--shadow-md); }
   .btn-cancel {
-    flex:1; padding:10px;
-    background:var(--surface-secondary);
+    flex:1; padding:10px;    background:var(--surface-secondary);
     border:1.5px solid var(--border);
     border-radius:var(--radius);
     color:var(--text); font-weight:700; cursor:pointer;
@@ -1125,7 +1137,8 @@
   .toast-container { position:fixed; bottom:20px; right:20px; z-index:9999; display:flex; flex-direction:column; gap:8px; }
   .toast {
     background:var(--surface);
-    border:1px solid var(--border);    border-radius:var(--radius);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
     padding:12px 16px;
     font-size:0.88rem;
     box-shadow:var(--shadow-lg);
@@ -1153,15 +1166,15 @@
     font-size:0.9rem;
     z-index:9998;
     box-shadow:var(--shadow-lg);
-    animation:bounceIn 0.4s ease;    text-align:center;
+    animation:bounceIn 0.4s ease;
+    text-align:center;
   }
   @keyframes bounceIn {
     0% { transform:translateX(-50%) scale(0.8) translateY(-20px); opacity:0; }
     100% { transform:translateX(-50%) scale(1) translateY(0); opacity:1; }
   }
   .theme-toggle { font-size:1rem; }
-  ::-webkit-scrollbar { width:5px; height:5px; }
-  ::-webkit-scrollbar-track { background:transparent; }
+  ::-webkit-scrollbar { width:5px; height:5px; }  ::-webkit-scrollbar-track { background:transparent; }
   ::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
 
   /* MOBILE */
@@ -1174,7 +1187,8 @@
       position:fixed; top:56px; left:0; right:0; width:100%;
       z-index:99; max-height:calc(100vh - 56px); overflow-y:auto;
       background:var(--bg); padding:10px;
-    }    .post-images { height:220px; }
+    }
+    .post-images { height:220px; }
   }
   @media (max-width:480px) {
     .nav-search { display:none; }
@@ -1183,6 +1197,21 @@
     .admin-tabs { flex-wrap:wrap; }
     .admin-tab { flex:1; min-width:100px; }
     .new-post-buttons { flex-direction:column; }
+  }
+  
+  /* Loading spinner for feed */
+  .feed-loading {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-secondary);
+  }
+  .feed-loading .spinner {
+    width: 24px; height: 24px;
+    border: 3px solid var(--border);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 10px;
   }
 </style>
 </head>
@@ -1194,14 +1223,14 @@
 <div id="auth-screen">
   <div class="auth-container">
     <div class="auth-brand">
-      <h1>Market<span>&</span>Place</h1>
-      <p>Account Marketplace Pro</p>
+      <h1>Shop<span>&</span>M</h1>      <p>Account Shop</p>
     </div>
     <div class="auth-tabs">
       <button class="auth-tab active" id="loginTab" onclick="switchTab('login')">Нэвтрэх</button>
       <button class="auth-tab" id="signupTab" onclick="switchTab('signup')">Бүртгүүлэх</button>
     </div>
-    <div class="auth-loading" id="authLoading">      <div class="spinner"></div>
+    <div class="auth-loading" id="authLoading">
+      <div class="spinner"></div>
     </div>
 
     <!-- LOGIN FORM -->
@@ -1215,6 +1244,7 @@
         Google-ээр нэвтрэх
       </button>
       <button class="social-btn" onclick="showPhoneAuth('login')" style="margin-top:8px">📱 Утсаар нэвтрэх</button>
+      <div class="auth-link"><a onclick="switchToReset()">Нууц үг мартсан уу?</a></div>
       <div class="otp-container" id="phoneLoginOtp">
         <div class="phone-input-group">
           <select id="loginPhoneCountry">
@@ -1223,7 +1253,8 @@
             <option value="+44">🇬🇧 +44</option>
             <option value="+86">🇨🇳 +86</option>
             <option value="+82">🇰🇷 +82</option>
-            <option value="+81">🇯🇵 +81</option>          </select>
+            <option value="+81">🇯🇵 +81</option>
+          </select>
           <input type="tel" id="loginPhone" placeholder="99123456" maxlength="8" pattern="[0-9]{8}">
         </div>
         <button class="btn-primary" onclick="sendPhoneCode('login')" id="sendPhoneBtn">Код илгээх</button>
@@ -1241,15 +1272,15 @@
       <div class="form-group"><label>Нууц үг</label><input type="password" id="signupPass" placeholder="•••••••• (6+ тэмдэгт)" onkeydown="if(event.key==='Enter')doSignup()"></div>
       <button class="btn-primary" onclick="doSignup()" id="signupBtn">Бүртгүүлэх</button>
       <div class="auth-divider">эсвэл</div>
-      <button class="social-btn google" onclick="signInWithGoogle()">
-        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      <button class="social-btn google" onclick="signInWithGoogle()">        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
         Google-ээр бүртгүүлэх
       </button>
       <button class="social-btn" onclick="showPhoneAuth('signup')" style="margin-top:8px">📱 Утсаар бүртгүүлэх</button>
       <div class="otp-container" id="phoneSignupOtp">
         <div class="form-group"><label>Нэр</label><input type="text" id="signupPhoneName" placeholder="Таны нэр"></div>
         <div class="phone-input-group">
-          <select id="signupPhoneCountry">            <option value="+976">🇲🇳 +976</option>
+          <select id="signupPhoneCountry">
+            <option value="+976">🇲🇳 +976</option>
             <option value="+1">🇺🇸 +1</option>
             <option value="+44">🇬🇧 +44</option>
             <option value="+86">🇨🇳 +86</option>
@@ -1272,6 +1303,7 @@
       <button class="btn-primary" onclick="resetPassword()">Нууц үг сэргээх</button>
       <div class="auth-link"><a onclick="switchTab('login')">← Буцаж нэвтрэх</a></div>
     </div>
+
     <div class="auth-err" id="authErr"></div>
   </div>
 </div>
@@ -1279,7 +1311,7 @@
 <!-- APP -->
 <div id="app">
   <nav class="navbar">
-    <div class="nav-logo">Marketplace</div>
+    <div class="nav-logo">Shop M</div>
     <div class="nav-info-chip">
       <span class="nav-chip-id" id="navId">#000001</span>
       <span style="color:var(--border)">|</span>
@@ -1287,17 +1319,17 @@
       <span class="nav-role-badge" id="navRole" style="display:none">ADMIN</span>
     </div>
     <div class="nav-search">
-      <input type="text" id="navSearchInput" placeholder="Зар хайх..." oninput="searchPosts(this.value)">
+      <input type="text" id="navSearchInput" placeholder="Зар хайх..." oninput="handleSearchInput(this.value)">
     </div>
-    <div class="nav-spacer"></div>
-    <div class="nav-actions">
+    <div class="nav-spacer"></div>    <div class="nav-actions">
       <button class="nav-icon-btn theme-toggle" onclick="toggleTheme()" title="Dark mode" id="themeBtn">🌙</button>
       <button class="nav-icon-btn" id="dmBtn" onclick="toggleDM()" title="Мессеж">
         💬
         <span class="notif-badge" id="dmBadge" style="display:none">0</span>
       </button>
       <button class="nav-icon-btn" id="adminBtn" onclick="toggleAdmin()" title="Админ" style="display:none">⚙️</button>
-      <button class="nav-icon-btn" onclick="toggleProfile()" title="Профиль">👤</button>      <div class="nav-avatar-btn" id="navAvatar" onclick="toggleProfile()">A</div>
+      <button class="nav-icon-btn" onclick="toggleProfile()" title="Профиль">👤</button>
+      <div class="nav-avatar-btn" id="navAvatar" onclick="toggleProfile()">A</div>
       <button class="nav-icon-btn" onclick="logout()" title="Гарах" style="font-size:0.85rem;width:auto;padding:0 10px;border-radius:8px;">Гарах</button>
     </div>
   </nav>
@@ -1318,10 +1350,12 @@
         <div class="new-post-content">
           <select id="postCategory">
             <option value="">-- Төрөл сонгох --</option>
+             <option value="📌All">📌All</option>
             <option value="Roblox">🎮 Roblox</option>
             <option value="Bloxfruit">🍎 Bloxfruit</option>
             <option value="Escape tsunami">🌊 Escape tsunami</option>
-            <option value="Sailor">⛵ Sailor</option>            <option value="Steal a brainrot">🧠 Steal a brainrot</option>
+            <option value="Sailor">⛵ Sailor</option>
+            <option value="Steal a brainrot">🧠 Steal a brainrot</option>
             <option value="99Night">🌙 99Night</option>
             <option value="Pubg">🔫 Pubg</option>
             <option value="Mlbb">⚔️ MLBB</option>
@@ -1332,26 +1366,24 @@
           <div class="img-upload-area">📸 Зураг оруулах (олон зураг)<input type="file" id="imgInput" accept="image/*" multiple onchange="previewImages(event)"></div>
           <div class="img-preview-grid" id="imgPreview"></div>
           <div class="new-post-buttons">
-            <button class="btn-post" onclick="submitPost()">Нийтлэх</button>
+            <button class="btn-post" onclick="submitPost()" id="submitPostBtn">Нийтлэх</button>
             <button class="btn-cancel2" onclick="toggleNewPost()">Болих</button>
           </div>
         </div>
-      </div>
-
-      <div class="filter-row" id="filterRow">
+      </div>      <div class="filter-row" id="filterRow">
         <button class="filter-btn active" onclick="filterPosts('all',this)">Бүгд</button>
         <button class="filter-btn" onclick="filterPosts('Roblox',this)">🎮 Roblox</button>
         <button class="filter-btn" onclick="filterPosts('Bloxfruit',this)">🍎 Bloxfruit</button>
         <button class="filter-btn" onclick="filterPosts('Escape tsunami',this)">🌊 Tsunami</button>
         <button class="filter-btn" onclick="filterPosts('Sailor',this)">⛵ Sailor</button>
         <button class="filter-btn" onclick="filterPosts('Steal a brainrot',this)">🧠 Brainrot</button>
-        <button class="filter-btn" onclick="filterPosts('99Night',this)">🌙 99Night</button>        <button class="filter-btn" onclick="filterPosts('Pubg',this)">🔫 Pubg</button>
+        <button class="filter-btn" onclick="filterPosts('99Night',this)">🌙 99Night</button>
+        <button class="filter-btn" onclick="filterPosts('Pubg',this)">🔫 Pubg</button>
         <button class="filter-btn" onclick="filterPosts('Mlbb',this)">⚔️ MLBB</button>
         <button class="filter-btn" onclick="filterPosts('So2',this)">⚡ So2</button>
       </div>
       <div id="feedContainer"></div>
       <div id="emptyFeed" class="empty-feed" style="display:none"><div class="icon">📭</div><p>Одоогоор зар байхгүй байна.</p></div>
-      <div id="loadingFeed" class="loading-feed" style="display:none"><div class="loading-spinner"></div><p>Ачааллаж байна...</p></div>
     </div>
 
     <div class="sidebar" id="profileSidebar">
@@ -1370,6 +1402,7 @@
       </div>
     </div>
   </div>
+
   <!-- DM POPUP -->
   <div class="dm-popup" id="dmPopup">
     <div class="dm-popup-header">
@@ -1386,14 +1419,14 @@
       <div class="dm-chat-header-info">
         <div class="dm-chat-header-name" id="chatHeaderName">User</div>
         <div class="dm-chat-header-status"><span style="width:7px;height:7px;background:#4ade80;border-radius:50%;display:inline-block;"></span> Онлайн</div>
-      </div>
-      <div class="dm-chat-header-actions" onclick="event.stopPropagation()">
+      </div>      <div class="dm-chat-header-actions" onclick="event.stopPropagation()">
         <button class="dm-chat-hbtn" onclick="toggleMinimize()" title="Багасгах">—</button>
         <button class="dm-chat-hbtn" onclick="closeChatPopup()" title="Хаах">✕</button>
       </div>
     </div>
     <div class="dm-chat-body" id="dmChatBody"></div>
-    <div class="dm-chat-input-area">      <div class="dm-img-preview-strip" id="dmImgPreviewStrip"></div>
+    <div class="dm-chat-input-area">
+      <div class="dm-img-preview-strip" id="dmImgPreviewStrip"></div>
       <div class="dm-chat-input-row">
         <button class="dm-img-upload-btn" title="Зураг илгээх">📷<input type="file" id="dmImgFileInput" accept="image/*" multiple onchange="handleDmImages(event)"></button>
         <button class="dm-emoji-btn" id="dmEmojiToggleBtn" onclick="toggleInputEmoji(event)" title="Emoji">😊</button>
@@ -1401,25 +1434,27 @@
         <button class="dm-send-btn" onclick="sendDM()">➤</button>
       </div>
     </div>
-    <!-- EMOJI PICKER moved inside chat for correct positioning -->
-    <div class="emoji-picker-popup" id="inputEmojiPicker">
-      <div class="emoji-opt" onclick="insertEmoji('😊')">😊</div>
-      <div class="emoji-opt" onclick="insertEmoji('😂')">😂</div>
-      <div class="emoji-opt" onclick="insertEmoji('🔥')">🔥</div>
-      <div class="emoji-opt" onclick="insertEmoji('👍')">👍</div>
-      <div class="emoji-opt" onclick="insertEmoji('❤️')">❤️</div>
-      <div class="emoji-opt" onclick="insertEmoji('😎')">😎</div>
-      <div class="emoji-opt" onclick="insertEmoji('🎮')">🎮</div>
-      <div class="emoji-opt" onclick="insertEmoji('💰')">💰</div>
-      <div class="emoji-opt" onclick="insertEmoji('✅')">✅</div>
-      <div class="emoji-opt" onclick="insertEmoji('😍')">😍</div>
-      <div class="emoji-opt" onclick="insertEmoji('🤣')">🤣</div>
-      <div class="emoji-opt" onclick="insertEmoji('👀')">👀</div>
-      <div class="emoji-opt" onclick="insertEmoji('💯')">💯</div>
-      <div class="emoji-opt" onclick="insertEmoji('🙏')">🙏</div>
-      <div class="emoji-opt" onclick="insertEmoji('😭')">😭</div>
-      <div class="emoji-opt" onclick="insertEmoji('🤔')">🤔</div>
-    </div>  </div>
+  </div>
+
+  <!-- EMOJI PICKER -->
+  <div class="emoji-picker-popup" id="inputEmojiPicker">
+    <div class="emoji-opt" onclick="insertEmoji('😊')">😊</div>
+    <div class="emoji-opt" onclick="insertEmoji('😂')">😂</div>
+    <div class="emoji-opt" onclick="insertEmoji('🔥')">🔥</div>
+    <div class="emoji-opt" onclick="insertEmoji('👍')">👍</div>
+    <div class="emoji-opt" onclick="insertEmoji('❤️')">❤️</div>
+    <div class="emoji-opt" onclick="insertEmoji('😎')">😎</div>
+    <div class="emoji-opt" onclick="insertEmoji('🎮')">🎮</div>
+    <div class="emoji-opt" onclick="insertEmoji('💰')">💰</div>
+    <div class="emoji-opt" onclick="insertEmoji('✅')">✅</div>
+    <div class="emoji-opt" onclick="insertEmoji('😍')">😍</div>
+    <div class="emoji-opt" onclick="insertEmoji('🤣')">🤣</div>
+    <div class="emoji-opt" onclick="insertEmoji('👀')">👀</div>
+    <div class="emoji-opt" onclick="insertEmoji('💯')">💯</div>
+    <div class="emoji-opt" onclick="insertEmoji('🙏')">🙏</div>
+    <div class="emoji-opt" onclick="insertEmoji('😭')">😭</div>
+    <div class="emoji-opt" onclick="insertEmoji('🤔')">🤔</div>
+  </div>
 
   <!-- LIGHTBOX -->
   <div class="img-lightbox" id="imgLightbox" onclick="closeLightbox()">
@@ -1433,14 +1468,14 @@
         <h1>⚙️ Админ панель</h1>
         <div class="admin-tabs">
           <button class="admin-tab active" onclick="switchAdminTab('users',this)">👥 Хэрэглэгчид</button>
-          <button class="admin-tab" onclick="switchAdminTab('posts',this)">📝 Зарнууд</button>
-        </div>
+          <button class="admin-tab" onclick="switchAdminTab('posts',this)">📝 Зарнууд</button>        </div>
       </div>
       <div class="admin-content show" id="usersTab">
         <div class="search-box">
           <input type="text" id="searchInput" placeholder="ID эсвэл нэр хайх...">
           <button onclick="searchUser()">🔍 Хайх</button>
-        </div>        <div style="overflow-x:auto;">
+        </div>
+        <div style="overflow-x:auto;">
           <table class="user-table" id="usersTable">
             <thead><tr><th>ID</th><th>Нэр</th><th>И-мэйл</th><th>Дүр</th><th>Үйлдэл</th></tr></thead>
             <tbody id="usersBody"></tbody>
@@ -1468,7 +1503,8 @@
 <div class="modal" id="editPostModal">
   <div class="modal-content">
     <div class="modal-header">✏️ Зар засах<button class="modal-close" onclick="closeEditPost()">✕</button></div>
-    <div class="form-group"><label>Гарчиг</label><input type="text" id="editPostTitle"></div>    <div class="form-group"><label>Төрөл</label>
+    <div class="form-group"><label>Гарчиг</label><input type="text" id="editPostTitle"></div>
+    <div class="form-group"><label>Төрөл</label>
       <select id="editPostCategory">
         <option value="">-- Төрөл сонгох --</option>
         <option value="Roblox">🎮 Roblox</option>
@@ -1481,14 +1517,14 @@
         <option value="Mlbb">⚔️ MLBB</option>
         <option value="So2">⚡ So2</option>
       </select>
-    </div>
-    <div class="form-group"><label>Тайлбар</label><textarea id="editPostDesc" rows="3" style="display:block;width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:var(--radius);outline:none;font-family:'Sora',sans-serif;background:var(--surface-secondary);color:var(--text);resize:vertical;"></textarea></div>
+    </div>    <div class="form-group"><label>Тайлбар</label><textarea id="editPostDesc" rows="3" style="display:block;width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:var(--radius);outline:none;font-family:'Sora',sans-serif;background:var(--surface-secondary);color:var(--text);resize:vertical;"></textarea></div>
     <div class="form-group"><label>Үнэ</label><input type="text" id="editPostPrice"></div>
     <div class="form-group"><label>Зургууд</label>
       <div class="img-preview-grid" id="editImgPreview"></div>
       <div class="img-upload-area">📸 Зураг оруулах<input type="file" id="editImgInput" accept="image/*" multiple onchange="previewEditImages(event)"></div>
     </div>
-    <div class="modal-buttons">      <button class="btn-save" onclick="saveEditPost()">Хадгалах</button>
+    <div class="modal-buttons">
+      <button class="btn-save" onclick="saveEditPost()">Хадгалах</button>
       <button class="btn-cancel" onclick="closeEditPost()">Болих</button>
     </div>
   </div>
@@ -1507,23 +1543,21 @@ const firebaseConfig = {
 };
 
 // ── ADMIN EMAILS ──
-const ADMIN_EMAILS = ['concengcon@gmail.com'];
+const ADMIN_EMAILS = ['test@gmail.com'];
 
-// ── FIREBASE INIT ──
+// Initialize Firebase
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 const auth = firebase.auth();
 const db = firebase.firestore();
+
+// Configure Firestore
 db.settings({ ignoreUndefinedProperties: true });
 
-// ── COLLECTIONS ──const POSTS_COLLECTION = 'posts';
-  const POSTS_COLLECTION = 'posts';
-  const USERS_COLLECTION = 'users';
-const CHATS_COLLECTION = 'chats';
-
-// ── APP DATA ──
+// ── APP DATA (local fallback) ──
 let appData = {
+  posts: [],
   messages: JSON.parse(localStorage.getItem('hm_messages') || '{}'),
   likes: JSON.parse(localStorage.getItem('hm_likes') || '{}'),
 };
@@ -1531,24 +1565,23 @@ let appData = {
 let currentUser = null;
 let currentFilter = 'all';
 let currentSearch = '';
-let currentChatKey = null;
-let currentChatName = '';
+let currentChatKey = null;let currentChatName = '';
 let postImages = [];
 let editPostId = null;
 let editPostImages = [];
 let pendingDmImages = [];
 let isDark = localStorage.getItem('hm_theme') === 'dark';
-let pollingInterval = null;let phoneAuthMode = null;
+let pollingInterval = null;
+let phoneAuthMode = null;
 let phoneVerificationId = null;
 let resendTimer = null;
 let recaptchaVerifiers = {};
-let postsUnsubscribe = null;
-let chatsUnsubscribe = null; // ✅ Firestore DM listener
-let firestorePosts = [];
-let postsLoading = false;
+let isLoadingPosts = false;
+// FIX: Declare searchTimeout properly
+window.searchTimeout = null;
 
 // ── UTILS ──
-// ✅ ЗАСВАР 1: XSS-ээс хамгаалсан зөв escHtml
+// FIX: Proper HTML escaping function
 function escHtml(s) {
   if (!s) return '';
   return String(s)
@@ -1560,19 +1593,18 @@ function escHtml(s) {
     .replace(/\n/g, '<br>');
 }
 
-function escJs(s) {
-  if (!s) return '';
-  return String(s).replace(/'/g, "\\'").replace(/"/g, '\\"');
-}
-
 function showToast(msg, type='info') {
   const container = document.getElementById('toastContainer');
-  if(!container) return;  const t = document.createElement('div');
+  if(!container) return;
+  const t = document.createElement('div');
   t.className = 'toast';
   t.style.borderColor = type === 'error' ? 'var(--danger)' : (type === 'success' ? 'var(--success)' : 'var(--border)');
   t.innerHTML = msg;
   container.appendChild(t);
-  setTimeout(() => { t.classList.add('fadeOut'); setTimeout(() => t.remove(), 300); }, 3500);
+  setTimeout(() => { 
+    t.classList.add('fadeOut'); 
+    setTimeout(() => t.remove(), 300); 
+  }, 3500);
 }
 
 function showLoading(show) {
@@ -1582,7 +1614,14 @@ function showLoading(show) {
   ['loginBtn','signupBtn','sendPhoneBtn','sendSignupPhoneBtn','verifyPhoneBtn','verifySignupPhoneBtn'].forEach(id => {
     const btn = document.getElementById(id);
     if(btn) btn.disabled = show;
-  });
+  });}
+
+function showFeedLoading(show) {
+  const feed = document.getElementById('feedContainer');
+  if(!feed) return;
+  if(show) {
+    feed.innerHTML = '<div class="feed-loading"><div class="spinner"></div>Ачааллаж байна...</div>';
+  }
 }
 
 function saveAppData() {
@@ -1600,23 +1639,43 @@ function validateImage(file) {
   return true;
 }
 
+// ── BASE64 IMAGE FUNCTIONS ──
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
+}
+
+async function filesToBase64(files) {
+  const promises = Array.from(files).map(file => fileToBase64(file));
+  return Promise.all(promises);
+}
+
+// Compress image before converting to base64 (optional - reduces size)
 function compressImage(file, maxWidth = 800, quality = 0.7) {
   return new Promise((resolve) => {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
     const img = new Image();
-    img.onload = () => {
-      let { width, height } = img;
-      if (width > maxWidth) {
-        height = height * (maxWidth / width);
-        width = maxWidth;
-      }
-      canvas.width = width;
-      canvas.height = height;
-      ctx.drawImage(img, 0, 0, width, height);
-      resolve(canvas.toDataURL('image/jpeg', quality));
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      img.onload = () => {
+        let width = img.width;
+        let height = img.height;
+        if(width > maxWidth) {          height = Math.round(height * maxWidth / width);
+          width = maxWidth;
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.src = e.target.result;
     };
-    img.onerror = () => resolve(null);    img.src = URL.createObjectURL(file);
+    reader.readAsDataURL(file);
   });
 }
 
@@ -1636,7 +1695,8 @@ applyTheme();
 // ── AUTH TABS ──
 function switchTab(t) {
   document.getElementById('loginForm').style.display = t === 'login' ? '' : 'none';
-  document.getElementById('signupForm').style.display = t === 'signup' ? '' : 'none';  document.getElementById('resetForm').style.display = 'none';
+  document.getElementById('signupForm').style.display = t === 'signup' ? '' : 'none';
+  document.getElementById('resetForm').style.display = 'none';
   document.getElementById('loginTab').classList.toggle('active', t === 'login');
   document.getElementById('signupTab').classList.toggle('active', t === 'signup');
   document.getElementById('authErr').textContent = '';
@@ -1652,7 +1712,6 @@ function switchToReset() {
   document.getElementById('resetForm').style.display = '';
   document.getElementById('authErr').textContent = '';
 }
-
 // ── EMAIL AUTH ──
 async function doLogin() {
   const email = document.getElementById('loginEmail')?.value.trim().toLowerCase();
@@ -1666,6 +1725,7 @@ async function doLogin() {
   } catch(e) { if(err) err.textContent = getAuthErrorMessage(e.code); }
   finally { showLoading(false); }
 }
+
 async function doSignup() {
   const name = document.getElementById('signupName')?.value.trim();
   const email = document.getElementById('signupEmail')?.value.trim().toLowerCase();
@@ -1684,7 +1744,8 @@ async function doSignup() {
 
 async function resetPassword() {
   const email = document.getElementById('resetEmail')?.value.trim().toLowerCase();
-  const err = document.getElementById('authErr');  if (!email) { if(err) err.textContent = 'И-мэйл оруулна уу'; return; }
+  const err = document.getElementById('authErr');
+  if (!email) { if(err) err.textContent = 'И-мэйл оруулна уу'; return; }
   showLoading(true);
   try {
     await auth.sendPasswordResetEmail(email);
@@ -1700,12 +1761,17 @@ async function signInWithGoogle() {
   const err = document.getElementById('authErr');
   try {
     const provider = new firebase.auth.GoogleAuthProvider();
-    provider.setCustomParameters({ prompt: 'select_account' });
-    try {
+    provider.setCustomParameters({ prompt: 'select_account' });    try {
       const result = await auth.signInWithPopup(provider);
       await handleFirebaseUser(result.user, result.additionalUserInfo?.isNewUser ? 'signup' : 'login');
     } catch (popupError) {
-      if (popupError.code === 'auth/popup-blocked' || popupError.code === 'auth/cancelled-popup-request') {
+      if (
+        popupError.code === 'auth/popup-blocked' ||
+        popupError.code === 'auth/cancelled-popup-request' ||
+        popupError.code === 'auth/operation-not-supported-in-this-environment' ||
+        popupError.message?.includes('sessionStorage') ||
+        popupError.message?.includes('storage')
+      ) {
         localStorage.setItem('hm_google_redirect', '1');
         await auth.signInWithRedirect(provider);
         return;
@@ -1714,7 +1780,8 @@ async function signInWithGoogle() {
     }
   } catch(e) {
     if(err) err.textContent = getAuthErrorMessage(e.code);
-    console.error('Google sign-in error:', e);    showLoading(false);
+    console.error('Google sign-in error:', e);
+    showLoading(false);
   }
 }
 
@@ -1723,10 +1790,12 @@ function getRecaptchaVerifier(mode) {
   const key = mode === 'login' ? 'login' : 'signup';
   if (!recaptchaVerifiers[key]) {
     const containerId = mode === 'login' ? 'recaptcha-container' : 'recaptcha-container-signup';
-    if(!document.getElementById(containerId)) return null;
+    const container = document.getElementById(containerId);
+    if(!container) return null;
     recaptchaVerifiers[key] = new firebase.auth.RecaptchaVerifier(containerId, {
       'size': 'normal',
-      'callback': () => {},      'expired-callback': () => {
+      'callback': () => {},
+      'expired-callback': () => {
         showToast('⚠️ reCAPTCHA дууссан, дахин оролдоно уу', 'error');
         recaptchaVerifiers[key]?.clear();
         recaptchaVerifiers[key] = null;
@@ -1741,8 +1810,7 @@ function showPhoneAuth(mode) {
   document.getElementById('loginForm').style.display = mode === 'login' ? '' : 'none';
   document.getElementById('signupForm').style.display = mode === 'signup' ? '' : 'none';
   document.getElementById(mode === 'login' ? 'phoneLoginOtp' : 'phoneSignupOtp')?.classList.add('show');
-  const key = mode === 'login' ? 'login' : 'signup';
-  if (recaptchaVerifiers[key]) { recaptchaVerifiers[key].clear(); recaptchaVerifiers[key] = null; }
+  const key = mode === 'login' ? 'login' : 'signup';  if (recaptchaVerifiers[key]) { recaptchaVerifiers[key].clear(); recaptchaVerifiers[key] = null; }
   getRecaptchaVerifier(mode);
   setupOtpInputs(mode);
   ['loginOtpInputs','signupOtpInputs'].forEach(id => { const el = document.getElementById(id); if(el) el.style.display='none'; });
@@ -1763,7 +1831,8 @@ function setupOtpInputs(mode) {
       e.target.value = e.target.value.replace(/[^0-9]/g,'');
       if(e.target.value && index < inputs.length-1) inputs[index+1].focus();
     });
-    input.addEventListener('keydown', e => {      if(e.key==='Backspace' && !e.target.value && index>0) inputs[index-1].focus();
+    input.addEventListener('keydown', e => {
+      if(e.key==='Backspace' && !e.target.value && index>0) inputs[index-1].focus();
     });
     input.addEventListener('paste', e => {
       e.preventDefault();
@@ -1774,7 +1843,8 @@ function setupOtpInputs(mode) {
   });
 }
 
-async function sendPhoneCode(mode) {  const country = document.getElementById(mode==='login'?'loginPhoneCountry':'signupPhoneCountry')?.value;
+async function sendPhoneCode(mode) {
+  const country = document.getElementById(mode==='login'?'loginPhoneCountry':'signupPhoneCountry')?.value;
   const phone = document.getElementById(mode==='login'?'loginPhone':'signupPhone')?.value.trim();
   if(!country || !phone || !/^\d{8}$/.test(phone)) { showToast('⚠️ Зөв утасны дугаар оруулна уу (8 тоо)', 'error'); return; }
   showLoading(true);
@@ -1785,9 +1855,11 @@ async function sendPhoneCode(mode) {  const country = document.getElementById(mo
     const otpId = mode==='login'?'loginOtpInputs':'signupOtpInputs';
     const verifyId = mode==='login'?'verifyPhoneBtn':'verifySignupPhoneBtn';
     const sendId = mode==='login'?'sendPhoneBtn':'sendSignupPhoneBtn';
-    document.getElementById(otpId).style.display='flex';
-    document.getElementById(verifyId).style.display='block';
-    document.getElementById(sendId).style.display='none';
+    const otpEl = document.getElementById(otpId);
+    const verifyEl = document.getElementById(verifyId);
+    const sendEl = document.getElementById(sendId);
+    if(otpEl) otpEl.style.display='flex';
+    if(verifyEl) verifyEl.style.display='block';    if(sendEl) sendEl.style.display='none';
     document.querySelector(`#${otpId} input`)?.focus();
     startResendTimer(mode);
     showToast('✓ 6 оронтой код илгээгдлээ', 'success');
@@ -1806,13 +1878,19 @@ function startResendTimer(mode) {
   if(resendTimer) clearInterval(resendTimer);
   resendTimer = setInterval(() => {
     secs--;
-    if(secs<=0) { clearInterval(resendTimer); link.style.pointerEvents='auto'; link.style.opacity='1'; link.textContent='Дахин илгээх'; }
+    if(secs<=0) { 
+      clearInterval(resendTimer); 
+      link.style.pointerEvents='auto'; 
+      link.style.opacity='1'; 
+      link.textContent='Дахин илгээх'; 
+    }
     else link.textContent=`${secs}сек`;
   }, 1000);
 }
 
 async function resendPhoneCode(mode) {
-  phoneVerificationId = null;  ['loginOtpInputs','signupOtpInputs'].forEach(id => { const el=document.getElementById(id); if(el) el.style.display='none'; });
+  phoneVerificationId = null;
+  ['loginOtpInputs','signupOtpInputs'].forEach(id => { const el=document.getElementById(id); if(el) el.style.display='none'; });
   ['verifyPhoneBtn','verifySignupPhoneBtn'].forEach(id => { const el=document.getElementById(id); if(el) el.style.display='none'; });
   ['sendPhoneBtn','sendSignupPhoneBtn'].forEach(id => { const el=document.getElementById(id); if(el) el.style.display=''; });
   document.querySelectorAll(`#${mode==='login'?'loginOtpInputs':'signupOtpInputs'} input`).forEach(i => i.value='');
@@ -1822,70 +1900,76 @@ async function resendPhoneCode(mode) {
 async function verifyPhoneCode(mode) {
   const containerId = mode==='login'?'loginOtpInputs':'signupOtpInputs';
   const code = Array.from(document.querySelectorAll(`#${containerId} input`)).map(i=>i.value||'').join('');
-  if(code.length!==6) { showToast('⚠️ 6 оронтой кодыг бүрэн оруулна уу', 'error'); return; }  if(!phoneVerificationId) { showToast('❌ Кодын хугацаа дууссан. Дахин илгээнэ үү.', 'error'); return; }
+  if(code.length!==6) { showToast('⚠️ 6 оронтой кодыг бүрэн оруулна уу', 'error'); return; }
+  if(!phoneVerificationId) { showToast('❌ Кодын хугацаа дууссан. Дахин илгээнэ үү.', 'error'); return; }
   showLoading(true);
   try {
     const result = await phoneVerificationId.confirm(code);
     if(mode==='signup') {
       const name = document.getElementById('signupPhoneName')?.value.trim() || 'Хэрэглэгч';
       await result.user.updateProfile({ displayName: name });
-    }
-    await handleFirebaseUser(result.user, mode);
+    }    await handleFirebaseUser(result.user, mode);
   } catch(e) { showToast('❌ Код буруу эсвэл хугацаа дууссан', 'error'); }
   finally { showLoading(false); }
 }
 
 // ── FIREBASE USER HANDLER ──
 async function handleFirebaseUser(firebaseUser, action) {
-  let users = JSON.parse(localStorage.getItem('hm_users') || '[]');
-  let appUser = users.find(u => u.firebaseUid === firebaseUser.uid);
+  try {
+    let users = JSON.parse(localStorage.getItem('hm_users') || '[]');
+    let appUser = users.find(u => u.firebaseUid === firebaseUser.uid);
 
-  const userEmail = firebaseUser.email?.toLowerCase() || '';
-  const isAdminEmail = ADMIN_EMAILS.includes(userEmail);
+    const userEmail = firebaseUser.email?.toLowerCase() || '';
+    const isAdminEmail = ADMIN_EMAILS.includes(userEmail);
 
-  if (!appUser) {
-    let userId;
-    do { userId = 100000 + Math.floor(Math.random() * 900000); }
-    while (users.find(u => u.id === userId));
+    if (!appUser) {
+      let userId;
+      do { userId = 100000 + Math.floor(Math.random() * 900000); }
+      while (users.find(u => u.id === userId));
 
-    appUser = {
-      id: userId,
-      firebaseUid: firebaseUser.uid,
-      name: firebaseUser.displayName || firebaseUser.email?.split('@')[0] || 'Хэрэглэгч',
-      email: firebaseUser.email,
-      phone: firebaseUser.phoneNumber,
-      photoURL: firebaseUser.photoURL,
-      role: isAdminEmail ? 'admin' : 'buyer',
-      createdAt: new Date().toISOString(),
-      lastLogin: new Date().toISOString()
-    };
-    users.push(appUser);
-    localStorage.setItem('hm_users', JSON.stringify(users));
-    if(action==='signup') showToast(`🎉 Тавай морилно уу, ${escHtml(appUser.name)}!`, 'success');  } else {
-    appUser.name = firebaseUser.displayName || appUser.name;
-    appUser.email = firebaseUser.email || appUser.email;
-    appUser.phone = firebaseUser.phoneNumber || appUser.phone;
-    appUser.photoURL = firebaseUser.photoURL || appUser.photoURL;
-    appUser.lastLogin = new Date().toISOString();
-    if (isAdminEmail) appUser.role = 'admin';
-    const idx = users.findIndex(u => u.firebaseUid === firebaseUser.uid);
-    if(idx !== -1) { users[idx] = appUser; localStorage.setItem('hm_users', JSON.stringify(users)); }
-  }
-  currentUser = appUser;
-  sessionStorage.setItem('hm_user', JSON.stringify(currentUser));
-  showApp();
+      appUser = {
+        id: userId,
+        firebaseUid: firebaseUser.uid,
+        name: firebaseUser.displayName || firebaseUser.email?.split('@')[0] || 'Хэрэглэгч',
+        email: firebaseUser.email,
+        phone: firebaseUser.phoneNumber,
+        photoURL: firebaseUser.photoURL,
+        role: isAdminEmail ? 'admin' : 'buyer',
+        createdAt: new Date().toISOString(),
+        lastLogin: new Date().toISOString()
+      };
+      users.push(appUser);
+      localStorage.setItem('hm_users', JSON.stringify(users));
+      if(action==='signup') showToast(`🎉 Тавай морилно уу, ${escHtml(appUser.name)}!`, 'success');
+    } else {
+      appUser.name = firebaseUser.displayName || appUser.name;
+      appUser.email = firebaseUser.email || appUser.email;
+      appUser.phone = firebaseUser.phoneNumber || appUser.phone;
+      appUser.photoURL = firebaseUser.photoURL || appUser.photoURL;
+      appUser.lastLogin = new Date().toISOString();
+      if (isAdminEmail) appUser.role = 'admin';
+      const idx = users.findIndex(u => u.firebaseUid === firebaseUser.uid);
+      if(idx !== -1) { users[idx] = appUser; localStorage.setItem('hm_users', JSON.stringify(users)); }
+    }
+
+    currentUser = appUser;
+    sessionStorage.setItem('hm_user', JSON.stringify(currentUser));
+    showApp();
+  } catch(e) {
+    console.error('handleFirebaseUser error:', e);
+    showToast('❌ Хэрэглэгчийн мэдээлэл боловсруулахад алдаа', 'error');  }
 }
 
 // ── LOGOUT ──
 async function logout() {
   if(pollingInterval) { clearInterval(pollingInterval); pollingInterval=null; }
-  if(postsUnsubscribe) { postsUnsubscribe(); postsUnsubscribe=null; }
-  cleanupChatListener(); // ✅ Чат сонсогчийг цэвэрлэх
   try { await auth.signOut(); } catch(e) {}
   currentUser = null;
   sessionStorage.removeItem('hm_user');
-  document.getElementById('app').style.display='none';
-  document.getElementById('auth-screen').style.display='flex';
+  const app = document.getElementById('app');
+  const authScreen = document.getElementById('auth-screen');
+  if(app) app.style.display='none';
+  if(authScreen) authScreen.style.display='flex';
   switchTab('login');
   ['loginEmail','loginPass','signupName','signupEmail','signupPass','resetEmail','signupPhoneName','loginPhone','signupPhone'].forEach(id => {
     const el = document.getElementById(id); if(el) el.value='';
@@ -1910,7 +1994,8 @@ function getAuthErrorMessage(code) {
     'auth/network-request-failed':'Сүлжээний алдаа. Интернетээ шалгана уу.',
     'auth/timeout':'Хугацаа дууссан',
     'auth/invalid-phone-number':'Буруу утасны дугаар',
-    'auth/missing-phone-number':'Утасны дугаар оруулаагүй',    'auth/invalid-verification-code':'Буруу баталгаажуулах код',
+    'auth/missing-phone-number':'Утасны дугаар оруулаагүй',
+    'auth/invalid-verification-code':'Буруу баталгаажуулах код',
     'auth/code-expired':'Кодын хугацаа дууссан',
     'auth/too-many-requests':'Хэт олон оролдлого, түр хүлээнэ үү',
     'auth/requires-recent-login':'Аюулгүй байдлын үүднээс дахин нэвтэрнэ үү'
@@ -1919,107 +2004,118 @@ function getAuthErrorMessage(code) {
 }
 
 // ── FIRESTORE POST FUNCTIONS ──
-async function savePostToFirestore(post) {  try {
-    const totalSize = JSON.stringify(post).length;
-    if(totalSize > 900000) {
-      showToast('⚠️ Зураг хэт том байна. Бага хэмжээтэй зураг ашиглана уу.', 'error');
-      return null;
-    }
-    
-    const docRef = await db.collection(POSTS_COLLECTION).add({
-      ...post,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-    });
-    return docRef.id;
-  } catch(e) {
-    console.error('Firestore save error:', e);
-    showToast('❌ Пост хадгалахад алдаа: ' + e.message, 'error');
-    return null;
-  }
-}
-
-async function updatePostInFirestore(postId, updates) {
+async function savePostToFirestore(post) {
   try {
-    await db.collection(POSTS_COLLECTION).doc(postId).update({
-      ...updates,
-      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    await db.collection('posts').doc(String(post.id)).set({      id: post.id,
+      sellerId: post.sellerId,
+      sellerName: post.sellerName,
+      sellerRole: post.sellerRole,
+      title: post.title,
+      desc: post.desc,
+      price: post.price,
+      category: post.category,
+      images: post.images,
+      likes: post.likes || 0,
+      time: post.time,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
     return true;
   } catch(e) {
-    console.error('Firestore update error:', e);
-    showToast('❌ Шинэчлэхэд алдаа: ' + e.message, 'error');
+    console.error('Firebase save error:', e);
+    showToast('⚠️ Firebase-д хадгалахад алдаа гарлаа', 'error');
     return false;
   }
 }
 
-async function deletePostFromFirestore(postId) {
+async function loadPostsFromFirestore(category = 'all', search = '') {
   try {
-    await db.collection(POSTS_COLLECTION).doc(postId).delete();
-    return true;
+    let query = db.collection('posts').orderBy('createdAt', 'desc').limit(50);
+    
+    if (category !== 'all') {
+      query = query.where('category', '==', category);
+    }
+    
+    const snapshot = await query.get();
+    const posts = [];
+    
+    snapshot.forEach(doc => {
+      const data = doc.data();
+      if (!search || 
+          data.title?.toLowerCase().includes(search) || 
+          data.desc?.toLowerCase().includes(search) ||
+          data.category?.toLowerCase().includes(search)) {
+        posts.push({ ...data, id: doc.id });
+      }
+    });
+    
+    return posts;
   } catch(e) {
-    console.error('Firestore delete error:', e);
-    showToast('❌ Устгахад алдаа: ' + e.message, 'error');    return false;
+    console.error('Firebase load error:', e);
+    return [];
   }
 }
-function listenToPosts(callback) {
-  if(postsUnsubscribe) postsUnsubscribe();
-  
-  postsUnsubscribe = db.collection(POSTS_COLLECTION)
-    .orderBy('createdAt', 'desc')
-    .limit(50)
-    .onSnapshot(
-      (snapshot) => {
-        const posts = [];
-        snapshot.forEach(doc => {
-          const data = doc.data();
-          if(data.createdAt?.toDate) data.createdAt = data.createdAt.toDate().toISOString();
-          if(data.updatedAt?.toDate) data.updatedAt = data.updatedAt.toDate().toISOString();
-          posts.push({ id: doc.id, ...data });
-        });
-        callback(posts);
-      },
-      (error) => {
-        console.error('Posts listener error:', error);
-        showToast('⚠️ Постуудыг ачаалахад алдаа', 'error');
-      }
-    );
+
+async function deletePostFromFirestore(postId) {  try {
+    await db.collection('posts').doc(String(postId)).delete();
+    return true;
+  } catch(e) {
+    console.error('Firebase delete error:', e);
+    return false;
+  }
+}
+
+async function updatePostInFirestore(post) {
+  try {
+    await db.collection('posts').doc(String(post.id)).update({
+      title: post.title,
+      desc: post.desc,
+      price: post.price,
+      category: post.category,
+      images: post.images,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    return true;
+  } catch(e) {
+    console.error('Firebase update error:', e);
+    return false;
+  }
 }
 
 // ── APP ──
 function showApp() {
-  document.getElementById('auth-screen').style.display='none';
-  document.getElementById('app').style.display='flex';
-  if(!currentUser) return;
+  const app = document.getElementById('app');
+  const authScreen = document.getElementById('auth-screen');
+  if(!app || !authScreen || !currentUser) return;
+  
+  authScreen.style.display='none';
+  app.style.display='flex';
 
-  document.getElementById('navId').textContent = '#'+String(currentUser.id).padStart(6,'0');
-  document.getElementById('navUser').textContent = escHtml(currentUser.name);
-  document.getElementById('navAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
-  document.getElementById('navRole').style.display = currentUser.role==='admin'?'inline-block':'none';
-  document.getElementById('adminBtn').style.display = currentUser.role==='admin'?'flex':'none';
-  document.getElementById('createPostBtn').style.display = currentUser.role!=='buyer'?'flex':'none';
-  document.getElementById('profileSidebar').classList.remove('open');
-  document.getElementById('createAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
-  document.getElementById('postAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
-  document.getElementById('postName').textContent = escHtml(currentUser.name);
+  const navId = document.getElementById('navId');
+  const navUser = document.getElementById('navUser');
+  const navAvatar = document.getElementById('navAvatar');
+  const navRole = document.getElementById('navRole');
+  const adminBtn = document.getElementById('adminBtn');
+  const createPostBtn = document.getElementById('createPostBtn');
+  const profileSidebar = document.getElementById('profileSidebar');
+  const createAvatar = document.getElementById('createAvatar');
+  const postAvatar = document.getElementById('postAvatar');
+  const postName = document.getElementById('postName');
+  
+  if(navId) navId.textContent = '#'+String(currentUser.id).padStart(6,'0');
+  if(navUser) navUser.textContent = escHtml(currentUser.name);
+  if(navAvatar) navAvatar.textContent = currentUser.name.charAt(0).toUpperCase();
+  if(navRole) navRole.style.display = currentUser.role==='admin'?'inline-block':'none';  if(adminBtn) adminBtn.style.display = currentUser.role==='admin'?'flex':'none';
+  if(createPostBtn) createPostBtn.style.display = currentUser.role!=='buyer'?'flex':'none';
+  if(profileSidebar) profileSidebar.classList.remove('open');
+  if(createAvatar) createAvatar.textContent = currentUser.name.charAt(0).toUpperCase();
+  if(postAvatar) postAvatar.textContent = currentUser.name.charAt(0).toUpperCase();
+  if(postName) postName.textContent = escHtml(currentUser.name);
 
   updateProfile();
-  initPostsListener();
+  renderFeed();
   renderDMList();
   updateDMBadge();
   startPolling();
-}
-function initPostsListener() {  postsLoading = true;
-  document.getElementById('loadingFeed').style.display = '';
-  document.getElementById('feedContainer').innerHTML = '';
-  document.getElementById('emptyFeed').style.display = 'none';
-  
-  listenToPosts((posts) => {
-    firestorePosts = posts;
-    postsLoading = false;
-    document.getElementById('loadingFeed').style.display = 'none';
-    renderFeed();
-  });
 }
 
 function startPolling() {
@@ -2031,10 +2127,12 @@ function startPolling() {
       if(updatedUser && updatedUser.role!==currentUser?.role) {
         currentUser.role = updatedUser.role;
         sessionStorage.setItem('hm_user', JSON.stringify(currentUser));
-        document.getElementById('createPostBtn').style.display = currentUser.role!=='buyer'?'flex':'none';
+        const createPostBtn = document.getElementById('createPostBtn');
+        if(createPostBtn) createPostBtn.style.display = currentUser.role!=='buyer'?'flex':'none';
         showToast('🎉 Эрх шинэчлэгдлээ!', 'success');
       }
       updateDMBadge();
+      if(currentChatKey && document.getElementById('dmChatPopup')?.classList.contains('open')) renderChatMessages();
     } catch(e) {}
   }, 10000);
 }
@@ -2055,22 +2153,34 @@ function resetPostForm() {
   const cat = document.getElementById('postCategory'); if(cat) cat.value='';
   const inp = document.getElementById('imgInput'); if(inp) inp.value='';
   const prev = document.getElementById('imgPreview'); if(prev) prev.innerHTML='';
+  postImages = [];}
+
+async function previewImages(e) {
   postImages = [];
-}
-async function previewImages(e) {  postImages = [];
   const preview = document.getElementById('imgPreview');
   if(!preview) return;
   preview.innerHTML = '';
   
-  for(const file of Array.from(e.target.files)) {
-    if(!validateImage(file)) continue;
-    const base64 = await compressImage(file);
-    if(!base64) continue;
-    postImages.push(base64);
-    const div = document.createElement('div');
-    div.className = 'img-item';
-    div.innerHTML = `<img src="${escHtml(base64)}" alt="preview"><button class="img-remove" onclick="removeImage(${postImages.length-1})" type="button">✕</button>`;
-    preview.appendChild(div);
+  const files = Array.from(e.target.files).filter(validateImage);
+  if(files.length === 0) return;
+  
+  // Show loading state
+  preview.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--text-secondary);padding:20px;">Зураг боловсруулж байна...</div>';
+  
+  for(const file of files) {
+    try {
+      // Compress and convert to base64
+      const base64 = await compressImage(file, 800, 0.75);
+      postImages.push(base64);
+      
+      const div = document.createElement('div');
+      div.className = 'img-item';
+      div.innerHTML = `<img src="${escHtml(base64)}" alt="preview"><button class="img-remove" onclick="removeImage(${postImages.length-1})" type="button">✕</button>`;
+      preview.appendChild(div);
+    } catch(err) {
+      console.error('Image processing error:', err);
+      showToast('⚠️ Зураг боловсруулахад алдаа', 'error');
+    }
   }
 }
 
@@ -2091,9 +2201,16 @@ async function submitPost() {
   const desc = document.getElementById('postDesc')?.value.trim();
   const price = document.getElementById('postPrice')?.value.trim();
   const cat = document.getElementById('postCategory')?.value;
-  if(!title||!desc||!price||!cat) { showToast('⚠️ Бүх талбарыг бөглөнө үү', 'error'); return; }
+  
+  if(!title||!desc||!price||!cat) {     showToast('⚠️ Бүх талбарыг бөглөнө үү', 'error'); 
+    return; 
+  }
+  
+  const btn = document.getElementById('submitPostBtn');
+  if(btn) { btn.disabled = true; btn.textContent = 'Нийтлэж байна...'; }
   
   const post = {
+    id: Date.now(),
     sellerId: currentUser.id,
     sellerName: currentUser.name,
     sellerRole: currentUser.role,
@@ -2101,26 +2218,40 @@ async function submitPost() {
     images: [...postImages],
     likes: 0,
     time: new Date().toLocaleString('mn-MN',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}),
+    createdAt: new Date().toISOString()
   };
   
-  const docId = await savePostToFirestore(post);
-  if(!docId) return;
-    appData.posts = appData.posts || [];
-  appData.posts.unshift({ id: docId, ...post, createdAt: new Date().toISOString() });  saveAppData();
+  // Save to Firebase
+  const saved = await savePostToFirestore(post);
   
-  resetPostForm();
-  toggleNewPost();
-  showToast('✓ Зар амжилттай нийтлэгдлээ!', 'success');
-  updateProfile();
+  if(saved) {
+    // Also save locally for offline fallback
+    appData.posts.unshift(post);
+    saveAppData();
+    
+    resetPostForm();
+    toggleNewPost();
+    showToast('✓ Зар амжилттай нийтлэгдлээ!', 'success');
+    renderFeed();
+    updateProfile();
+  }
+  
+  if(btn) { btn.disabled = false; btn.textContent = 'Нийтлэх'; }
 }
 
-function searchPosts(val) { currentSearch=val.toLowerCase(); renderFeed(); }
+function handleSearchInput(val) {
+  currentSearch = val.toLowerCase();
+  // Debounce search
+  clearTimeout(window.searchTimeout);
+  window.searchTimeout = setTimeout(() => {
+    renderFeed();
+  }, 300);
+}
 
-function filterPosts(cat, btn) {
+async function filterPosts(cat, btn) {
   currentFilter = cat;
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
-  renderFeed();
+  if(btn) btn.classList.add('active');  await renderFeed();
 }
 
 function getLikeKey(postId) { return `${currentUser?.id}_${postId}`; }
@@ -2129,106 +2260,130 @@ function isLiked(postId) { return !!appData.likes[getLikeKey(postId)]; }
 function toggleLike(postId) {
   if(!currentUser) return;
   const key = getLikeKey(postId);
-  const post = firestorePosts.find(p => p.id===postId);
+  // Check both local and cached Firebase posts
+  let post = appData.posts.find(p => p.id == postId);
+  if(!post) post = (window._lastPosts || []).find(p => p.id == postId);
   if(!post) return;
   if(appData.likes[key]) { delete appData.likes[key]; post.likes=Math.max(0,(post.likes||1)-1); }
   else { appData.likes[key]=true; post.likes=(post.likes||0)+1; }
+  // Update Firestore like count
+  try { db.collection('posts').doc(String(post.id)).update({ likes: post.likes }); } catch(e) {}
   saveAppData(); renderFeed(); updateProfile();
 }
 
-function renderFeed() {
+async function renderFeed() {
   const feed = document.getElementById('feedContainer');
   const empty = document.getElementById('emptyFeed');
   if(!feed||!empty) return;
   
-  if(postsLoading) {
-    document.getElementById('loadingFeed').style.display = '';
-    feed.innerHTML = '';
-    empty.style.display = 'none';
-    return;
-  }
-  document.getElementById('loadingFeed').style.display = 'none';
+  if(isLoadingPosts) return;
+  isLoadingPosts = true;
+  showFeedLoading(true);
   
-  let posts = [...firestorePosts];
-  if(currentFilter!=='all') posts=posts.filter(p=>p.category===currentFilter);
-  if(currentSearch) { 
-    const s=currentSearch; 
-    posts=posts.filter(p=>      p.title?.toLowerCase().includes(s)||
-      p.desc?.toLowerCase().includes(s)||
-      p.category?.toLowerCase().includes(s)    ); 
-  }
-  
-  if(!posts.length) { feed.innerHTML=''; empty.style.display=''; return; }
-  empty.style.display='none';
-  
-  feed.innerHTML = posts.map((p,idx) => {
-    const imgHtml = p.images?.length
-      ? `<div class="post-images ${p.images.length>1?'multi':''}">
-          ${p.images.map(src=>`<img src="${escHtml(src)}" alt="post" onclick="openLightbox('${escJs(src)}')">`).join('')}
-        </div>` 
-      : '';
-      
-    const isMine = currentUser && p.sellerId===currentUser.id;
-    const liked = isLiked(p.id);
-    const likeBtn = `<button class="like-btn ${liked?'liked':''}" onclick="toggleLike('${p.id}')" type="button">
-      <span class="heart">${liked?'❤️':'🤍'}</span>${p.likes||0}
-    </button>`;
+  try {
+    // Load from Firebase
+    let posts = await loadPostsFromFirestore(currentFilter, currentSearch);
     
-    let actions = '';
-    if(isMine && (currentUser.role==='admin'||currentUser.role==='seller'))
-      actions=`<button class="btn-edit" onclick="openEditPost('${p.id}')" type="button">✏️ Засах</button>
-               <button class="btn-delete" onclick="deletePost('${p.id}')" type="button">🗑️</button>`;
-    else if(currentUser && currentUser.role!=='admin')
-      actions=`<button class="btn-dm" onclick="openDMTo(${p.sellerId},'${escJs(p.sellerName)}')" type="button">💬 Холбогдох</button>`;
+    // Update local cache with Firebase data (for profile counts etc)
+    if (posts.length > 0 && currentFilter === 'all' && !currentSearch) {
+      appData.posts = posts.map(p => ({...p, id: isNaN(p.id) ? p.id : Number(p.id)}));
+    }
     
-    const sellerBadge = p.sellerRole==='admin'
-      ? '<span class="post-admin-badge">admin</span>'
-      : '<span class="seller-verified">✓ Seller</span>';
-      
-    const timeStr = p.createdAt ? new Date(p.createdAt).toLocaleString('mn-MN',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}) : (p.time||'');
-      
-    return `<div class="post-card" style="animation-delay:${idx*0.05}s">
-      ${imgHtml}
-      <div class="post-body">
-        <div class="post-meta">
-          <span class="post-category">${escHtml(p.category)}</span>
-          <span class="post-id">#${String(p.sellerId).padStart(6,'0')}</span>
-          ${sellerBadge}
-          <span class="post-time">${escHtml(timeStr)}</span>
+    // Fallback to local if empty AND no filter/search applied
+    if (!posts.length && (currentFilter === 'all' && !currentSearch)) {
+      posts = [...appData.posts];
+      if(currentFilter!=='all') posts=posts.filter(p=>p.category===currentFilter);
+      if(currentSearch) { 
+        const s=currentSearch; 
+        posts=posts.filter(p=>p.title.toLowerCase().includes(s)||p.desc.toLowerCase().includes(s)||p.category.toLowerCase().includes(s));
+      }
+    }
+    
+    if(!posts.length) { 
+      feed.innerHTML=''; 
+      empty.style.display=''; 
+      return; 
+    }
+    
+    empty.style.display='none';
+    // Cache posts for edit/delete operations
+    window._lastPosts = posts;
+    feed.innerHTML = posts.map((p,idx) => {
+      const imgHtml = p.images&&p.images.length
+        ? `<div class="post-images ${p.images.length>1?'multi':''}">${p.images.map(src=>`<img src="${escHtml(src)}" alt="post" onclick="openLightbox('${escHtml(src.replace(/'/g, "\\'"))}')">`).join('')}</div>` : '';
+      const isMine = currentUser&&p.sellerId===currentUser.id;      const liked = isLiked(p.id);
+      const likeBtn = `<button class="like-btn ${liked?'liked':''}" onclick="toggleLike(${p.id})" type="button"><span class="heart">${liked?'❤️':'🤍'}</span>${p.likes||0}</button>`;
+      let actions = '';
+      if(isMine&&(currentUser.role==='admin'||currentUser.role==='seller'))
+        actions=`<button class="btn-edit" onclick="openEditPost(${p.id})" type="button">✏️ Засах</button><button class="btn-delete" onclick="deletePost(${p.id})" type="button">🗑️</button>`;
+      else if(currentUser&&currentUser.role!=='admin')
+        actions=`<button class="btn-dm" onclick="openDMTo(${p.sellerId},'${escHtml(p.sellerName.replace(/'/g, "\\'"))}')" type="button">💬 Холбогдох</button>`;
+      const sellerBadge = p.sellerRole==='admin'
+        ? '<span class="post-admin-badge">admin</span>'
+        : '<span class="seller-verified">✓ Seller</span>';
+      return `<div class="post-card" style="animation-delay:${idx*0.05}s">
+        ${imgHtml}
+        <div class="post-body">
+          <div class="post-meta">
+            <span class="post-category">${escHtml(p.category)}</span>
+            <span class="post-id">${escHtml(p.sellerName)}</span>
+            ${sellerBadge}
+            <span class="post-time">${escHtml(p.time||'')}</span>
+          </div>
+          <div class="post-title">${escHtml(p.title)}</div>
+          <div class="post-desc">${escHtml(p.desc)}</div>
+          <div class="post-price">${escHtml(p.price)}</div>
+          <div class="post-footer">
+            <div class="post-actions">${actions}</div>
+            ${likeBtn}
+          </div>
         </div>
-        <div class="post-title">${escHtml(p.title)}</div>
-        <div class="post-desc">${escHtml(p.desc)}</div>
-        <div class="post-price">${escHtml(p.price)}</div>
-        <div class="post-footer">
-          <div class="post-actions">${actions}</div>
-          ${likeBtn}        </div>
-      </div>
-    </div>`;
-  }).join('');}
+      </div>`;
+    }).join('');
+  } catch(e) {
+    console.error('Render feed error:', e);
+    showToast('⚠️ Заруудыг ачаалахад алдаа', 'error');
+  } finally {
+    isLoadingPosts = false;
+  }
+}
 
 async function deletePost(postId) {
   if(!confirm('Үнэхээр устгах уу?')) return;
   
-  const success = await deletePostFromFirestore(postId);
-  if(!success) return;
+  // Delete from Firebase
+  await deletePostFromFirestore(postId);
   
+  // Delete locally
   Object.keys(appData.likes).forEach(k => { if(k.endsWith(`_${postId}`)) delete appData.likes[k]; });
-  appData.posts = (appData.posts||[]).filter(p=>p.id!==postId);
+  appData.posts = appData.posts.filter(p => p.id != postId);
+  window._lastPosts = (window._lastPosts || []).filter(p => p.id != postId);
   saveAppData(); 
-  
   showToast('🗑️ Зар устгагдлаа','success'); 
+  renderFeed(); 
   updateProfile();
 }
 
 function openEditPost(postId) {
-  const post = firestorePosts.find(p=>p.id===postId);
-  if(!post) return;
+  // Search both local and rendered posts
+  let post = appData.posts.find(p => p.id == postId);
+  if(!post) {
+    // Try to find from last rendered feed (stored in window._lastPosts)
+    post = (window._lastPosts || []).find(p => p.id == postId);
+  }
+  if(!post) { showToast('⚠️ Зар олдсонгүй', 'error'); return; }
   editPostId=postId; editPostImages=[...(post.images||[])];
-  document.getElementById('editPostTitle').value=post.title||'';
-  document.getElementById('editPostCategory').value=post.category||'';
-  document.getElementById('editPostDesc').value=post.desc||'';
-  document.getElementById('editPostPrice').value=post.price||'';
+  const titleEl = document.getElementById('editPostTitle');
+  const catEl = document.getElementById('editPostCategory');
+  const descEl = document.getElementById('editPostDesc');
+  const priceEl = document.getElementById('editPostPrice');
   const preview = document.getElementById('editImgPreview');
+  
+  if(titleEl) titleEl.value=post.title;
+  if(catEl) catEl.value=post.category;
+  if(descEl) descEl.value=post.desc;
+  if(priceEl) priceEl.value=post.price;
+  
   if(preview) {
     preview.innerHTML='';
     editPostImages.forEach((src,i) => {
@@ -2240,20 +2395,34 @@ function openEditPost(postId) {
   document.getElementById('editPostModal').classList.add('open');
 }
 
-function closeEditPost() { document.getElementById('editPostModal').classList.remove('open'); editPostId=null; editPostImages=[]; }
+function closeEditPost() { 
+  document.getElementById('editPostModal').classList.remove('open'); 
+  editPostId=null; 
+  editPostImages=[]; 
+}
 
 async function previewEditImages(e) {
   editPostImages=[];
   const preview=document.getElementById('editImgPreview'); if(!preview) return;
   
-  for(const file of Array.from(e.target.files)) {
-    if(!validateImage(file)) continue;
-    const base64 = await compressImage(file);
-    if(!base64) continue;    editPostImages.push(base64);
-    const div=document.createElement('div'); div.className='img-item';
-    div.innerHTML=`<img src="${escHtml(base64)}" alt="edit preview"><button class="img-remove" onclick="removeEditImage(${editPostImages.length-1})" type="button">✕</button>`;
-    preview.appendChild(div);
-  }}
+  const files = Array.from(e.target.files).filter(validateImage);
+  if(files.length === 0) return;
+  
+  preview.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--text-secondary);padding:20px;">Зураг боловсруулж байна...</div>';
+  
+  for(const file of files) {
+    try {
+      const base64 = await compressImage(file, 800, 0.75);
+      editPostImages.push(base64);
+      
+      const div=document.createElement('div'); div.className='img-item';
+      div.innerHTML=`<img src="${escHtml(base64)}" alt="edit preview"><button class="img-remove" onclick="removeEditImage(${editPostImages.length-1})" type="button">✕</button>`;      preview.appendChild(div);
+    } catch(err) {
+      console.error('Image processing error:', err);
+      showToast('⚠️ Зураг боловсруулахад алдаа', 'error');
+    }
+  }
+}
 
 function removeEditImage(idx) {
   editPostImages.splice(idx,1);
@@ -2268,46 +2437,50 @@ function removeEditImage(idx) {
 }
 
 async function saveEditPost() {
-  const post = firestorePosts.find(p=>p.id===editPostId); 
-  if(!post) return;
-  
+  let post = appData.posts.find(p => p.id == editPostId);
+  if(!post) post = (window._lastPosts || []).find(p => p.id == editPostId);
+  if(!post) { showToast('⚠️ Зар олдсонгүй', 'error'); return; }
   const title=document.getElementById('editPostTitle')?.value.trim();
   const category=document.getElementById('editPostCategory')?.value;
   const desc=document.getElementById('editPostDesc')?.value.trim();
   const price=document.getElementById('editPostPrice')?.value.trim();
+  if(!title||!desc||!price||!category) { showToast('⚠️ Бүх талбарыг бөглөнө үү','error'); return; }
   
-  if(!title||!desc||!price||!category) { 
-    showToast('⚠️ Бүх талбарыг бөглөнө үү','error'); 
-    return; 
-  }
+  post.title=title; post.category=category; post.desc=desc; post.price=price; post.images=editPostImages;
   
-  const updates = { title, category, desc, price, images: editPostImages };
-  const success = await updatePostInFirestore(editPostId, updates);
-  if(!success) return;
+  // Update Firebase
+  await updatePostInFirestore(post);
   
-  const localIdx = (appData.posts||[]).findIndex(p=>p.id===editPostId);
-  if(localIdx !== -1) {
-    appData.posts[localIdx] = { ...appData.posts[localIdx], ...updates };
-    saveAppData();
-  }
-  
+  // Update locally
+  saveAppData(); 
   showToast('✓ Зар шинэчлэгдлээ','success'); 
   closeEditPost(); 
+  renderFeed();
 }
 
 // ── PROFILE ──
 function updateProfile() {
-  if(!currentUser) return;  document.getElementById('profileAvatar').textContent=currentUser.name.charAt(0).toUpperCase();
-  document.getElementById('profileName').textContent=escHtml(currentUser.name);
-  document.getElementById('profileId').textContent='#'+String(currentUser.id).padStart(6,'0');
-  document.getElementById('profileRole').textContent=currentUser.role==='admin'?'Админ':(currentUser.role==='seller'?'Худалдагч':'Худалдан авагч');
-  
-  const myPosts = firestorePosts.filter(p=>p.sellerId===currentUser.id);  document.getElementById('profilePostCount').textContent = myPosts.length;
-  document.getElementById('profileLikes').textContent = myPosts.reduce((s,p)=>s+(p.likes||0),0);
+  if(!currentUser) return;
+  const profileAvatar = document.getElementById('profileAvatar');
+  const profileName = document.getElementById('profileName');
+  const profileId = document.getElementById('profileId');
+  const profileRole = document.getElementById('profileRole');
+  const profilePostCount = document.getElementById('profilePostCount');
+  const profileLikes = document.getElementById('profileLikes');
+    if(profileAvatar) profileAvatar.textContent=currentUser.name.charAt(0).toUpperCase();
+  if(profileName) profileName.textContent=escHtml(currentUser.name);
+  if(profileId) profileId.textContent='#'+String(currentUser.id).padStart(6,'0');
+  if(profileRole) profileRole.textContent=currentUser.role==='admin'?'Админ':(currentUser.role==='seller'?'Худалдагч':'Худалдан авагч');
+  if(profilePostCount) profilePostCount.textContent=appData.posts.filter(p=>p.sellerId===currentUser.id).length;
+  if(profileLikes) profileLikes.textContent=appData.posts.filter(p=>p.sellerId===currentUser.id).reduce((s,p)=>s+(p.likes||0),0);
 }
 
 function toggleProfile() { document.getElementById('profileSidebar')?.classList.toggle('open'); }
-function openEditProfile() { document.getElementById('editProfileName').value=currentUser.name; document.getElementById('editProfileModal').classList.add('open'); }
+function openEditProfile() { 
+  const nameEl = document.getElementById('editProfileName');
+  if(nameEl) nameEl.value=currentUser.name; 
+  document.getElementById('editProfileModal').classList.add('open'); 
+}
 function closeEditProfile() { document.getElementById('editProfileModal').classList.remove('open'); }
 
 function saveProfile() {
@@ -2320,12 +2493,15 @@ function saveProfile() {
   sessionStorage.setItem('hm_user',JSON.stringify(currentUser));
   showToast('✓ Профиль шинэчлэгдлээ','success');
   closeEditProfile(); updateProfile(); renderFeed();
-  document.getElementById('navAvatar').textContent=name.charAt(0).toUpperCase();
-  document.getElementById('postAvatar').textContent=name.charAt(0).toUpperCase();
-  document.getElementById('postName').textContent=escHtml(name);
+  const navAvatar = document.getElementById('navAvatar');
+  const postAvatar = document.getElementById('postAvatar');
+  const postName = document.getElementById('postName');
+  if(navAvatar) navAvatar.textContent=name.charAt(0).toUpperCase();
+  if(postAvatar) postAvatar.textContent=name.charAt(0).toUpperCase();
+  if(postName) postName.textContent=escHtml(name);
 }
 
-// ── DM SYSTEM (FIRESTORE REALTIME) ──
+// ── DM ──
 function getConvKey(a,b) { return [a,b].sort((x,y)=>x-y).join('_'); }
 
 function updateDMBadge() {
@@ -2340,25 +2516,30 @@ function updateDMBadge() {
 }
 
 function toggleDM() {
-  const popup=document.getElementById('dmPopup');
-  if(!popup) return;
+  const popup=document.getElementById('dmPopup');  if(!popup) return;
   if(popup.classList.contains('open')) closeDmPopup();
-  else { document.getElementById('dmChatPopup')?.classList.remove('open'); popup.classList.add('open'); renderDMList(); }
+  else { 
+    document.getElementById('dmChatPopup')?.classList.remove('open'); 
+    popup.classList.add('open'); 
+    renderDMList(); 
+  }
 }
+
 function closeDmPopup() { document.getElementById('dmPopup')?.classList.remove('open'); }
 
 function renderDMList() {
   const list=document.getElementById('dmConvList');
   if(!currentUser||!list) return;
   const myConvs=Object.entries(appData.messages).filter(([k,v])=>v.participants?.includes(currentUser.id));
-  if(!myConvs.length) { list.innerHTML='<div class="dm-empty"><div class="dm-empty-icon">💬</div><p>Мессеж байхгүй байна</p></div>'; return; }  list.innerHTML=myConvs.map(([key,conv])=>{
+  if(!myConvs.length) { list.innerHTML='<div class="dm-empty"><div class="dm-empty-icon">💬</div><p>Мессеж байхгүй байна</p></div>'; return; }
+  list.innerHTML=myConvs.map(([key,conv])=>{
     const otherId=conv.participants?.find(id=>id!==currentUser.id);
     const other=JSON.parse(localStorage.getItem('hm_users')||'[]').find(u=>u.id===otherId);
     if(!other) return '';
     const unread=(conv.msgs||[]).filter(m=>m.from!==currentUser.id&&!m.read).length;
     const lastMsg=conv.msgs&&conv.msgs.length?conv.msgs[conv.msgs.length-1]:null;
     const lastText=lastMsg?(lastMsg.img?'📷 Зураг':(lastMsg.text||'').slice(0,28)+((lastMsg.text&&lastMsg.text.length>28)?'...':'')):'' ;
-    return `<div class="dm-conv-item" onclick="openChatPopup('${key}','${escJs(other.name)}',${otherId})">
+    return `<div class="dm-conv-item" onclick="openChatPopup('${key}','${escHtml(other.name.replace(/'/g, "\\'"))}',${otherId})">
       <div class="dm-conv-avatar">${escHtml(other.name.charAt(0).toUpperCase())}<span class="dm-conv-online"></span></div>
       <div class="dm-conv-info">
         <div class="dm-conv-name">${escHtml(other.name)}</div>
@@ -2378,91 +2559,83 @@ function openDMTo(sellerId, sellerName) {
   openChatPopup(key,sellerName,sellerId);
 }
 
-// ✅ ЗАСВАР 2: Firestore Realtime Listener + Цэвэрлэх функц
-function cleanupChatListener() {
-  if(chatsUnsubscribe) { chatsUnsubscribe(); chatsUnsubscribe=null; }
-}
-
-async function openChatPopup(key,name,otherId) {
-  currentChatKey=key; currentChatName=name;
-  document.getElementById('chatHeaderAvatar').textContent=name.charAt(0).toUpperCase();
-  document.getElementById('chatHeaderName').textContent=escHtml(name);
+function openChatPopup(key,name,otherId) {
+  currentChatKey=key; 
+  currentChatName=name;
+  
+  const chatHeaderAvatar = document.getElementById('chatHeaderAvatar');
+  const chatHeaderName = document.getElementById('chatHeaderName');
+  if(chatHeaderAvatar) chatHeaderAvatar.textContent=name.charAt(0).toUpperCase();
+  if(chatHeaderName) chatHeaderName.textContent=escHtml(name);
+  
   document.getElementById('dmPopup')?.classList.remove('open');
-  const chat=document.getElementById('dmChatPopup');
-  if(!chat) return;
-  chat.classList.remove('minimized'); chat.classList.add('open');
   
-  // ✅ Хуучин сонсогчийг цуцалж, шинээр эхлүүлэх
-  cleanupChatListener();
+  // Conversation үүсгэх
+  if(!appData.messages[key]) {
+    appData.messages[key] = {
+      participants: [currentUser.id, otherId],
+      msgs: []
+    };
+  }
   
-  // ✅ Firestore-оос бодит цагт мессеж сонсох
-  chatsUnsubscribe = db.collection(CHATS_COLLECTION).doc(key)
-    .collection('msgs')
-    .orderBy('createdAt', 'asc')
-    .limit(100)
-    .onSnapshot(snapshot => {      const msgs = [];
-      snapshot.forEach(doc => {
-        const data = doc.data();
-        // Timestamp хувиргалт
-        if(data.createdAt?.toDate) {
-          data.time = data.createdAt.toDate().toLocaleTimeString('mn-MN',{hour:'2-digit',minute:'2-digit'});
-        }
-        msgs.push({ id: doc.id, ...data });
-      });
-      
-      // ✅ Local cache-д шинэчлэх
-      if(!appData.messages[key]) {
-        appData.messages[key] = { participants:[currentUser.id, otherId], msgs:[] };
+  // Мессежийг унших гэж тэмдэглэх
+  if(appData.messages[key] && appData.messages[key].msgs) {
+    appData.messages[key].msgs.forEach(m => {
+      if(m.from !== currentUser.id) {
+        m.read = true;
       }
-      appData.messages[key].msgs = msgs;
-      
-      // ✅ Уншаагүй мессежийг "уншсан" болгох
-      msgs.forEach(m => {
-        if(m.from !== currentUser.id && !m.read) {
-          m.read = true;
-        }
-      });
-      
-      saveAppData();
-      renderChatMessages();
-      updateDMBadge();
-    }, error => {
-      console.error('Чат ачаалах алдаа:', error);
-      // ✅ Алдаа гарвал local cache-с харуулах
-      if(appData.messages[key]) renderChatMessages();
     });
-    
-  setTimeout(()=>document.getElementById('dmTextInput')?.focus(),100);
+  }
+  saveAppData();
+  
+  const chat = document.getElementById('dmChatPopup');
+  if(!chat) return;
+  chat.classList.remove('minimized'); 
+  chat.classList.add('open');
+  
+  renderChatMessages(); 
+  updateDMBadge(); 
+  renderDMList();
+  
+  setTimeout(() => document.getElementById('dmTextInput')?.focus(), 100);
 }
 
 function closeChatPopup() {
-  cleanupChatListener();
   document.getElementById('dmChatPopup')?.classList.remove('open');
-  currentChatKey=null; pendingDmImages=[];  const strip=document.getElementById('dmImgPreviewStrip');
+  currentChatKey=null; pendingDmImages=[];
+  const strip=document.getElementById('dmImgPreviewStrip');
   if(strip){strip.innerHTML='';strip.classList.remove('has-img');}
 }
 
 function toggleMinimize() { document.getElementById('dmChatPopup')?.classList.toggle('minimized'); }
 
 function renderChatMessages() {
-  const body=document.getElementById('dmChatBody'); if(!body) return;
-  const conv=appData.messages[currentChatKey];
-  if(!conv||!conv.msgs?.length) { body.innerHTML='<div style="text-align:center;color:var(--text-secondary);margin-top:30px;font-size:0.85rem;">👋 Мессеж эхлүүлэх</div>'; return; }
-  body.innerHTML=conv.msgs.map((m)=>{
-    const mine=m.from===currentUser.id;    const side=mine?'mine':'theirs';
+  const body = document.getElementById('dmChatBody'); 
+  if(!body) return;
+  
+  const conv = appData.messages[currentChatKey];
+  
+  // Хэрэв мессеж байхгүй бол
+  if(!conv || !conv.msgs || conv.msgs.length === 0) { 
+    body.innerHTML = '<div style="text-align:center;color:var(--text-secondary);margin-top:30px;font-size:0.85rem;">👋 Мессеж эхлүүлэх</div>'; 
+    return; 
+  }
+  
+  // Үлдсэн кодыг хадгалаарай...
+  body.innerHTML=conv.msgs.map((m,idx)=>{
+    const mine=m.from===currentUser.id;
+    const side=mine?'mine':'theirs';
     const seenHtml=mine?`<span class="msg-seen">${m.read?'✓✓':'✓'}</span>`:'';
     const reactions=m.reactions||{};
-    const reactHtml=Object.entries(reactions).length?`<div class="msg-reactions">${Object.entries(reactions).map(([emoji,users])=>{const iMine=users?.includes(currentUser.id);return`<span class="reaction-chip ${iMine?'mine-react':''}" onclick="toggleReaction('${m.id}','${emoji}')">${emoji}<span class="reaction-count">${users.length}</span></span>`;}).join('')}</div>`:'';
+    const reactHtml=Object.entries(reactions).length?`<div class="msg-reactions">${Object.entries(reactions).map(([emoji,users])=>{const iMine=users?.includes(currentUser.id);return`<span class="reaction-chip ${iMine?'mine-react':''}" onclick="toggleReaction(${idx},'${emoji}')">${emoji}<span class="reaction-count">${users.length}</span></span>`;}).join('')}</div>`:'';
     let contentHtml='';
-    if(m.img) contentHtml=`<img class="msg-img" src="${escHtml(m.img)}" alt="msg" onclick="openLightbox('${escJs(m.img)}')">`;
-    else if(m.editing) contentHtml=`<input class="msg-edit-input" id="editInput_${m.id}" value="${escHtml(m.text)}" onkeydown="if(event.key==='Enter')saveEdit('${m.id}');if(event.key==='Escape')cancelEdit('${m.id}')"><div class="msg-edit-actions"><button class="msg-edit-save" onclick="saveEdit('${m.id}')" type="button">✓ Хадгалах</button><button class="msg-edit-cancel" onclick="cancelEdit('${m.id}')" type="button">Болих</button></div>`;
+    if(m.img) contentHtml=`<img class="msg-img" src="${escHtml(m.img)}" alt="msg" onclick="openLightbox('${escHtml(m.img.replace(/'/g, "\\'"))}')">`;
+    else if(m.editing) contentHtml=`<input class="msg-edit-input" id="editInput_${idx}" value="${escHtml(m.text)}" onkeydown="if(event.key==='Enter')saveEdit(${idx});if(event.key==='Escape')cancelEdit(${idx})"><div class="msg-edit-actions"><button class="msg-edit-save" onclick="saveEdit(${idx})" type="button">✓ Хадгалах</button><button class="msg-edit-cancel" onclick="cancelEdit(${idx})" type="button">Болих</button></div>`;
     else contentHtml=`<div class="msg-bubble ${m.edited?'edited-msg':''}">${escHtml(m.text)}</div>`;
-    
-    // ✅ Уникаль ID ашиглах
-    const emojiOpts=['❤️','😂','👍','🔥','😮','😢'].map(e=>`<button class="msg-action-btn" onclick="toggleReaction('${m.id}','${e}')" type="button">${e}</button>`).join('');
-    const editBtn=mine&&!m.img?`<button class="msg-action-btn" onclick="startEdit('${m.id}')" type="button">✏️</button>`:'';
-    const deleteBtn=mine?`<button class="msg-action-btn" onclick="deleteMsg('${m.id}')" type="button">🗑️</button>`:'';
-    return `<div class="msg-row ${side}" data-id="${m.id}">
+    const emojiOpts=['❤️','😂','👍','🔥','😮','😢'].map(e=>`<button class="msg-action-btn" onclick="toggleReaction(${idx},'${e}')" type="button">${e}</button>`).join('');
+    const editBtn=mine&&!m.img?`<button class="msg-action-btn" onclick="startEdit(${idx})" type="button">✏️</button>`:'';
+    const deleteBtn=mine?`<button class="msg-action-btn" onclick="deleteMsg(${idx})" type="button">🗑️</button>`:'';
+    return `<div class="msg-row ${side}">
       <div class="msg-hover-actions">${emojiOpts}${editBtn}${deleteBtn}</div>
       ${contentHtml}
       ${reactHtml}
@@ -2472,82 +2645,53 @@ function renderChatMessages() {
   body.scrollTop=body.scrollHeight;
 }
 
-async function toggleReaction(msgId,emoji) {
+function toggleReaction(msgIdx,emoji) {
   const conv=appData.messages[currentChatKey]; if(!conv) return;
-  const msg=conv.msgs.find(m=>m.id===msgId); if(!msg) return;
-  if(!msg.reactions) msg.reactions={};
+  const msg=conv.msgs[msgIdx]; if(!msg.reactions) msg.reactions={};
   if(!msg.reactions[emoji]) msg.reactions[emoji]=[];
   const arr=msg.reactions[emoji]; const i=arr.indexOf(currentUser.id);
-  if(i>=0) arr.splice(i,1); else arr.push(currentUser.id);
-  if(arr.length===0) delete msg.reactions[emoji];
-  
-  // ✅ Firestore-д шинэчлэх
-  try {
-    await db.collection(CHATS_COLLECTION).doc(currentChatKey).collection('msgs').doc(msgId).update({
-      reactions: msg.reactions
-    });
-  } catch(e) { console.error('Reaction update failed:', e); }
+  if(i>=0) arr.splice(i,1); else arr.push(currentUser.id);  if(arr.length===0) delete msg.reactions[emoji];
+  saveAppData(); renderChatMessages();
 }
 
-async function startEdit(msgId) {
-  const conv=appData.messages[currentChatKey]; if(!conv) return;
-  const msg=conv.msgs.find(m=>m.id===msgId); if(!msg || msg.img) return;
-  msg.editing=true;
-  renderChatMessages();
-  setTimeout(()=>{const inp=document.getElementById('editInput_'+msgId);if(inp){inp.focus();inp.select();}},50);
+function startEdit(idx) {
+  const conv=appData.messages[currentChatKey]; if(!conv?.msgs[idx]) return;
+  conv.msgs[idx].editing=true; saveAppData(); renderChatMessages();
+  setTimeout(()=>{const inp=document.getElementById('editInput_'+idx);if(inp){inp.focus();inp.select();}},50);
 }
 
-async function saveEdit(msgId) {
-  const inp=document.getElementById('editInput_'+msgId); if(!inp) return;  const conv=appData.messages[currentChatKey]; if(!conv) return;
-  const msg=conv.msgs.find(m=>m.id===msgId); if(!msg) return;
-  
-  msg.text=inp.value.trim()||msg.text;
-  msg.editing=false; msg.edited=true;
-  
-  try {
-    await db.collection(CHATS_COLLECTION).doc(currentChatKey).collection('msgs').doc(msgId).update({
-      text: msg.text, edited: true
-    });
-  } catch(e) { console.error('Edit save failed:', e); }
-  
-  renderChatMessages();
+function saveEdit(idx) {
+  const inp=document.getElementById('editInput_'+idx); if(!inp) return;
+  const conv=appData.messages[currentChatKey]; if(!conv?.msgs[idx]) return;
+  conv.msgs[idx].text=inp.value.trim()||conv.msgs[idx].text;
+  conv.msgs[idx].editing=false; conv.msgs[idx].edited=true;
+  saveAppData(); renderChatMessages();
 }
 
-async function cancelEdit(msgId) {
-  const conv=appData.messages[currentChatKey]; if(!conv) return;
-  const msg=conv.msgs.find(m=>m.id===msgId); if(!msg) return;
-  msg.editing=false;
-  renderChatMessages();
+function cancelEdit(idx) {
+  const conv=appData.messages[currentChatKey]; if(!conv?.msgs[idx]) return;
+  conv.msgs[idx].editing=false; saveAppData(); renderChatMessages();
 }
 
-async function deleteMsg(msgId) {
-  const conv=appData.messages[currentChatKey]; if(!conv) return;
-  
-  try {
-    await db.collection(CHATS_COLLECTION).doc(currentChatKey).collection('msgs').doc(msgId).delete();
-    // ✅ Local-оос устгах (listener автоматаар шинэчилнэ)
-    conv.msgs = conv.msgs.filter(m=>m.id!==msgId);
-    saveAppData(); renderChatMessages(); renderDMList();
-  } catch(e) {
-    showToast('❌ Устгахад алдаа гарлаа', 'error');
-  }
+function deleteMsg(idx) {
+  const conv=appData.messages[currentChatKey]; if(!conv?.msgs) return;
+  conv.msgs.splice(idx,1); saveAppData(); renderChatMessages(); renderDMList();
 }
 
-// ✅ ЗАСВАР 3: Зураг + Текст нэг мессежид нэгтгэх, Firestore руу бичих
-async function handleDmImages(e) {
-  for(const file of Array.from(e.target.files)) {
-    if(!validateImage(file)) continue;
-    const base64 = await compressImage(file, 400, 0.6);
-    if(!base64) continue;
-    pendingDmImages.push(base64);
-    renderDmImgPreview();
-  }
+function handleDmImages(e) {
+  Array.from(e.target.files).forEach(file=>{
+    if(!validateImage(file)) return;
+    const reader=new FileReader();
+    reader.onload=ev=>{pendingDmImages.push(ev.target.result);renderDmImgPreview();};
+    reader.readAsDataURL(file);
+  });
   e.target.value='';
 }
 
 function renderDmImgPreview() {
   const strip=document.getElementById('dmImgPreviewStrip'); if(!strip) return;
-  strip.innerHTML=pendingDmImages.map((src,i)=>`<div class="dm-preview-item"><img src="${escHtml(src)}" alt="preview"><button class="dm-preview-remove" onclick="removePendingImg(${i})" type="button">✕</button></div>`).join('');  strip.classList.toggle('has-img',pendingDmImages.length>0);
+  strip.innerHTML=pendingDmImages.map((src,i)=>`<div class="dm-preview-item"><img src="${escHtml(src)}" alt="preview"><button class="dm-preview-remove" onclick="removePendingImg(${i})" type="button">✕</button></div>`).join('');
+  strip.classList.toggle('has-img',pendingDmImages.length>0);
 }
 
 function removePendingImg(i) { pendingDmImages.splice(i,1); renderDmImgPreview(); }
@@ -2555,14 +2699,17 @@ function removePendingImg(i) { pendingDmImages.splice(i,1); renderDmImgPreview()
 function toggleInputEmoji(e) {
   e?.stopPropagation();
   const picker=document.getElementById('inputEmojiPicker');
-  const btn=document.getElementById('dmEmojiToggleBtn');
-  if(!picker||!btn) return;
+  const btn=document.getElementById('dmEmojiToggleBtn');  if(!picker||!btn) return;
+  const rect=btn.getBoundingClientRect();
+  picker.style.bottom=(window.innerHeight-rect.top+4)+'px';
+  picker.style.right=(window.innerWidth-rect.right)+'px';
   picker.classList.toggle('open');
 }
 
 function insertEmoji(emoji) {
   const inp=document.getElementById('dmTextInput'); if(!inp) return;
-  const pos=inp.selectionStart||0;  inp.value=inp.value.slice(0,pos)+emoji+inp.value.slice(pos);
+  const pos=inp.selectionStart||0;
+  inp.value=inp.value.slice(0,pos)+emoji+inp.value.slice(pos);
   inp.focus(); inp.setSelectionRange(pos+emoji.length,pos+emoji.length);
   document.getElementById('inputEmojiPicker')?.classList.remove('open');
 }
@@ -2579,57 +2726,49 @@ function autoResizeInput(el) {
 
 function dmInputKeydown(e) { if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendDM();} }
 
-async function sendDM() {
+function sendDM() {
   if(!currentChatKey || !currentUser) return;
-  const input=document.getElementById('dmTextInput');
-  const text=input?.value.trim();
-  const images=[...pendingDmImages];
   
-  if(!text && images.length===0) return;
-  if(!appData.messages[currentChatKey]) appData.messages[currentChatKey]={participants:[],msgs:[]};
+  const input = document.getElementById('dmTextInput');
+  const text = input?.value.trim();
   
-  const time=new Date().toLocaleTimeString('mn-MN',{hour:'2-digit',minute:'2-digit'});
+  if(!text && pendingDmImages.length === 0) return;
   
-  // ✅ Зураг + Текст нэгтгэх
-  if(images.length > 0) {
-    for(const img of images) {
-      const msgData = {
-        from: currentUser.id,
-        fromName: currentUser.name,
-        text: text || '',        img: img,
-        time: time,
-        read: false,
-        reactions: {},
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-      };
-      try {
-        const docRef = await db.collection(CHATS_COLLECTION).doc(currentChatKey).collection('msgs').add(msgData);
-        // ✅ Local cache-д нэмэх
-        appData.messages[currentChatKey].msgs.push({ id: docRef.id, ...msgData });
-      } catch(e) { console.error('Send failed:', e); }
-    }
-    pendingDmImages=[]; renderDmImgPreview();
-    if(input){input.value='';input.style.height='auto';}
-  } else if(text) {
-    const msgData = {
-      from: currentUser.id,
-      fromName: currentUser.name,
-      text: text,
-      time: time,
-      read: false,
-      reactions: {},
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  // Ensure conversation exists with both participants
+  if(!appData.messages[currentChatKey]) {
+    // Parse participants from key (format: "id1_id2")
+    const parts = currentChatKey.split('_').map(Number);
+    appData.messages[currentChatKey] = {
+      participants: parts,
+      msgs: []
     };
-    try {
-      const docRef = await db.collection(CHATS_COLLECTION).doc(currentChatKey).collection('msgs').add(msgData);
-      appData.messages[currentChatKey].msgs.push({ id: docRef.id, ...msgData });
-    } catch(e) { console.error('Send failed:', e); }
-    if(input){input.value='';input.style.height='auto';}
   }
+  // Ensure participants array is correct
+  if(!appData.messages[currentChatKey].participants) {
+    const parts = currentChatKey.split('_').map(Number);
+    appData.messages[currentChatKey].participants = parts;
+  }
+
+  const time = new Date().toLocaleTimeString('mn-MN', {hour:'2-digit', minute:'2-digit'});
   
+  if(pendingDmImages.length > 0) {
+    pendingDmImages.forEach(img => {
+      appData.messages[currentChatKey].msgs.push({
+        from: currentUser.id, img, time, read: false, reactions: {}
+      });
+    });
+    pendingDmImages = [];
+    renderDmImgPreview();
+  }
+  if(text) {
+    appData.messages[currentChatKey].msgs.push({
+      from: currentUser.id, text, time, read: false, reactions: {}
+    });
+  }
   saveAppData();
-  renderChatMessages(); 
-  renderDMList(); 
+  if(input){ input.value=''; input.style.height='auto'; }
+  renderChatMessages();
+  renderDMList();
   updateDMBadge();
 }
 
@@ -2639,14 +2778,15 @@ function openLightbox(src) {
   if(img&&lb){img.src=src;lb.classList.add('open');}
 }
 function closeLightbox() { document.getElementById('imgLightbox')?.classList.remove('open'); }
-
 // ── ADMIN ──
 function toggleAdmin() {
   const main=document.getElementById('mainContent');
   const admin=document.getElementById('adminPanel');
   if(!main||!admin) return;
-  if(admin.style.display==='flex'){main.style.display='flex';admin.style.display='none';}  else{main.style.display='none';admin.style.display='flex';renderUsersTable();}
+  if(admin.style.display==='flex'){main.style.display='flex';admin.style.display='none';}
+  else{main.style.display='none';admin.style.display='flex';renderUsersTable();}
 }
+
 function switchAdminTab(tab,btn) {
   document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.admin-content').forEach(c=>c.classList.remove('show'));
@@ -2686,45 +2826,43 @@ function promoteToSeller(userId) {
   let users=JSON.parse(localStorage.getItem('hm_users')||'[]');
   const user=users.find(u=>u.id===userId); if(!user) return;
   user.role=user.role==='seller'?'buyer':'seller';
-  localStorage.setItem('hm_users',JSON.stringify(users));
-  showToast(`✓ ${escHtml(user.name)} → ${user.role==='seller'?'Seller':'Buyer'} болгосон!`,'success');
+  localStorage.setItem('hm_users',JSON.stringify(users));  showToast(`✓ ${escHtml(user.name)} → ${user.role==='seller'?'Seller':'Buyer'} болгосон!`,'success');
   renderUsersTable();
 }
 
 function renderAdminPosts() {
   const container=document.getElementById('postsContainer'); if(!container) return;
-  if(!firestorePosts.length){container.innerHTML='<p style="text-align:center;color:var(--text-secondary);">Зар байхгүй байна</p>';return;}
-  container.innerHTML=firestorePosts.map(p=>`<div class="post-card">    <div class="post-body">
-      <div class="post-meta">        <span class="post-category">${escHtml(p.category)}</span>
+  if(!appData.posts.length){container.innerHTML='<p style="text-align:center;color:var(--text-secondary);">Зар байхгүй байна</p>';return;}
+  container.innerHTML=appData.posts.map(p=>`<div class="post-card">
+    <div class="post-body">
+      <div class="post-meta">
+        <span class="post-category">${escHtml(p.category)}</span>
         <span class="post-id">#${String(p.sellerId).padStart(6,'0')}</span>
         <span style="font-size:0.78rem;color:var(--text-secondary);">${escHtml(p.sellerName)}</span>
       </div>
       <div class="post-title">${escHtml(p.title)}</div>
       <div class="post-desc">${escHtml(p.desc)}</div>
       <div class="post-price">${escHtml(p.price)}</div>
-      <div class="post-actions"><button class="btn-delete" onclick="adminDeletePost('${p.id}')" type="button">🗑️ Устгах</button></div>
+      <div class="post-actions"><button class="btn-delete" onclick="adminDeletePost(${p.id})" type="button">🗑️ Устгах</button></div>
     </div>
   </div>`).join('');
 }
 
-async function adminDeletePost(postId) {
+function adminDeletePost(postId) {
   if(!confirm('Үнэхээр устгах уу?')) return;
-  const success = await deletePostFromFirestore(postId);
-  if(!success) return;
   Object.keys(appData.likes).forEach(k=>{if(k.endsWith(`_${postId}`))delete appData.likes[k];});
-  showToast('🗑️ Зар устгагдлаа','success'); 
-  renderAdminPosts();
+  appData.posts=appData.posts.filter(p=>p.id!==postId);
+  saveAppData(); showToast('🗑️ Зар устгагдлаа','success'); renderAdminPosts();
 }
 
 // ── INIT ──
 window.addEventListener('beforeunload',()=>{
   if(pollingInterval) clearInterval(pollingInterval);
   if(resendTimer) clearInterval(resendTimer);
-  if(postsUnsubscribe) postsUnsubscribe();
-  cleanupChatListener();
   Object.values(recaptchaVerifiers).forEach(v=>v?.clear());
 });
 
+// Handle Google redirect result
 auth.getRedirectResult().then(async result => {
   if (result && result.user && localStorage.getItem('hm_google_redirect')) {
     localStorage.removeItem('hm_google_redirect');
@@ -2734,21 +2872,34 @@ auth.getRedirectResult().then(async result => {
   if (e.code && e.code !== 'auth/no-auth-event') console.error('Redirect result error:', e);
 });
 
+// Auth state listener
 auth.onAuthStateChanged(async firebaseUser => {
   if (firebaseUser && !currentUser) {
-    const users = JSON.parse(localStorage.getItem('hm_users') || '[]');
-    const appUser = users.find(u => u.firebaseUid === firebaseUser.uid);
+    const users = JSON.parse(localStorage.getItem('hm_users') || '[]');    const appUser = users.find(u => u.firebaseUid === firebaseUser.uid);
     if (appUser) {
       const userEmail = firebaseUser.email?.toLowerCase() || '';
       if (ADMIN_EMAILS.includes(userEmail) && appUser.role !== 'admin') {
         appUser.role = 'admin';
         const idx = users.findIndex(u => u.firebaseUid === firebaseUser.uid);
-        if(idx !== -1) { users[idx] = appUser; localStorage.setItem('hm_users', JSON.stringify(users)); }      }
-      currentUser = appUser;      sessionStorage.setItem('hm_user', JSON.stringify(currentUser));
+        if(idx !== -1) { users[idx] = appUser; localStorage.setItem('hm_users', JSON.stringify(users)); }
+      }
+      currentUser = appUser;
+      sessionStorage.setItem('hm_user', JSON.stringify(currentUser));
+      showApp();
+    }
+  }
+});
+
+// Initial load - try to load posts from Firebase if user is already logged in
+window.addEventListener('load', async () => {
+  const savedUser = sessionStorage.getItem('hm_user');
+  if(savedUser) {
+    currentUser = JSON.parse(savedUser);
+    if(currentUser) {
       showApp();
     }
   }
 });
 </script>
 </body>
-  </html>
+    </html>
